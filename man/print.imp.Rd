@@ -1,0 +1,29 @@
+\name{print.imp}
+\alias{print.imp}
+\title{ Print method for objects of class imp }
+\description{
+ The function returns a few information about how many missings are imputeted and possible other 
+ information about the amount of iterations, for example.
+}
+\usage{
+\method{print}{imp}(x, ...)
+}
+\arguments{
+  \item{x}{ an object of class \sQuote{imp} }
+  \item{\dots}{  }
+}
+\value{
+None (invisible NULL).
+}
+\author{ Matthias Templ }
+\seealso{ \code{\link{impCoda}}, \code{\link{impKNNa}} }
+\examples{
+data(aitchison395)
+aitchison395[1,3]
+aitchison395[1,3] <- NA
+xi <- impCoda(aitchison395)
+xi
+summary(xi)
+plot(xi, which=1:2)
+}
+\keyword{ print }
