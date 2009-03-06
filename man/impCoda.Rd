@@ -7,7 +7,7 @@
   Then iterative algorithms try to find better estimations for the former missing values.
 }
 \usage{
-impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN", k = 5)
+impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN", k = 5, dl = rep(0.05, ncol(x)))
 }
 \arguments{
   \item{x}{ data frame or matrix }
@@ -17,6 +17,7 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
   \item{closed}{ imputation of transformed data (using ilr transformation) or in the original space (closed $==$ TRUE)  }
   \item{init}{ method for initializing missing values }
   \item{k}{ number of nearest neighbors (if init $==$ \dQuote{KNN}) }
+  \item{dl}{ detection limit(s), only important for the imputation of rounded zeros}
 }
 \details{
   eps: The algorithm is finished as soon as the imputed values stabilize, i.e. until the sum of Aitchison distances from the present and previous iteration changes only marginally (eps).\\
@@ -26,7 +27,9 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
   iterative procedure), \sQuote{ltsReg2} (least trimmed squares regression is used within the iterative procedure. 
     The imputated values are perturbed in the direction of the predictor by values drawn 
     form a normal distribution with mean and standard deviation related to the corresponding 
-    residuals).   
+    residuals).
+    
+  method \sQuote{roundedZero} is experimental. It imputes rounded zeros within our iterative framework.   
 }
 \value{
   \item{xOrig }{Original data frame or matrix}

@@ -3,4 +3,5 @@ importFrom(robustbase, ltsReg)
 importFrom(car, scatterplot.matrix)
 importFrom(MASS, parcoord)
 
-export(adjust, aDist, ilr, impCoda, impKNNa, invilr, robVariation, print.imp, summary.imp, plot.imp) 
+export(adjust, aDist, alrEM, 
+       ilr, impCoda, impKNNa, invilr, robVariation, print.imp, summary.imp, plot.imp) 

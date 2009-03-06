@@ -1,5 +1,6 @@
 `impCoda` <-
-function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE, init="KNN", k=5){
+function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE, 
+		init="KNN", k=5, dl=rep(0.05, ncol(x))){
 
 ## MT & KH, 1. Version April 2008
 ## MT 01. August 2008 (modification).
@@ -9,10 +10,16 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE, init="KNN", k=5){
 ## if closed  == FALSE, ilr is applied.
 
 if( is.vector(x) ) stop("x must be a matrix or data frame")
-stopifnot((method %in% c("ltsReg", "ltsReg2", "classical", "lm")))
+stopifnot((method %in% c("ltsReg", "ltsReg2", "classical", "lm", "roundedZero")))
 if( k > nrow(x)/4 ) warning("k might be too large")
+if(method == "roundedZero") init <- "roundedZero"
 
 xcheck <- x
+
+if(method == "roundedZero"){
+	x[x==0] <- NA
+}
+
 
 ##index of missings / non-missings
 w <- is.na(x)
@@ -20,6 +27,9 @@ wn <- !is.na(x)
 w2 <- apply(x, 1, function(x){
           length(which(is.na(x)))
 })
+
+
+
 
 if(method == "gmean"){
 ### mean imputation im Simplex:
@@ -62,6 +72,10 @@ if(init=="KNN"){
 if(init=="KNNclosed"){
   x <- impKNNa(x, k=k, metric="Euclidean")$xImp
 }
+if(init=="roundedZero"){
+  x[is.na(x)] <- 0.001
+}
+
 
 
 #x=acomp(x) #Aitchison compositions (for ilr)
@@ -74,6 +88,12 @@ criteria <- 10000000
 
 ###########################################
 ###  start the iteration
+
+##require(StatDA)
+##ternary(acomp(x))
+#plot(ilr(x[w2==0,]), xlim=c(-5,5), ylim=c(-8,0.5))
+#points(ilr(x[w2>0,]), col=gray(0.9), pch=3)
+#gr <- seq(0.7,0.3, length.out=8)
 
 while(it <= maxit & criteria >= eps){
 
@@ -89,7 +109,6 @@ x[,1]=xNA
 x[,indM[i]]=x1
 
 if( closed == FALSE ) xilr=ilr(x) else xilr=x
-#xilr2 <- ilr(x2) # warum keine Missings mehr? 
 
 #apply the PCA algorithm -> ximp
 ind <- cbind(w[, indM[i]], rep(FALSE, dim(w)[1]))
@@ -131,6 +150,26 @@ if(method == "ltsReg2"){
   xilr <- data.frame(xilr)
 ##imp[w[, indM[i]]] + rnorm(length(imp[w[, indM[i]]]), 0, sd=0.5*sqrt(mad(xilr[,1]))) 
 }
+if(method == "roundedZero"){
+	phi <- ilr(cbind(rep(dl[indM[i]], nrow(x)), x[,-1,drop=FALSE]))[,1]
+	xilr <- data.frame(xilr)
+	c1 <- colnames(xilr)[1]
+	colnames(xilr)[1] <- "V1"
+	reg1 = lm(V1 ~ ., data=xilr)
+	yhat2 <- predict(reg1, new.data=xilr[,-i]) 	
+	#colnames(xilr)[1] <- c1
+	#s <- sd(xilr[,1], na.rm=TRUE)
+	#ex <- (phi - yhat)/s
+	#yhat2 <- yhat - s*dnorm(ex)/pnorm(ex)
+	#plot(yhat2, ylim=c(-5,5))
+	#points(yhat, pch=2)
+	#lines(phi)
+	#x11()
+	#plot(ilr(cbind(rep(dl[indM[i]], nrow(x)), x[,-1,drop=FALSE])))
+	#points(ilr(x), col="red")
+	#xilr[w[, indM[i]], 1] <- yhat2[w[, indM[i]]] 
+	xilr[w[, indM[i]], 1] <- ifelse(yhat2[w[, indM[i]]] <= phi[w[, indM[i]]], phi[w[, indM[i]]], yhat2[w[, indM[i]]] )
+}
 #if( method == "rf" ){
 #  xilr[w[, indM[i]], 1] <- NA
 #  reg1 <- rfImpute(xilr[,1] ~ xilr[,-1], data=xilr)
@@ -149,9 +188,14 @@ x[,indM[i]]=xNA
 #print(paste(it,"-te Iteration:"))
 #print(x[1,])
 
+#if(i == 3){
+#	#x11()
+#	#ternary(data.frame(acomp(x)))
+#	points(ilr(x[w2>0,]), col= gray(gr[it]), pch=3)
+#}
+
 
 }
-
 
 #print(get("method"))
 #print(x[1,3])
