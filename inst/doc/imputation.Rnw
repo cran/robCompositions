@@ -31,7 +31,7 @@
   {\LARGE\bf Robust Imputation of Missing
   Values in \\[2mm]  \vspace*{-0.8cm} Compositional Data Using the\Rlogo-Package 
   \vspace*{0.55cm} \texttt{robCompositions}}
-%  \vspace{1.0cm}
+  \vspace{1.0cm}
   
   Matthias Templ$^{*,**}$, Peter Filzmoser$^{*}$, Karel Hron$^{***}$
   
@@ -49,11 +49,11 @@ Mathematics, Palack\'y University, Tomkova 40, 779 00 Olomouc, Czech Republic.
 \end{description}
 }
 \end{flushleft}
-%\vspace{24pt}
-\vspace{12pt}
+\vspace{1cm}
 
 
-\begin{center} {\Large Abstract} \end{center}
+
+\begin{center} {\large Abstract} \end{center}
 
 \abstract{The aim of this contribution is to show how the R-package
 \texttt{robCompositions} can be applied to estimate missing values in
@@ -63,10 +63,6 @@ Measures for information loss are presented, and it is demonstrated
 how they can be applied. Moreover, we introduce new diagnostic tools
 that are useful for inspecting the quality of the imputed data.}
 
-\vspace{12pt}
-\noindent {\bf Keywords:} Missing Values, Compositional Data, Imputation.
-
-%\vspace{24pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -433,13 +429,14 @@ function (x, ..., labels = colnames(X), cn = colnames(X), aspanel = FALSE,
 \begin{figure}[h]
 \begin{center}
 \vspace*{-3cm}
-<<plot-acomp, fig=TRUE, echo=FALSE>>=
-par(mfrow=c(1,2), mar=c(3.5,0,0,0))
-plot.acomp(acomp(x$z2), col=c(rep(1,90), rep(4,5), rep(3,5)), pch=c(rep(20,90), rep(2,5), rep(4,5)), cex=c(rep(0.6,90), rep(0.9,5), rep(0.9,5)))
-par(mar=c(3.5,4,0,0.1))
-plot(ilr(x$z2), col=c(rep(1,90), rep(4,5), rep(3,5)), pch=c(rep(20,90),
-rep(2,5), rep(4,5)), xlab=expression(z[1]), ylab=expression(z[2]), cex.lab=1.5, cex=c(rep(0.6,90), rep(0.9,5), rep(0.9,5))) 
-@  
+%<<plot-acomp, fig=TRUE, echo=FALSE>>=
+%par(mfrow=c(1,2), mar=c(3.5,0,0,0))
+%plot.acomp(acomp(x$z2), col=c(rep(1,90), rep(4,5), rep(3,5)), pch=c(rep(20,90), rep(2,5), rep(4,5)), cex=c(rep(0.6,90), rep(0.9,5), rep(0.9,5)))
+%par(mar=c(3.5,4,0,0.1))
+%plot(ilr(x$z2), col=c(rep(1,90), rep(4,5), rep(3,5)), pch=c(rep(20,90),
+%rep(2,5), rep(4,5)), xlab=expression(z[1]), ylab=expression(z[2]), cex.lab=1.5, cex=c(rep(0.6,90), rep(0.9,5), rep(0.9,5))) 
+%@
+\includegraphics{imputation-plot-acomp}  
 \vspace*{-33mm}
 \caption{Simulated data set with 5 points from
 {\it outlier group 1} (symbol \textcolor{green}{$\times$}) 
@@ -851,7 +848,7 @@ bootimpM <- function(x, R = 100) {
 %legend("top", bty="n", legend=c("original data", "mean imputation", "classical model-based imputation", "robust model-based imputation"), fill=c(gray(0.9), 
 %				gray(0.7), gray(0.5), gray(0.3)))
 %@
-\includegraphics{imputation-boxplot.pdf}
+\includegraphics{imputation-boxplot}
 \vspace*{-1cm}
 \caption{Boxplot comparison of the estimated column-wise geometric means of
 $1000$ bootstrap replicates of the original data set and the data sets 
