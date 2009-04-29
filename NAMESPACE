@@ -1,7 +1,12 @@
+UseDynLib(robCompositions)
 importFrom(e1071, impute)
 importFrom(robustbase, ltsReg)
 importFrom(car, scatterplot.matrix)
 importFrom(MASS, parcoord)
+importFrom(utils, citation)
 
-export(adjust, aDist, alrEM, 
-       ilr, impCoda, impKNNa, invilr, robVariation, print.imp, summary.imp, plot.imp) 
+export(adjust, aDist, adtest, adtestWrapper, alrEM, 
+       print.adtestWrapper, summary.adtestWrapper, 
+       ilr, impCoda, impKNNa, invilr, robVariation, 
+       print.imp, summary.imp, plot.imp, outCoDa, print.outCoDa,
+       plot.outCoDa, print.pcaCoDa, pcaCoDa, plot.pcaCoDa, pfa) 

@@ -7,7 +7,7 @@
   Then iterative algorithms try to find better estimations for the former missing values.
 }
 \usage{
-impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN", k = 5, dl = rep(0.05, ncol(x)))
+impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN", k = 5, dl = rep(0.05, ncol(x)), noise=0.1)
 }
 \arguments{
   \item{x}{ data frame or matrix }
@@ -17,17 +17,21 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
   \item{closed}{ imputation of transformed data (using ilr transformation) or in the original space (closed $==$ TRUE)  }
   \item{init}{ method for initializing missing values }
   \item{k}{ number of nearest neighbors (if init $==$ \dQuote{KNN}) }
-  \item{dl}{ detection limit(s), only important for the imputation of rounded zeros}
+  \item{dl}{ detection limit(s), only important for the imputation of rounded zeros }
+  \item{noise}{ amount of adding random noise to predictors after convergency }  
 }
 \details{
   eps: The algorithm is finished as soon as the imputed values stabilize, i.e. until the sum of Aitchison distances from the present and previous iteration changes only marginally (eps).\\
   
-  method: Several different methods can be chosen, such as \sQuote{ltsReg} (least trimmed squares regression is used within the iterative procedure), \sQuote{lm} 
-  (least squares regression is used within the iterative procedure), \sQuote{classical} (principal component analysis is used within the 
-  iterative procedure), \sQuote{ltsReg2} (least trimmed squares regression is used within the iterative procedure. 
+  method: Several different methods can be chosen, such as 
+  \sQuote{ltsReg}: least trimmed squares regression is used within the iterative procedure.
+  \sQuote{lm}: least squares regression is used within the iterative procedure. 
+  \sQuote{classical}: principal component analysis is used within the 
+  iterative procedure. 
+  \sQuote{ltsReg2}: least trimmed squares regression is used within the iterative procedure. 
     The imputated values are perturbed in the direction of the predictor by values drawn 
     form a normal distribution with mean and standard deviation related to the corresponding 
-    residuals).
+    residuals and multiplied by \code{noise}.
     
   method \sQuote{roundedZero} is experimental. It imputes rounded zeros within our iterative framework.   
 }
