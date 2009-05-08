@@ -1,0 +1,76 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aitchison(1986)]{Aitchison86}
+J.~Aitchison.
+\newblock \emph{The Statistical Analysis of Compositional Data}.
+\newblock Wiley, New York, 1986.
+
+\bibitem[Anderson and Darling(1952)]{Anderson52}
+T.W. Anderson and D.A. Darling.
+\newblock Asymptotic theory of certain goodness-of-fit criteria based on
+  stochastic processes.
+\newblock \emph{Annals of Mathematical Statistics}, 23:\penalty0 193--212,
+  1952.
+
+\bibitem[Egozcue et~al.(2003)Egozcue, Pawlowsky-Glahn, Mateu-Figueras, and
+  Barcel\'{o}-Vidal]{Egozcue03}
+J.J. Egozcue, V.~Pawlowsky-Glahn, G.~Mateu-Figueras, and C.~Barcel\'{o}-Vidal.
+\newblock Isometric log-ratio transformations for compositional data analysis.
+\newblock \emph{Mathematical Geology}, 35\penalty0 (3):\penalty0 279--300,
+  2003.
+\newblock \doi{10.1023/A:1023818214614}.
+\newblock URL \url{http://www.springerlink.com/content/wx1166n56n685v82/}.
+
+\bibitem[Filzmoser and Hron(2008)]{Filzmoser08}
+P.~Filzmoser and K.~Hron.
+\newblock Outlier detection for compositional data using robust methods.
+\newblock \emph{Mathematical Geosciences}, 40\penalty0 (3):\penalty0 233--248,
+  2008.
+\newblock \doi{http://dx.doi.org/10.1007/s11004-007-9141-5}.
+\newblock URL \url{http://www.springerlink.com/content/d662421553216861}.
+
+\bibitem[Filzmoser et~al.(2009)Filzmoser, Hron, and Templ]{robComp09}
+P.~Filzmoser, K.~Hron, and M.~Templ.
+\newblock \emph{robCompositions: Robust Estimation for Compositional Data.},
+  2009.
+\newblock R package version 1.1.
+
+\bibitem[Labus(2005)]{Labus05}
+M.~Labus.
+\newblock Compositional data analysis as a tool for interpretation of rock
+  porosity parameters.
+\newblock \emph{Geological Quarterly}, 49\penalty0 (3):\penalty0 347--354,
+  2005.
+
+\bibitem[Maronna et~al.(2006)Maronna, Martin, and Yohai]{Maronna06}
+R.A. Maronna, R.D. Martin, and V.J. Yohai.
+\newblock \emph{Robust Statistics: Theory and Methods}.
+\newblock John Wiley \& Sons, New York, 2006.
+
+\bibitem[Pawlowsky-Glahn et~al.(2008)Pawlowsky-Glahn, Egozcue, and
+  Tolosana-Delgado]{P-Glahn08}
+V.~Pawlowsky-Glahn, J.J. Egozcue, and R.~Tolosana-Delgado.
+\newblock \emph{Lecture Notes on Compositional Data Analysis}.
+\newblock Universitat de Girona, 2008.
+\newblock URL
+  \url{http://diobma.udg.edu:8080/dspace/bitstream/10256.1/297/1/CoDa-book.pdf%
+}.
+
+\bibitem[{R Development Core Team}(2009)]{RDev}
+{R Development Core Team}.
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2009.
+\newblock URL \url{http://www.R-project.org}.
+\newblock {ISBN} 3-900051-07-0.
+
+\bibitem[Stephens(1974)]{Stephens74}
+M.A. Stephens.
+\newblock Edf statistics for goodness of fit and some comparisons.
+\newblock \emph{J. Amer. Statist. Assoc.}, 69:\penalty0 730--737, 1974.
+
+\end{thebibliography}

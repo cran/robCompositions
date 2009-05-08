@@ -1,6 +1,6 @@
 `impKNNa` <-
 function(x, method="knn", k=3,
-                    metric="Aitchison", agg="median", primitive=FALSE, normknn=TRUE, das=FALSE){
+                    metric="Aitchison", agg="median", primitive=FALSE, normknn=TRUE, das=FALSE, adj="median"){
 ### Coda Version 2!
 ### Nearest Neighbor imputation algorithm of Missing values
 ### based on distance matrices.
@@ -9,6 +9,8 @@ function(x, method="knn", k=3,
 ### R Version: 2.7.1
 ### Copyright : TU-Wien, 2008
 ###
+
+# TODO: help file mit adj ergaenzen
 
 
 x <- as.matrix(x)
@@ -134,8 +136,8 @@ imp <- function(x, i, j){
   ### median, normalization:
   #fac <- knn$xclriSum/knn$medKnnSum
   #median(x[knn$knn, j])#*fac  # fac anders berechnen
-  medSum <- median(apply(x[knn$knn, knn$m1, drop=FALSE], 2, median, na.rm=TRUE), na.rm=TRUE) 
-  xSum <- median(x[i, knn$m1, drop=FALSE], na.rm=TRUE)
+  medSum <- get(adj)(apply(x[knn$knn, knn$m1, drop=FALSE], 2, function(x,...){get(agg)(x, na.rm=TRUE)} ), na.rm=TRUE) 
+  xSum <- get(adj)(x[i, knn$m1, drop=FALSE], na.rm=TRUE)
   fac <- xSum/medSum
   get(agg)(x[knn$knn, j], na.rm=TRUE)*fac #median
 }
@@ -146,17 +148,17 @@ imp <- function(x, i, j){
   knn <- findknn(x, i, j)
   ##normalization:
   #xSum <- sum(x[i, knn$m1, drop=FALSE], na.rm=TRUE)
-  xSum <- median(x[i, knn$m1, drop=FALSE], na.rm=TRUE)
+  xSum <- get(adj)(x[i, knn$m1, drop=FALSE], na.rm=TRUE)
   if( length(knn$knn) == 1){
     #knnSum <- sum(x[knn$knn, knn$m1], na.rm=TRUE)
-    knnSum <- median(x[knn$knn, knn$m1], na.rm=TRUE) 
+    knnSum <- get(adj)(x[knn$knn, knn$m1], na.rm=TRUE) 
   } else{
     #knnSum <- rowSums(x[knn$knn, knn$m1, drop=FALSE], na.rm=TRUE)
-    knnSum <- apply(x[knn$knn, knn$m1, drop=FALSE], 1, median, na.rm=TRUE)
+    knnSum <- apply(x[knn$knn, knn$m1, drop=FALSE], 1, function(x,...){get(agg)(x, na.rm=TRUE)} )
   }
   fac <- xSum/knnSum
   get(agg)(x[knn$knn, j] * fac, na.rm=TRUE)
-  ## statt Median das geom. Mittel?
+  ## statt Mean das geom. Mittel?
 }
 }
 

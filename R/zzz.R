@@ -1,10 +1,8 @@
-.First.lib <- function(lib,pkg)
-{
-	version <- citation("robCompositions")$note
-	version <- substr(version, (nchar(version)-5), nchar(version))
+.onLoad <- function(lib, pkg) {
+	library.dynam("robCompositions",pkg,lib)
+	cat("\n ----------------------------------------------")	
 	cat("\n --------")	
-	#cat("\n robCompositions has been loaded \n\n")
-	cat("\n robCompositions version",version,"has been loaded \n\n")
-	cat(" --------\n\n")
+	cat("\n robCompositions, ", citation("robCompositions")$note, "loaded." )
+	cat("\n --------") 
+	cat("\n ----------------------------------------------\n\n") 
 }
-

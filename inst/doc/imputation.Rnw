@@ -261,6 +261,7 @@ MCAR mechanism. The new data set is stored in the list element \texttt{zmiss} of
 
 %% original:
 <<echo=FALSE, results=hide>>=
+require(compositions)
 genData <- function(n=1000, out=0.05, 
             Sigma=5*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
     ## Gruppe ohne Ausreisser:

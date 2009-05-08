@@ -22,7 +22,7 @@ The algorithm first applies an additive log-ratio transformation to the composit
 using a modified EM algorithm.
 Details can be found in Palarea-Albaladej and Martinn-Fernandez (2008). 
 
-The major difference between their MATLAB implementation and this re-implementatin as a R function is that they use the reg.sweep methodology for 
+The major difference between their MATLAB implementation and this R function is that they use the reg.sweep methodology for 
 regression analysis. Nevertheless, we use the standard lm function from R which based on QR-decompositons, which is more
 accurate than sweep.
 }
@@ -39,7 +39,6 @@ compositional data sets. \emph{Computers and Geosciences}, \bold{34}, 902-917
 \author{ Matthias Templ and Karel Hron }
 \seealso{ \code{\link{impCoda}} }
 \examples{
-require(compositions)
 require(robCompositions)
 data(aitchison359)
 x <- aitchison359

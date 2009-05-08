@@ -5,7 +5,7 @@
   This function offers several knn methods for the imputation of missing values in compositional data.
 }
 \usage{
-impKNNa(x, method = "knn", k = 3, metric = "Aitchison", agg = "median", primitive = FALSE, normknn = TRUE, das = FALSE)
+impKNNa(x, method = "knn", k = 3, metric = "Aitchison", agg = "median", primitive = FALSE, normknn = TRUE, das = FALSE, adj="median")
 }
 \arguments{
   \item{x}{ data frame or matrix }
@@ -17,6 +17,7 @@ impKNNa(x, method = "knn", k = 3, metric = "Aitchison", agg = "median", primitiv
   \item{normknn}{ An adjustment of the imputed values is performed if TRUE }
   \item{das}{depricated. if TRUE, the original definition of the Aitchison distance is used to calculate distances between observations.
              if FALSE, a version using the clr transformation is used.}
+  \item{adj}{ either \sQuote{median} (default) or \sQuote{sum} can be chosen for the adjustment of the nearest neighbors, see Hron et al., 2008. }
 }
 \details{
 The Aitchison \code{metric} should be chosen when dealing with compositional data, the Euclidean \code{metric} otherwise. \\

@@ -2,24 +2,29 @@
 \alias{aDist}
 \title{Aitchison distance}
 \description{
-  Computes the Aitchison distance between two observations.
+  Computes the Aitchison distance between two observations or between two data sets.
 }
 \usage{
 aDist(x, y)
 }
 \arguments{
-  \item{x}{ a vector }
-  \item{y}{ a vector }
+  \item{x}{ a vector, matrix or data.frame }
+  \item{y}{ a vector, matrix or data.frame with equal dimension as \code{x} }
 }
 \details{
   This distance measure accounts for the relative scale property of the 
-  Aitchison distance, and measures the distance between two compositions. 
-  It is not designed to apply it on one whole matrix, 
+  Aitchison distance. It measures the distance between two compositions if \code{x} and \code{y} 
+  are vectors and evaluate sum of the distances between \code{x} and \code{y} for each row of \code{x} and \code{y} if
+  \code{x} and \code{y} are matrizes or data frames.
+  
+  It is not designed to apply it on one matrix, 
   such as function \sQuote{acomp()} in package \sQuote{compositions}, 
-  but is suitable to compare different matrices.
+  but it is designed to compare different matrices.
+  
+  The underlying code is written in C and allows a fast computation also for large data sets.
 }
 \value{
-  The Aitchison distance between two compositions.
+  The Aitchison distance between two compositions or between two data sets.
 }
 \references{ Aitchison, J. (1986) \emph{The Statistical Analysis of Compositional
 Data} Monographs on Statistics and Applied Probability. Chapman \&
@@ -39,11 +44,7 @@ x[1,3] <- x[3,5] <- x[2,4] <- x[5,3] <- x[8,3] <- NA
 xImp <- impCoda(x, method="ltsReg")$xImp
 
 ## calculate the relative Aitchsion distance between xOrig and xImp:
-das <- 0
-for(i in 1:nrow(xOrig)){
-  das <- das + aDist(x=xOrig[i,], y=xImp[i,])
-}
-das
+aDist(xOrig, xImp)
 }
 \keyword{ math }
 \keyword{ arith }

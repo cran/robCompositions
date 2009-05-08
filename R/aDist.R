@@ -1,13 +1,25 @@
 `aDist` <-
-function(x,y){
-    d <- 0
-    p <- length(x)
-    for(i in 1:(p-1)){
-      for(j in (i+1):p){
-        d <- d + (log(x[i]/x[j]) - log(y[i]/y[j]))^2
-      }
-    }
-    d=d/p
-    sqrt(d)
-  }
-
+  function(x, y){
+      if(is.vector(x)) x <- matrix(x, ncol=length(x))
+	  if(is.vector(y)) x <- matrix(y, ncol=length(y))	  
+	  
+	  
+	  matOrig <- as.numeric(t(x))
+	  matImp <- as.numeric(t(y))
+	  n <- dim(x)[1]
+	  p <- dim(x)[2]
+	  dims <- as.integer(c(n, p))
+	  rowDists <-  as.numeric(rep(0.0, n))
+	  distance <- as.numeric(0.0)
+	  out <- .C("da", 
+				  matOrig,
+				  matImp,
+				  dims,
+				  rowDists,
+				  distance,
+				  PACKAGE="robCompositions", NUOK=TRUE
+		  )[[5]]
+	  return(out)
+}	  
+	  
+	
