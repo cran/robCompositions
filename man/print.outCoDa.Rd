@@ -14,8 +14,8 @@ Gives a short information of the amount of outliers in objects of class \sQuote{
 \author{ Matthias Templ, Karel Hron }
 \seealso{ \code{\link{outCoDa}} }
 \examples{
-data(aitchison395)
-oD <- outCoDa(aitchison395)
+data(expenditures)
+oD <- outCoDa(expenditures)
 oD
 }
 \keyword{ print }

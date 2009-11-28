@@ -49,6 +49,27 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 	res <- list(xOrig=xcheck, xImp=xmean, criteria=0, iter=0, maxit=maxit, w=length(which(w)), wind=w)
 	} else if ( method=="meanClosed" ){
 	  xmean <- x
+	  impute <-                          
+	  function (x, what = c("median", "mean")) 
+	  {                                        
+		  what <- match.arg(what)              
+		  if (what == "median") {              
+			  retval <- apply(x, 2, function(z) {
+						  z[is.na(z)] <- median(z, na.rm = TRUE)
+						  z                                     
+					  })                                        
+		  }
+		  else if (what == "mean") {
+			  retval <- apply(x, 2, function(z) {
+						  z[is.na(z)] <- mean(z, na.rm = TRUE)
+						  z
+					  })
+		  }
+		  else {
+			  stop("`what' invalid")
+		  }
+		  retval
+	  }	  
 	  xmean <- impute(xmean)
 	  res <- list(xOrig=xcheck, xImp=xmean, criteria=0, iter=0, maxit=maxit, w=length(which(w)), wind=w)
 	} else{

@@ -208,6 +208,9 @@ As a regression method we propose to use robust regression, like LTS regression
 %Three data sets are included in the package, namely
 <<load package, echo=FALSE, results=hide>>=
 library(robCompositions)
+constSum <- function(x, const=1){
+	x / rowSums(x) * const
+}
 @
 %<<data sets>>=
 %library(robCompositions)
@@ -261,7 +264,7 @@ MCAR mechanism. The new data set is stored in the list element \texttt{zmiss} of
 
 %% original:
 <<echo=FALSE, results=hide>>=
-require(compositions)
+##require(compositions)
 genData <- function(n=1000, out=0.05, 
             Sigma=5*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
     ## Gruppe ohne Ausreisser:
@@ -650,9 +653,9 @@ gives more reasonable results than its classical counterpart
 
 
 <<variations, echo=FALSE>>=
-v1 <- variation(acomp(x$z2[1:95,]))
-v2 <- variation(acomp(xImp1$xImp[1:95,]))
-v22 <- variation(acomp(xImp2$xImp[1:95,]))
+v1 <- robVariation(constSum(x$z2[1:95,]), robust=FALSE)
+v2 <- robVariation(constSum(xImp1$xImp[1:95,]), robust=FALSE)
+v22 <- robVariation(constSum(xImp2$xImp[1:95,]), robust=FALSE)
 variations1 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v2[upper.tri(v2, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v2, diag=FALSE))) 
 variations2 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v22[upper.tri(v22, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v22, diag=FALSE))) 
 @
@@ -731,7 +734,7 @@ bootimp <- function(x, R = 100, method = "lm") {
              simp <- impCoda(s1, method=method)$xImp
              med[i, ] <- apply(simp[induse,], 2, geometricmean)
      }
-     invisible(as.data.frame(acomp(med)))
+     invisible(as.data.frame(constSum(med)))
 	 ##thetaHatMed <- apply(med, 2, mean)
      ##for (i in 1:d) {
      ##    thetaM[i, 1] <- quantile(med[, i], 0.025)
@@ -758,7 +761,7 @@ bootimpEM <- function(x, R = 100) {
 		print(simp)
 		med[i, ] <- apply(simp[induse,], 2, geometricmean)
 	}
-	invisible(as.data.frame(acomp(med)))
+	invisible(as.data.frame(constSum(med)))
 }
 geometricmean <- function (x) {
 	if (any(na.omit(x == 0)))
@@ -786,7 +789,7 @@ bootimpGM <- function(x, R = 100) {
 		}
 		med[i, ] <- apply(xmean[induse,], 2, geometricmean)
 	}
-	invisible(as.data.frame(acomp(med)))
+	invisible(as.data.frame(constSum(med)))
 }
 bootimpM <- function(x, R = 100) {
         d <- dim(x)[2]
@@ -802,7 +805,7 @@ bootimpM <- function(x, R = 100) {
                 simp <- impute(s1, what="mean")
                 med[i, ] <- apply(simp[induse,], 2, geometricmean)
         }
-        invisible(as.data.frame(acomp(med)))
+        invisible(as.data.frame(constSum(med)))
 }
 
 @

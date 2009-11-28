@@ -11,6 +11,7 @@ invilr(x.ilr)
   \item{x.ilr}{ data frame or matrix }
 }
 \details{
+For details on the choice of the balances, please, see at the research report for which the link is given below.
 }
 \value{
 The transformed data.
@@ -24,14 +25,12 @@ Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for
 \emph{Research Report SM-2008-4, Vienna University of Technology}, 15 pages.
 }
 \author{ Karel Hron }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ \code{\link{ilr}} }
 \examples{
 require(MASS)
 Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
 set.seed(123)
 z <- mvrnorm(100, mu=c(0,2), Sigma=Sigma)
-#require(compositions)
-#plot(acomp(z))
-plot(invilr(z))
+invilr(z)
 }
 \keyword{ math }

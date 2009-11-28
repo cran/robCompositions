@@ -22,12 +22,12 @@ None (invisible NULL).
 \author{ Matthias Templ }
 \seealso{ \code{\link{impCoda}}, \code{\link{impKNNa}} }
 \examples{
-data(aitchison395)
-aitchison395[1,3]
-aitchison395[1,3] <- NA
-xi <- impKNNa(aitchison395)
+data(expenditures)
+expenditures[1,3]
+expenditures[1,3] <- NA
+xi <- impKNNa(expenditures)
 xi
 summary(xi)
-plot(xi, which=1:2)
+# plot(xi, which=1:2)
 }
 \keyword{ print }

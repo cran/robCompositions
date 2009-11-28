@@ -49,8 +49,8 @@ It is highly recommended to use the robust version of the procedure.
 }
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
-data(aitchison395)
-oD <- outCoDa(aitchison395)
+data(expenditures)
+oD <- outCoDa(expenditures)
 oD
 }
 \keyword{ multivariate }

@@ -18,8 +18,6 @@ cm <- colMeans(x, na.rm=TRUE)  ## fuers Ruecktransf.
 csd <- sd(x, na.rm=TRUE)   ## fuers Ruecktransf.
 x <- apply(x, 2, function(x) (x - mean(x, na.rm=TRUE))/sd(x, na.rm=TRUE))
 
-#x <- impute(x, "median")
-
 ### PCA, Iteration:
 d <- 1000000
 it=0

@@ -51,8 +51,8 @@ Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for
 \author{ Matthias Templ, Karel Hron }
 \seealso{ \code{\link{impKNNa}}, \code{\link{ilr}} }
 \examples{
-data(aitchison395)
-x <- aitchison395
+data(expenditures)
+x <- expenditures
 x[1,3]
 x[1,3] <- NA
 xi <- impCoda(x)$xImp

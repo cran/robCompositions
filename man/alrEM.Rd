@@ -39,9 +39,8 @@ compositional data sets. \emph{Computers and Geosciences}, \bold{34}, 902-917
 \author{ Matthias Templ and Karel Hron }
 \seealso{ \code{\link{impCoda}} }
 \examples{
-require(robCompositions)
-data(aitchison359)
-x <- aitchison359
+data(arcticLake)
+x <- arcticLake
 ## generate rounded zeros artificially:
 x[x < 5] <- 0
 xia <- alrEM(x, pos=2, dl=rep(5,3))

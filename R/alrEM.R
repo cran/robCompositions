@@ -1,18 +1,20 @@
 alrEM <- function(x, pos=ncol(x), dl=rep(0.05, ncol(x)-1), eps=0.0001, maxit=50) {
-  require(compositions)
   stopifnot(all(x[,pos] != 0 & length(which(is.na(x[,pos]))) == 0))
   m=matrix(rep(dl,each=nrow(x)),ncol=length(dl))
   phi <- log(m/x[,pos]) 
   xOrig <- x
   if(length(colnames) < 1) names <- letters[1:ncol(x)] else names <- colnames(x)
+  nam <- colnames(x)[pos]
   x <- cbind(x[, -pos], x[, pos])
+  w <- which(colnames(x) == "x[, pos]")
+  colnames(x)[w] <- nam
   ## close the X rows to 1:
-  xc <- acomp(x)
+  xc <- constSum(x)
   ## convert zeros into missing values:
   x[x==0] <- NA
   ## transform x into y=alr(x,pos):
   # x is already in the correct order
-  y <- alr(x)
+  y <- alr(x)$x.alr
   y <- data.frame(y)
   w <- is.na(y)
   wr <- apply(y, 1, function(x) any(is.na(x)) )
@@ -38,7 +40,9 @@ alrEM <- function(x, pos=ncol(x), dl=rep(0.05, ncol(x)-1), eps=0.0001, maxit=50)
   }
   
 
-  ximp <- alrInv(y)
+  ximp <- suppressWarnings(invalr(y))
+  w <- which(colnames(ximp) == "rat")
+  colnames(ximp)[w] <- nam
   colnames(ximp)[which(colnames(ximp) =="")] <- names[pos]
   ximp <- ximp[, names]
   

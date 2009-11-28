@@ -5,11 +5,12 @@ adtest=function(x, R=1000, locscatt="standard") {
 	cv <- function(x, type) {
 		classical <- function(x){
 			if( (length(dim(x)) < 1) | is.vector(x) ){
-				list(mean=mean(x, na.rm=TRUE), varmat=var(x, na.rm=TRUE))
+	 			list(mean=mean(x, na.rm=TRUE), varmat=var(x, na.rm=TRUE))
 			} else {
 				list(mean=colMeans(x, na.rm=TRUE), varmat=cov(x))  
 			}
 		}
+
 		robust <- function(x){
 			if( (length(dim(x)) < 1) | is.vector(x) ){
 				list(mean=median(x), varmat=mad(x)^2)
@@ -29,7 +30,7 @@ adtest=function(x, R=1000, locscatt="standard") {
 				median = median(x),
 				trimmed = mean(x, trim = .1))
 	}
-    if(locscatt=="standard") location <- "mean" else location <- "trimmed"    
+    if(locscatt=="standard") location <- "mean" else location <- "median"    
 
 	### 1-dim:
 	if((length(dim(x)) < 1) | is.vector(x) ){
@@ -88,16 +89,18 @@ adtest=function(x, R=1000, locscatt="standard") {
 			p=sort(z) 
 			h <- (2 * seq(1:N) - 1) * (log(p) + log(1 - rev(p)))
 			A <- -N-centre(h, location)
+#par(mfrow=c(1,2)); plot(p) ; plot(h)
 		} 
 		A=stat(x, location=location)    
+		#print(paste("A =", A))
 		estCv <- cv(x, locscatt)		
-		#mv=colMeans(x)
-		#varmat=var(x)
-		p=numeric(1000)
+		# estCv$mean=colMeans(x)  #weg
+		 #estCv$varmat=var(x) #weg
+		p=numeric(R)
 		n=nrow(x)
 		p <- sapply(X=1:R, FUN=function(X,...){ stat(mvrnorm(n, estCv$mean, estCv$varmat), location=location) })
 		pvalue=mean(p>A)
-		RVAL <- list(statistic = c(A = A), method = "A-D radius test", 
+		RVAL <- list(statistic = A, method = "A-D radius test", 
 				p.value=pvalue)
   }		
 		

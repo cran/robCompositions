@@ -18,8 +18,8 @@ Prints the (cummulative) percentages of explained variability for clr transforme
 \author{ M. Templ, K. Hron }
 \seealso{ \code{\link{pcaCoDa}}, \code{\link{plot.pcaCoDa}}}
 \examples{
-data(aitchison395)
-p1 <- pcaCoDa(aitchison395)
+data(expenditures)
+p1 <- pcaCoDa(expenditures)
 p1
 plot(p1)
 }

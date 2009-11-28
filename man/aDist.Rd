@@ -32,8 +32,8 @@ Hall Ltd., London (UK). 416p. }
 \author{ Matthias Templ }
 \seealso{ \code{\link{ilr}} }
 \examples{
-data(aitchison395)
-x <- xOrig <- aitchison395
+data(expenditures)
+x <- xOrig <- expenditures
 ## Aitchison distance between the first 2 observations:
 aDist(x[,1], x[,2])
 
