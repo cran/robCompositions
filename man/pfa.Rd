@@ -50,8 +50,8 @@ John Wiley and Sons, Chichester, 2008.
 }
 \author{ Peter Filzmoser }
 \examples{
-data(aitchison395)
-x <- aitchison395
+data(expenditures)
+x <- expenditures
 
 # construct orthonormal basis: 
 V <- matrix(0,nrow=ncol(x),ncol=ncol(x)-1)

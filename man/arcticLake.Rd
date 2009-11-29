@@ -1,18 +1,18 @@
-\name{aitchison359}
-\alias{aitchison359}
+\name{arcticLake}
+\alias{arcticLake}
 \docType{data}
 \title{ Artic lake sediment data }
 \description{
   Sand, silt, clay compositions of 39 sediment samples at different water depths in an Arctic lake.
   This data set can be found on page 359 of the Aitchison book (see reference).
 }
-\usage{data(aitchison359)}
+\usage{data(arcticLake)}
 \format{
   A data frame with 39 observations on the following 3 variables.
   \describe{
-    \item{\code{V1}}{numeric vector of percentages of sand}
-    \item{\code{V2}}{numeric vector of percentages of silt}
-    \item{\code{V3}}{numeric vector of percentages of clay}
+    \item{\code{sand}}{numeric vector of percentages of sand}
+    \item{\code{silt}}{numeric vector of percentages of silt}
+    \item{\code{clay}}{numeric vector of percentages of clay}
   }
 }
 \details{
@@ -24,6 +24,6 @@ Data} Monographs on Statistics and Applied Probability. Chapman \&
 Hall Ltd., London (UK). 416p.
 }
 \examples{
-data(aitchison359)
+data(arcticLake)
 }
 \keyword{datasets}

@@ -89,12 +89,12 @@ Journal of the American Statistical Association 85, 664--675.
 }
 \author{ Matthias Templ }
 \seealso{ \code{\link{impCoda}}, \code{\link{impKNNa}}, \
-  \code{\link[compositions]{plot.acomp}}, \code{\link[car]{scatterplot.matrix}} }
+  \code{\link[car]{scatterplot.matrix}} }
 \examples{
-data(aitchison395)
-aitchison395[1,3]
-aitchison395[1,3] <- NA
-xi <- impKNNa(aitchison395)
+data(expenditures)
+expenditures[1,3]
+expenditures[1,3] <- NA
+xi <- impKNNa(expenditures)
 xi
 summary(xi)
 plot(xi, which=1)

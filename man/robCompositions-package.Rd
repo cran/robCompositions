@@ -36,19 +36,16 @@ Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for
 \emph{Research Report SM-2008-4, Vienna University of Technology}, 15 pages.
 }
 \keyword{ package }
-\seealso{
-\code{\link[<compositions>:<compositions>-package]{<compositions>}} 
-}
 \examples{
 ## k nearest neighbor imputation
-data(aitchison395)
-aitchison395[1,3]
-aitchison395[1,3] <- NA
-impKNNa(aitchison395)$xImp[1,3]
+data(expenditures)
+expenditures[1,3]
+expenditures[1,3] <- NA
+impKNNa(expenditures)$xImp[1,3]
 
 ## iterative model based imputation
-data(aitchison395)
-x <- aitchison395
+data(expenditures)
+x <- expenditures
 x[1,3]
 x[1,3] <- NA
 xi <- impCoda(x)$xImp
@@ -57,7 +54,7 @@ s1 <- sum(x[1,-3])
 impS <- sum(xi[1,-3])
 xi[,3] * s1/impS
 
-xi <- impKNNa(aitchison395)
+xi <- impKNNa(expenditures)
 xi
 summary(xi)
 plot(xi, which=1)

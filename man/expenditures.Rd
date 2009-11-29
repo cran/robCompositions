@@ -1,19 +1,19 @@
-\name{aitchison395}
-\alias{aitchison395}
+\name{expenditures}
+\alias{expenditures}
 \docType{data}
 \title{ Household expenditures data }
 \description{
   This data set from Aitchison (1986), p. 395, describes household expenditures (in former Hong Kong dollars) on five commundity groups. 
 }
-\usage{data(aitchison395)}
+\usage{data(expenditures)}
 \format{
   A data frame with 20 observations on the following 5 variables.
   \describe{
-    \item{\code{V1}}{housing (including fuel and light)}
-    \item{\code{V2}}{foodstuff}
-    \item{\code{V3}}{alcohol}
-    \item{\code{V4}}{tobacco}
-    \item{\code{V5}}{ other goods (including clothing, footwear and durable goods)}
+    \item{\code{housing}}{housing (including fuel and light)}
+    \item{\code{foodstuff}}{foodstuff}
+    \item{\code{alcohol}}{alcohol}
+    \item{\code{tobacco}}{tobacco}
+    \item{\code{other}}{ other goods (including clothing, footwear and durable goods)}
   }
 }
 \details{
@@ -28,9 +28,9 @@ Data} Monographs on Statistics and Applied Probability. Chapman \&
 Hall Ltd., London (UK). 416p.
 }
 \examples{
-data(aitchison395)
-aitchison395[1,3]
-aitchison395[1,3] <- NA
-impKNNa(aitchison395)$xImp[1,3]
+data(expenditures)
+expenditures[1,3]
+expenditures[1,3] <- NA
+impKNNa(expenditures)$xImp[1,3]
 }
 \keyword{datasets}

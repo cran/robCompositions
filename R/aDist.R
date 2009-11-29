@@ -3,7 +3,6 @@
       if(is.vector(x)) x <- matrix(x, ncol=length(x))
 	  if(is.vector(y)) x <- matrix(y, ncol=length(y))	  
 	  
-	  
 	  matOrig <- as.numeric(t(x))
 	  matImp <- as.numeric(t(y))
 	  n <- dim(x)[1]

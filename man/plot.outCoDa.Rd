@@ -22,8 +22,8 @@ compositional outliers.
 \author{ Matthias Templ }
 \seealso{ \code{\link{outCoDa}} }
 \examples{
-data(aitchison395)
-oD <- outCoDa(aitchison395)
+data(expenditures)
+oD <- outCoDa(expenditures)
 oD
 }
 \keyword{ hplot }

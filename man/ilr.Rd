@@ -33,8 +33,5 @@ Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for
 require(MASS)
 Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
 z <- invilr(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
-require(compositions)
-plot(acomp(z))
-plot(invilr(z))
 }
 \keyword{ math }

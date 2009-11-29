@@ -24,8 +24,8 @@ Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for
 \author{ Matthias Templ }
 \seealso{ \code{\link{impCoda}} }
 \examples{
-data(aitchison395)
-x <- aitchison395
+data(expenditures)
+x <- expenditures
 x[1,3] <- x[2,4] <- x[3,3] <- x[3,4] <- NA
 xi <- impCoda(x)
 x

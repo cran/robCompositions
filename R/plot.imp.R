@@ -73,8 +73,8 @@ function (x, ..., which=1, ord=1:ncol(x),
 		mtext(cn[1], side = 1, adj = 0, padj=-2, line = 1.5, cex=1.2)
 		mtext(cn[2], side = 1, adj = 1, padj=-2, line = 1.5, cex=1.2)
 		text(0.5, s60 * 1.05, cn[3], pos = 3, offset = 0.01, xpd = TRUE, cex=1.2)
-		X <- acomp(x, c(1, 2, 3))
-		Y <- scale.acomp(X, center = center, scale = scale)
+		X <- constSum(x, c(1, 2, 3))
+		Y <- scale(constSum(X), center = center, scale = scale)
 		x2 <- Y[, 2] + Y[, 3] * c60
 		y2 <- Y[, 3] * s60
 		ind <- apply(wind, 1, any)

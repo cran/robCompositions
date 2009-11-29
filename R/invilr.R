@@ -16,4 +16,3 @@ x.back=yexp/apply(yexp,1,sum)
 invisible(x.back)
 #return(yexp)
 }
-
