@@ -7,7 +7,7 @@
 }
 \usage{data(expenditures)}
 \format{
-  A data frame with 20 observations on the following 5 variables.
+  A data frame with 20 observations with the following 5 variables.
   \describe{
     \item{\code{housing}}{housing (including fuel and light)}
     \item{\code{foodstuff}}{foodstuff}
@@ -29,6 +29,7 @@ Hall Ltd., London (UK). 416p.
 }
 \examples{
 data(expenditures)
+## imputing a missing value in the data set using k-nearest neighbor imputation:
 expenditures[1,3]
 expenditures[1,3] <- NA
 impKNNa(expenditures)$xImp[1,3]

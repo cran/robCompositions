@@ -15,7 +15,7 @@ adtest(x, R = 1000, locscatt = "standard")
                    robust estimates using \sQuote{covMcd()} from package robustbase}
 }
 \details{
-Three version of the test are implemented (unvariate, angle and radius test) and it depends on 
+Three version of the test are implemented (univariate, angle and radius test) and it depends on 
 the data which test is chosen.
 
 If the data is univariate the univariate Anderson-Darling test for normality is applied.

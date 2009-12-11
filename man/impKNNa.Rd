@@ -2,10 +2,11 @@
 \alias{impKNNa}
 \title{ Imputation of missing values in compositional data using knn methods }
 \description{
-  This function offers several knn methods for the imputation of missing values in compositional data.
+  This function offers several k-nearest neighbor methods for the imputation of missing values in compositional data.
 }
 \usage{
-impKNNa(x, method = "knn", k = 3, metric = "Aitchison", agg = "median", primitive = FALSE, normknn = TRUE, das = FALSE, adj="median")
+impKNNa(x, method = "knn", k = 3, metric = "Aitchison", agg = "median", 
+        primitive = FALSE, normknn = TRUE, das = FALSE, adj="median")
 }
 \arguments{
   \item{x}{ data frame or matrix }
@@ -15,19 +16,21 @@ impKNNa(x, method = "knn", k = 3, metric = "Aitchison", agg = "median", primitiv
   \item{agg}{ \dQuote{median} or \dQuote{mean}, for the aggregation of the nearest neighbors }
   \item{primitive}{ if TRUE, a more enhanced search for the $k$-nearest neighbors is obtained (see details)}
   \item{normknn}{ An adjustment of the imputed values is performed if TRUE }
-  \item{das}{depricated. if TRUE, the original definition of the Aitchison distance is used to calculate distances between observations.
+  \item{das}{depricated. if TRUE, the definition of the Aitchison distance, based on simple logratios of the compositional
+  part, is used (Aitchison, 2000) to calculate distances between observations.
              if FALSE, a version using the clr transformation is used.}
-  \item{adj}{ either \sQuote{median} (default) or \sQuote{sum} can be chosen for the adjustment of the nearest neighbors, see Hron et al., 2008. }
+  \item{adj}{ either \sQuote{median} (default) or \sQuote{sum} can be chosen for the adjustment of the nearest 
+  neighbors, see Hron et al., 2010. }
 }
 \details{
-The Aitchison \code{metric} should be chosen when dealing with compositional data, the Euclidean \code{metric} otherwise. \\
+The Aitchison \code{metric} should be chosen when dealing with compositional data, the Euclidean \code{metric} otherwise. 
 
 If \code{primitive} \eqn{==} FALSE, a sequential search for the \eqn{k}-nearest neighbors 
 is applied for every missing value where all information corresponding to the 
 non-missing cells plus the information in the variable to be imputed plus some 
 additional information is available. If \code{primitive} \eqn{==} TRUE, a search of the 
 \eqn{k}-nearest neighbors among observations is applied where in addition to the variable 
-to be imputed any further cells are non-missing. \\
+to be imputed any further cells are non-missing. 
 
 If \code{normknn} is TRUE (prefered option) the imputed cells from a nearest neighbor method are adjusted with special adjustment factors (more details can be found online (see the references)).
 }
@@ -39,8 +42,11 @@ If \code{normknn} is TRUE (prefered option) the imputed cells from a nearest nei
   \item{metric }{Metric used}
 }
 \references{ 
-Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Research Report SM-2008-4, Vienna University of Technology}, 15 pages.
+Aitchison, J. and Barcelo-Vidal, C. and Martin-Fernandez, J.A. and Pawlowsky-Glahn, V. (2000) 
+Logratio analysis and compositional distance, Mathematical Geology 32(3):271-275.
+
+Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
+\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
  }
 \author{ Matthias Templ }
 \seealso{ \code{\link{impCoda}} }

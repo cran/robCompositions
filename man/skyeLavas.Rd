@@ -1,7 +1,7 @@
 \name{skyeLavas}
 \alias{skyeLavas}
 \docType{data}
-\title{ Another data set from the Atichsion book }
+\title{ Aphyric skye lavas data }
 \description{
   AFM compositions of 23 aphyric Skye lavas. This data set can be found on page 360 of the Aitchison book (see reference).
 }

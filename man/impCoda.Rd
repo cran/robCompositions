@@ -14,7 +14,7 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
   \item{maxit}{ maximum number of iterations }
   \item{eps}{ convergence criteria }
   \item{method}{ imputation method }
-  \item{closed}{ imputation of transformed data (using ilr transformation) or in the original space (closed $==$ TRUE)  }
+  \item{closed}{ imputation of transformed data (using ilr transformation) or in the original space (\code{closed} equals TRUE)  }
   \item{init}{ method for initializing missing values }
   \item{k}{ number of nearest neighbors (if init $==$ \dQuote{KNN}) }
   \item{dl}{ detection limit(s), only important for the imputation of rounded zeros }
@@ -45,8 +45,8 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
   \item{wind }{Index of the missing values in the data}
 }
 \references{ 
-Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Research Report SM-2008-4, Vienna University of Technology}, 15 pages.
+Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
+\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
  }
 \author{ Matthias Templ, Karel Hron }
 \seealso{ \code{\link{impKNNa}}, \code{\link{ilr}} }

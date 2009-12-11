@@ -2,7 +2,7 @@
 \alias{print.imp}
 \title{ Print method for objects of class imp }
 \description{
- The function returns a few information about how many missings are imputeted and possible other 
+ The function returns a few information about how many missing values are imputed and possible other 
  information about the amount of iterations, for example.
 }
 \usage{

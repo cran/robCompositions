@@ -15,7 +15,7 @@ aDist(x, y)
   This distance measure accounts for the relative scale property of the 
   Aitchison distance. It measures the distance between two compositions if \code{x} and \code{y} 
   are vectors and evaluate sum of the distances between \code{x} and \code{y} for each row of \code{x} and \code{y} if
-  \code{x} and \code{y} are matrizes or data frames.
+  \code{x} and \code{y} are matrices or data frames.
   
   It is not designed to apply it on one matrix, 
   such as function \sQuote{acomp()} in package \sQuote{compositions}, 
@@ -27,8 +27,15 @@ aDist(x, y)
   The Aitchison distance between two compositions or between two data sets.
 }
 \references{ Aitchison, J. (1986) \emph{The Statistical Analysis of Compositional
-Data} Monographs on Statistics and Applied Probability. Chapman \&
-Hall Ltd., London (UK). 416p. }
+Data} Monographs on Statistics and Applied Probability. Chapman and
+Hall Ltd., London (UK). 416p. 
+
+Aitchison, J. and Barcelo-Vidal, C. and Martin-Fernandez, J.A. and Pawlowsky-Glahn, V. (2000) Logratio analysis and 
+compositional distance. \emph{Mathematical Geology}, \bold{32}, 271-275.
+
+Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
+\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
+}
 \author{ Matthias Templ }
 \seealso{ \code{\link{ilr}} }
 \examples{

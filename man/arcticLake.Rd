@@ -16,7 +16,8 @@
   }
 }
 \details{
- Please note, that the original data set consists of four variables. However, usually the first three are mainly used in applications.
+ The rows sum up to 100, except for rounding errors. The full data set including the water depth can be found in package
+ compositions, for example.
 }
 \source{
 Aitchison, J. (1986) \emph{The Statistical Analysis of Compositional

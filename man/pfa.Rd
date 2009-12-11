@@ -26,8 +26,10 @@ rotation = "varimax", maxiter = 5, control = NULL, ...)
   \item{\dots}{ arguments for creating a list }
 }
 \details{
-  The main difference of this implementation is that 
-  uniquenesses are nor longer of diagonal form.
+  The main difference to usual implementations is that 
+  uniquenesses are nor longer of diagonal form. This kind of factor analysis is designed for centered log-ratio
+  transformed compositional data. A robust version using the isometric log-ratio transformation could be chosen 
+  (see the example below).
 }
 \value{
   \item{loadings }{A matrix of loadings, one column for each factor. The factors 
@@ -46,9 +48,12 @@ rotation = "varimax", maxiter = 5, control = NULL, ...)
 \references{ C. Reimann, P. Filzmoser, R.G. Garrett, and R. Dutter (2008): 
 Statistical Data Analysis Explained. 
 \emph{Applied Environmental Statistics with R}. 
-John Wiley and Sons, Chichester, 2008.  
+John Wiley and Sons, Chichester, 2008.
+
+P. Filzmoser, K. Hron, C. Reimann, R. Garrett (2009): Robust Factor Analysis for Compositional Data. 
+\emph{Computers and Geosciences}, \bold{35} (9), 1854--1861.
 }
-\author{ Peter Filzmoser }
+\author{ Peter Filzmoser, Karel Hron }
 \examples{
 data(expenditures)
 x <- expenditures
@@ -84,8 +89,6 @@ res1logcentr <- pfa(y.sc, factors=1, scores="Bartlett", rotation="varimax")
 
 
 #res1Rlogcentr <- pfa(y.rsc, factors=1, covmat=var_y, scores="Bartlett", rotation="varimax")
-
-
 
 }
 \keyword{ multivariate }

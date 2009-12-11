@@ -6,7 +6,7 @@
   how the imputated values are distributed in comparison with the original data values.
 }
 \usage{
-plot.imp(x, ..., which = 1, ord = 1:ncol(x), colcomb = "missnonmiss", plotvars = NULL, 
+\method{plot}{imp}(x, ..., which = 1, ord = 1:ncol(x), colcomb = "missnonmiss", plotvars = NULL, 
   col = c("skyblue", "red"), alpha = NULL, lty = par("lty"), xaxt = "s", xaxlabels = NULL, 
   las = 3, interactive = TRUE, pch = c(1, 3), smooth = FALSE, reg.line = FALSE, 
   legend.plot = FALSE, ask = prod(par("mfcol")) < length(which) && dev.interactive(), 

@@ -18,13 +18,13 @@ p-values are provided.
 \value{
 a data frame including an information about the ilr-variables used (first column), the 
 underlying test (second column), the test statistics (third column), the corresponding
-estimated p-values (fourth column) and an information about the rejection of the Null 
+estimated p-values (fourth column) and an information about the rejection of the null 
 hypothesis (last column).
 }
 \references{ 
 Pawlowsky-Glahn, V., Egozcue, J.J. and Tolosana-Delgado, R. (2008),
 \emph{Lecture Notes on Compositional Data Analysis} Universitat de Girona,
-\url{http://diobma.udg.edu:8080/dspace/bitstream/10256.1/297/1/CoDa-book.pdf}
+\url{http://dugi-doc.udg.edu/bitstream/10256/297/1/CoDa-book.pdf}
 }
 \author{ Matthias Templ and Karel Hron }
 \seealso{ \code{\link{adtestWrapper}} }
