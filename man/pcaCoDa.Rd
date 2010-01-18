@@ -2,14 +2,14 @@
 \alias{pcaCoDa}
 \title{ Robust principal component analysis for compositional data }
 \description{
-This function performs out a robust principal component analysis for compositional data.
+This function applies robust principal component analysis for compositional data.
 }
 \usage{
 pcaCoDa(x, method = "robust")
 }
 \arguments{
   \item{x}{ compositional data }
-  \item{method}{ either \dQuote{robust} (default) or \sQuote{standard}}
+  \item{method}{ either \dQuote{robust} (default) or \dQuote{standard}}
 }
 \details{
 The compositional data set is transformed using the ilr tranformation. 
@@ -26,7 +26,7 @@ the compositional biplot can be shown.
 }
 \references{ 
  Filzmoser, P., Hron, K., Reimann, C. (2009)
- Principal Component Analysis for Compositional Data with Outliers. \emph{Environmetrics}, accepted for publication.
+ Principal Component Analysis for Compositional Data with Outliers. \emph{Environmetrics}, \bold{20}, 621-632.
 }
 \author{ K. Hron, P. Filzmoser, M. Templ }
 \seealso{\code{\link{print.pcaCoDa}}, \code{\link{plot.pcaCoDa}} }

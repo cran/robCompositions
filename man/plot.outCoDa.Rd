@@ -5,7 +5,7 @@
 Plots the Mahalanobis distance.
 }
 \usage{
-plot.outCoDa(x, y, ...)
+\method{plot}{outCoDa}(x, y, ...)
 }
 \arguments{
   \item{x}{ object from class \sQuote{outCoDa} }
@@ -25,5 +25,6 @@ compositional outliers.
 data(expenditures)
 oD <- outCoDa(expenditures)
 oD
+plot(oD)
 }
 \keyword{ hplot }

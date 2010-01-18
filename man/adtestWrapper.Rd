@@ -15,24 +15,24 @@ adtestWrapper(x, alpha = 0.05, R = 1000, robustEst = FALSE)
   \item{robustEst}{ logical }
 }
 \details{
-First, the data is tranformed using the \sQuote{ilr}-transformation. 
-After applying this tranformation 
+First, the data is transformed using the \sQuote{ilr}-transformation. 
+After applying this transformation 
 
-- all (D-1)-dimensional marginal, univarite distributions are tested using the univariate 
-Anderson-Darling Test for normality.
+- all (D-1)-dimensional marginal, univariate distributions are tested using the univariate 
+Anderson-Darling test for normality.
 
 - all 0.5 (D-1)(D-2)-dimensional bivariate angle distributions are tested using the Anderson-Darling
-angle Test for normality.
+angle test for normality.
 
 - the (D-1)-dimensional radius distribution is tested using
-the Anderson-Darling radius Test for normality. 
+the Anderson-Darling radius test for normality. 
 }
 \value{
   \item{res }{ a list including each test result }
-  \item{check }{ information about the rejection of the Null hypothesis}
+  \item{check }{ information about the rejection of the null hypothesis}
   \item{alpha}{ the underlying significance level }
   \item{info}{ further information which is used by the print and summary method. }
-  \item{est}{ standard for standard estimations and robust for robust estimation }  
+  \item{est}{ \dQuote{standard} for standard estimation and \dQuote{robust} for robust estimation }  
 }
 \references{ 
 Anderson, T.W. and Darling, D.A. (1952) 

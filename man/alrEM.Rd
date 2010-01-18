@@ -33,7 +33,7 @@ accurate than sweep.
   \item{iter }{Number of iterations}
   \item{eps }{eps}
 }
-\references{ Palarea-Albaladej, J. and Mart'in-Fern'andez, J.A. (2008) A modified EM alr-algorithm for replacing rounded zeros in
+\references{ Palarea-Albaladejo, J. and Martin-Fernandez, J.A. (2008) A modified EM alr-algorithm for replacing rounded zeros in
 compositional data sets. \emph{Computers and Geosciences}, \bold{34}, 902-917 
 }
 \author{ Matthias Templ and Karel Hron }

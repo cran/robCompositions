@@ -1,11 +1,10 @@
 \name{clr}
 \alias{clr}
 \title{
-centered log-ratio transformation
+Centred log-ratio transformation
 }
 \description{
-The clr transformation opens compositional data into an unconstrained
-form in the real space.
+The clr transformation moves D-part compositional data from the simplex into a D-dimensional real space.
 }
 \usage{
 clr(x)
@@ -16,7 +15,7 @@ multivariate data ideally of class data.frame or matrix
 }
 }
 \details{
-The compositions divided by its geometric mean before the logarithm is taken. 
+Each composition is divided by the geometric mean of its parts before the logarithm is taken. 
 }
 \value{
 The transformed data, including

@@ -1,11 +1,40 @@
 UseDynLib(robCompositions)
 importFrom(robustbase, ltsReg)
+importFrom(rrcov, CovMcd, getCenter, getCov)
 importFrom(car, scatterplot.matrix)
-importFrom(MASS, parcoord)
+importFrom(MASS, parcoord, mvrnorm)
 importFrom(utils, citation)
 
-export(adjust, aDist, adtest, adtestWrapper, alr, alrEM, clr,  
-       constSum, print.adtestWrapper, summary.adtestWrapper, 
-       ilr, impCoda, impKNNa, invalr, invclr, invilr, robVariation, 
-       print.imp, summary.imp, plot.imp, outCoDa, print.outCoDa,
-       plot.outCoDa, print.pcaCoDa, pcaCoDa, plot.pcaCoDa, pfa) 
+export(adjust, 
+       aDist, 
+       adtest, 
+       adtestWrapper, 
+       alr, 
+       alrEM, 
+       clr,  
+       constSum, 
+       daFisher,   
+       ilr, 
+       impCoda, 
+       impKNNa, 
+       invalr, 
+       invclr, 
+       invilr, 
+       outCoDa,
+       pcaCoDa,
+       pfa,
+       robVariation,
+       ternaryDiag) 
+
+S3method(plot, imp)
+S3method(plot, outCoDa)
+S3method(plot, pcaCoDa)
+S3method(print, adtestWrapper)
+S3method(print, daFisher)
+S3method(print, imp)
+S3method(print, outCoDa)
+S3method(print, pcaCoDa)
+S3method(summary, adtestWrapper)
+S3method(summary, imp)
+          
+       

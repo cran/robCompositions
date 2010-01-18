@@ -6,24 +6,27 @@
 Robust Estimation for Compositional Data.
 }
 \description{
-This first version of the package includes advanced methods for
-        imputation of compositional data including robust methods. The
-        package will be enhanced with other multivariate methods for
-        compositional data in near future.
+The package contains methods for imputation 
+             of compositional data including robust methods, (robust) outlier detection for compositional data, 
+             (robust) principal component
+             analysis for compositional data, (robust) factor analysis for compositional data, (robust) discriminant analysis
+             (Fisher rule) and (robust) 
+             Anderson-Darling normality tests
+             for compositional data as well as popular log-ratio transformations (alr, clr, ilr, and their inverse transformations). 
 }
 \details{
 \tabular{ll}{
 Package: \tab robCompositions\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2008-12-15\cr
+Version: \tab 1.3.3\cr
+Date: \tab 2009-11-28\cr
 License: \tab GPL 2\cr
 LazyLoad: \tab yes\cr
 }
 
 }
 \author{
-Peter Filzmoser, Karel Hron, Matthias Templ
+Matthias Templ, Peter Filzmoser, Karel Hron, 
 
 Maintainer: Matthias Templ <templ@tuwien.ac.at>
 }
@@ -32,8 +35,22 @@ Aitchison, J. (1986) \emph{The Statistical Analysis of Compositional
 Data} Monographs on Statistics and Applied Probability. Chapman \&
 Hall Ltd., London (UK). 416p. \\
 
-Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Research Report SM-2008-4, Vienna University of Technology}, 15 pages.
+Filzmoser, P., and Hron, K. (2008)
+  Outlier detection for compositional data using robust methods. \emph{Math. Geosciences}, \bold{40} 233-248.
+
+Filzmoser, P., Hron, K., Reimann, C. (2009)
+Principal Component Analysis for Compositional Data with Outliers. \emph{Environmetrics}, \bold{20} (6), 621--632.
+
+P. Filzmoser, K. Hron, C. Reimann, R. Garrett (2009): Robust Factor Analysis for Compositional Data. 
+\emph{Computers and Geosciences}, \bold{35} (9), 1854--1861.
+
+Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
+\emph{Computational Statistics and Data Analysis}, accepted for publication.
+
+C. Reimann, P. Filzmoser, R.G. Garrett, and R. Dutter (2008): 
+Statistical Data Analysis Explained. 
+\emph{Applied Environmental Statistics with R}. 
+John Wiley and Sons, Chichester, 2008.
 }
 \keyword{ package }
 \examples{
@@ -60,4 +77,40 @@ summary(xi)
 plot(xi, which=1)
 plot(xi, which=2)
 plot(xi, which=3)
+
+## pca
+data(expenditures)
+p1 <- pcaCoDa(expenditures)
+p1
+plot(p1)
+
+## outlier detection
+data(expenditures)
+oD <- outCoDa(expenditures)
+oD
+plot(oD)
+
+## transformations
+data(arcticLake)
+x <- arcticLake
+x.alr <- alr(x, 2)
+y <- invalr(x.alr)
+invalr(alr(x, 3))
+data(expenditures)
+x <- expenditures
+y <- invalr(alr(x, 5))
+head(x)
+head(y)
+invalr(x.alr, ivar=2, useClassInfo=FALSE)
+
+data(expenditures)
+eclr <- clr(expenditures)
+inveclr <- invclr(eclr)
+head(expenditures)
+head(inveclr)
+head(invclr(eclr$x.clr))
+
+require(MASS)
+Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
+z <- invilr(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
 }

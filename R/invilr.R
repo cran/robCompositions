@@ -12,7 +12,7 @@ for (i in 2:(ncol(y)-1)){
    y[,i]=y[,i]-sqrt((D-i)/(D-i+1))*x.ilr[,i]
 }
 yexp=exp(y)
-x.back=yexp/apply(yexp,1,sum)
+x.back=yexp/apply(yexp,1,sum) # * rowSums(derOriginaldaten)
 invisible(x.back)
 #return(yexp)
 }

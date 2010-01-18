@@ -1,7 +1,7 @@
 \name{machineOperators}
 \alias{machineOperators}
 \docType{data}
-\title{ Machine Operators data set}
+\title{ Machine operators data set}
 \description{
 The data set from Aitchison (1986), p. 382, contains 
 compositions of eight-hour shifts of 27 machine operators. 

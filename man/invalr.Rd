@@ -1,10 +1,10 @@
 \name{invalr}
 \alias{invalr}
 \title{
-additive logistic transformaton
+Additive logistic transformaton
 }
 \description{
-Inverse additive log-ratio transformation, often called as additive logistic transformation.
+Inverse additive log-ratio transformation, often called additive logistic transformation.
 }
 \usage{
 invalr(x, cnames = NULL, ivar = NULL, useClassInfo = TRUE)
@@ -17,8 +17,8 @@ data set, object of class \dQuote{alr}, \dQuote{matrix} or \dQuote{data.frame}
 column names. If the object is of class \dQuote{alr} the column names are chosen from therein.
 }
   \item{ivar}{
-index of the rationing variable. If the object is of class \dQuote{alr} the column names are chosen from therein. If not and ivar is not provided by
-the user, it is assumed that the rationing variable was the last column of the data in the simplex.
+index of the rationing part. If the object is of class \dQuote{alr} the column names are chosen from therein. If not and ivar is not provided by
+the user, it is assumed that the rationing part was the last column of the data in the simplex.
 }
   \item{useClassInfo}{
 if FALSE, the class information of object \code{x} is not used.
@@ -39,7 +39,7 @@ Hall Ltd., London (UK). 416p.
 Matthias Templ
 }
 \seealso{
-\code{\link{invilr}}, \code{\link{alr}}
+\code{\link{invilr}}, \code{\link{invclr}}, \code{\link{clr}}, \code{\link{alr}}, \code{\link[compositions]{ilrInv}}
 }
 \examples{
 data(arcticLake)

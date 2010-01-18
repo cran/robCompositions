@@ -21,8 +21,8 @@ C. Barcel'o-Vidal (2003) Isometric logratio transformations for
 compositional data analysis. \emph{Mathematical Geology}, \bold{35}(3)
 279-300 \\
 
-Hron, K. and Templ, M. and Filzmoser, P. (2008) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Research Report SM-2008-4, Vienna University of Technology}, 15 pages.
+Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
+\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
 }
 \author{ Karel Hron }
 \seealso{ \code{\link{ilr}} }

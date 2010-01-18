@@ -1,10 +1,10 @@
 \name{invclr}
 \alias{invclr}
 \title{
-inverse centered log-ratio transformation
+Inverse centred log-ratio transformation
 }
 \description{
-Applies the inverse centered log-ratio transformation.
+Applies the inverse centred log-ratio transformation.
 }
 \usage{
 invclr(x, useClassInfo = TRUE)

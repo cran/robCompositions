@@ -1,22 +1,20 @@
 \name{alr}
 \alias{alr}
 \title{
-additive log-ratio transformation
+Additive log-ratio transformation
 }
 \description{
-The alr transformation opens compositional data into an unconstrained
-form in the real space.
+The alr transformation moves D-part compositional data from the simplex into a (D-1)-dimensional real space.
 }
 \usage{
 alr(x, ivar=ncol(x))
 }
 \arguments{
-  \item{x}{Multivariate compositional data}
-  \item{ivar}{Rationing variable}
+  \item{x}{D-part compositional data}
+  \item{ivar}{Rationing part}
 }
 \details{
-The variables divided by its rationing variable before the logarithm is taken. This results in an D-1 dimensional space, with D the dimension of the 
-data matrix \emph{x}.
+The compositional parts are divided by the rationing part before the logarithm is taken. 
 }
 \value{
 A list of class \dQuote{alr} which includes the following content:
@@ -35,7 +33,7 @@ Hall Ltd., London (UK). 416p.
 Matthias Templ
 }
 \seealso{
-\code{\link{ilr}}
+\code{\link{invalr}}, \code{\link{ilr}}, \code{\link[compositions]{alr}}
 }
 \examples{
 data(arcticLake)
