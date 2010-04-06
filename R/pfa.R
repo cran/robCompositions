@@ -8,6 +8,17 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
         "Bartlett"), rotation = "varimax", maxiter = 5, control = NULL, 
     ...) 
 {
+	z <- ilr(x)    #ilr transformed data
+	## orthonormal basis:
+	V <- matrix(0,nrow=ncol(x),ncol=ncol(x)-1)
+	for (i in 1:ncol(V)){
+		V[1:i,i] <- 1/i
+		V[i+1,i] <- (-1)
+		V[,i] <- V[,i]*sqrt(i/(i+1))
+	}
+	y <- z%*%t(V)  #clr transformed data
+#	if(transformation=="ilr") x <- ilr(x) else if(transformation=="clr") x <- clr(x)$x.clr else stop("This transformation is not supported by pfa().")
+	x <- scale(x,scale=FALSE)
     sortLoadings <- function(Lambda) {
         cn <- colnames(Lambda)
         Phi <- attr(Lambda, "covariance")
@@ -25,22 +36,31 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
     }
     cl <- match.call()
     na.act <- NULL
-    if (is.list(covmat)) {
+	if (is.character(covmat) && length(covmat)==1){
+		if(covmat == "cov"){
+			cv <- cov(z)
+			n.obs <- nrow(x)
+		} else{
+			cv <- get(covmat)(z)$cov
+			n.obs <- nrow(x)
+		}
+	} else if (is.list(covmat)) {
         if (any(is.na(match(c("cov", "n.obs"), names(covmat))))) 
             stop("covmat is not a valid covariance list")
         cv <- covmat$cov
+		if(dim(cv)[2] != dim(z)[2]) stop(paste("covariance matrix is not of dimension", dim(z)[2], "times", dim(z)[2], ". Was it really taken from the transformed data?"))
         n.obs <- covmat$n.obs
         have.x <- FALSE
-    }
-    else if (is.matrix(covmat)) {
+    } else if (is.matrix(covmat)) {
         cv <- covmat
+		if(dim(cv)[2] != dim(z)[2]) stop(paste("covariance matrix is not of dimension", dim(z)[2], "times", dim(z)[2], ". Was it really taken from the transformed data?"))
         have.x <- FALSE
-    }
-    else if (is.null(covmat)) {
+		n.obs <- nrow(x)
+    } else if (is.null(covmat)) {
         if (missing(x)) 
             stop("neither x nor covmat supplied")
         have.x <- TRUE
-        if (inherits(x, "formula")) {
+        if (inherits(x, "formula")) { ## TODO: mit z!
             mt <- terms(x, data = data)
             if (attr(mt, "response") > 0) 
                 stop("response not allowed in formula")
@@ -54,7 +74,7 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
             z <- model.matrix(mt, mf)
         }
         else {
-            z <- as.matrix(x)
+            z <- as.matrix(z) ## statt x
             if (!missing(subset)) 
                 z <- z[subset, , drop = FALSE]
         }
@@ -63,6 +83,9 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
         n.obs <- covmat$n.obs
     }
     else stop("covmat is of unknown type")
+	## end covmat
+	## covmat saved in cv
+	x <- y  ## use clr transformed data!
     scores <- match.arg(scores)
     if (scores != "none" && !have.x) 
         z <- x
@@ -118,7 +141,7 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
     }
     if (!is.na(n.obs) && dof > 0) {
         fit$STATISTIC <- (n.obs - 1 - (2 * p + 5)/6 - (2 * factors)/3) * 
-            fit$criteria["objective"]
+            fit$criteria#["objective"]
         fit$PVAL <- pchisq(fit$STATISTIC, dof, lower.tail = FALSE)
     }
     fit$n.obs <- n.obs

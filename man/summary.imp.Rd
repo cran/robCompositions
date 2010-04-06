@@ -9,7 +9,7 @@
 }
 \arguments{
   \item{object}{ an object of class \sQuote{imp} }
-  \item{\dots}{  }
+  \item{\dots}{ additional arguments passed trough }
 }
 \details{
   Note that this function will be enhanced with more sophisticated methods in 

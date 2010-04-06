@@ -19,7 +19,7 @@ grouping variable: a factor specifying the class for each
           observation.
 }
   \item{coda}{
-TRUE, when if is a compositional data set.
+TRUE, when the underlying data are compositions.
 }
   \item{method}{
 \dQuote{classical} or \dQuote{robust}
@@ -70,7 +70,7 @@ x3 <- mvrnorm(40,c(0,3,0),diag(3))
 X <- rbind(x1,x2,x3)
 grp=c(rep(1,20),rep(2,30),rep(3,40))
 
-par(mfrow=c(1,2))
+#par(mfrow=c(1,2))
 d1 <- daFisher(X,grp=grp,method="classical",coda=FALSE)
 d2 <- daFisher(X,grp=grp,method="robust",coda=FALSE)
 d2

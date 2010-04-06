@@ -126,28 +126,28 @@ function (x, ..., which=1, ord=1:ncol(x),
 			
 			segments(x1=d$z1[,1], y1=d$z1[,2],
 					x0=x2, y0=y2,
-					col="skyblue", lwd=seg.lwd)	
+					col=col[1], lwd=seg.lwd)	
 			segments(x1=d$z2[,1], y1=d$z2[,2],
 					x0=x2, y0=y2,
-					col="skyblue", lwd=seg.lwd)				
+					col=col[1], lwd=seg.lwd)				
 			segments(x1=d$z3[,1], y1=d$z3[,2],
 							x0=x2, y0=y2,
-							col="skyblue", lwd=seg.lwd)	
+							col=col[1], lwd=seg.lwd)	
 					
 			if(info[1]){		
 					segments(x1=d$z1[ind1,1], y1=d$z1[ind1,2],
 							x0=x2[ind1], y0=y2[ind1],
-							col="red", lwd=seg.lwd+1)	
+							col=col[2], lwd=seg.lwd+2)	
 				}
 			if(info[2]){
 					segments(x1=d$z2[ind2,1], y1=d$z2[ind2,2],
 							x0=x2[ind2], y0=y2[ind2],
-							col="red", lwd=seg.lwd+1)	
+							col=col[2], lwd=seg.lwd+2)	
 				}
 			if(info[3]){
 					segments(x1=d$z3[ind3,1], y1=d$z3[ind3,2],
 							x0=x2[ind3], y0=y2[ind3],
-							col="red", lwd=seg.lwd+1)	
+							col=col[2], lwd=seg.lwd+2)	
 				}
 							
 		if (id) {
