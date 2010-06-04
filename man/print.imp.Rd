@@ -10,7 +10,7 @@
 }
 \arguments{
   \item{x}{ an object of class \sQuote{imp} }
-  \item{\dots}{  }
+  \item{\dots}{ additional arguments passed trough }
 }
 \value{
 None (invisible NULL).

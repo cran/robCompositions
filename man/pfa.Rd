@@ -2,7 +2,7 @@
 \alias{pfa}
 \title{ Factor analysis for compositional data }
 \description{
-Computes the principal factor analysis of the input data. 
+Computes the principal factor analysis of the input data which are transformed and centered first. 
 }
 \usage{
 pfa(x, factors, data = NULL, covmat = NULL, n.obs = NA, 
@@ -15,6 +15,7 @@ rotation = "varimax", maxiter = 5, control = NULL, ...)
   \item{factors}{ number of factors  }
   \item{data}{ default value is NULL }
   \item{covmat}{ (robustly) computed covariance or correlation matrix }
+%  \item{transformation}{Either \sQuote{clr} or \sQuote{ilr}}
   \item{n.obs}{ number of observations  }
   \item{subset}{ 	if a subset is used  }
   \item{na.action}{ what to do with NA values }
@@ -28,8 +29,9 @@ rotation = "varimax", maxiter = 5, control = NULL, ...)
 \details{
   The main difference to usual implementations is that 
   uniquenesses are nor longer of diagonal form. This kind of factor analysis is designed for centered log-ratio
-  transformed compositional data. A robust version using the isometric log-ratio transformation could be chosen 
-  (see the example below).
+  transformed compositional data. However, if the covariance is not specified, the covariance is estimated from 
+  isometric log-ratio transformed data internally, but the data used for factor analysis are backtransformed to 
+  the clr space (see Filzmoser et al., 2009).
 }
 \value{
   \item{loadings }{A matrix of loadings, one column for each factor. The factors 
@@ -53,42 +55,15 @@ John Wiley and Sons, Chichester, 2008.
 P. Filzmoser, K. Hron, C. Reimann, R. Garrett (2009): Robust Factor Analysis for Compositional Data. 
 \emph{Computers and Geosciences}, \bold{35} (9), 1854--1861.
 }
-\author{ Peter Filzmoser, Karel Hron }
+\author{ Peter Filzmoser, Karel Hron, Matthias Templ }
 \examples{
 data(expenditures)
 x <- expenditures
+res0 <- pfa(x, factors=1, covmat="cov")
 
-# construct orthonormal basis: 
-V <- matrix(0,nrow=ncol(x),ncol=ncol(x)-1)
-for (i in 1:ncol(V)){
-  V[1:i,i] <- 1/i
-  V[i+1,i] <- (-1)
-  V[,i] <- V[,i]*sqrt(i/(i+1))
-}
-
-z <- ilr(x) #ilr transformed data
-y <- z %*% t(V) #clr transformed data
-
-set.seed(200)
-require(robustbase)
-z.mcd <- covMcd(z)
-mean_z <- z.mcd$center
-mean_y <- V %*% mean_z 
-
-var_z <- z.mcd$cov
-var_y <- V %*% var_z %*% t(V)
-
-#classical scaling
-y.sc <- scale(y,scale=FALSE) #only centering
-
-#robust scaling
-#y.rsc <- scale(y,mean_y,scale=FALSE) #only centering
-
-
-res1logcentr <- pfa(y.sc, factors=1, scores="Bartlett", rotation="varimax")
-
-
-#res1Rlogcentr <- pfa(y.rsc, factors=1, covmat=var_y, scores="Bartlett", rotation="varimax")
-
+## the following produce always the same result:
+res1 <- pfa(x, factors=1, covmat="covMcd")
+res2 <- pfa(x, factors=1, covmat=covMcd(ilr(x))$cov)
+res3 <- pfa(x, factors=1, covmat=covMcd(ilr(x)))
 }
 \keyword{ multivariate }
