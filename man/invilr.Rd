@@ -31,6 +31,7 @@ require(MASS)
 Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
 set.seed(123)
 z <- mvrnorm(100, mu=c(0,2), Sigma=Sigma)
-invilr(z)
+x <- invilr(z)
+head(x)
 }
 \keyword{ math }
