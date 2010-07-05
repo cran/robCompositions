@@ -1,4 +1,4 @@
-outCoDa <- function(x, alpha=0.05, method="robust", h=1/2){
+outCoDa <- function(x, quantile=0.975, method="robust", h=1/2){
 	if(dim(x)[2] < 2) stop("need data with at least 2 variables")
 	
 	covEst <- function(x, type) {
@@ -17,9 +17,9 @@ outCoDa <- function(x, alpha=0.05, method="robust", h=1/2){
 	z <- ilr(x)
 	cv <- covEst(z, method)
 	dM <- sqrt(mahalanobis(z, center=cv$mean, cov=cv$varmat))
-	limit <- sqrt(qchisq(p=1-alpha, df=ncol(x)-1))
+	limit <- sqrt(qchisq(p=quantile, df=ncol(x)-1))
 	res <- list(mahalDist = dM, limit = limit, 
-			    outlierIndex = dM > limit)
+			    outlierIndex = dM > limit, method=method)
 	class(res) <- "outCoDa"
     invisible(res)
 }
