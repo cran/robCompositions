@@ -5,11 +5,15 @@
 Outlier detection for compositional data using standard and robust statistical methods.
 }
 \usage{
-outCoDa(x, alpha = 0.05, method = "robust", h = 1/2)
+outCoDa(x, quantile = 0.975, method = "robust", h = 1/2)
 }
 \arguments{
   \item{x}{ compositional data }
-  \item{alpha}{ significance level }
+  \item{quantile}{ quantile, 
+corresponding to a significance level, 
+is used as a cut-off value for outlier
+identification: observations with larger (squared) robust
+Mahalanobis distance are considered as potential outliers. }
   \item{method}{either \dQuote{robust} (default) or \dQuote{standard} }
   \item{h}{ the size of the subsets for the robust covariance estimation according the MCD-estimator for which the determinant is
           minimized (the default is (n+p+1)/2).}
@@ -26,8 +30,9 @@ If method \dQuote{standard} is used, standard measures of location
 }
 \value{
   \item{mahalDist }{resulting Mahalanobis distance}
-  \item{limit }{(1 - alpha) quantile of the Chi-squared distribution}
+  \item{limit }{quantile of the Chi-squared distribution}
   \item{outlierIndex }{logical vector indicating outliers and non-outliers}
+  \item{method }{method used}
 }
 \references{
 Egozcue J.J., V. Pawlowsky-Glahn, G. Mateu-Figueras and
@@ -47,7 +52,7 @@ Rousseeuw, P.J., Van Driessen, K. (1999)
 \note{
 It is highly recommended to use the robust version of the procedure.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{\code{\link{ilr}}}
 \examples{
 data(expenditures)
 oD <- outCoDa(expenditures)
