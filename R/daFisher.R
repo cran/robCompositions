@@ -40,7 +40,9 @@ else {
 	adirs <- t(t(adir)/(sqrt(diag(t(adir)%*%W%*%adir))))
 	scores=x%*%adirs
 if(plotScore){
-  plot(scores[,1:2],col=grp, pch=grp, cex=1.5)
+  pl <- as.numeric(factor(grp))
+  plot(scores[,1:2],col=pl, pch=pl, cex=1.5, xlab="Scores 1", ylab="Scores 2", cex.lab=1.2)
+  legend("topright", legend=levels(factor(grp)), pch=unique(pl), col=unique(pl), cex=1.3)
 }
 #    postgroup <- apply(scores, 1, which.min)
 #	print(postgroup)

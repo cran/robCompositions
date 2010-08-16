@@ -208,7 +208,7 @@ function (x, ..., which=1, ord=1:ncol(x),
     }
     args$col <- c(args$col[1], args$col[3], args$col[2])
     args$pch <- args$pch[2:1]
-    do.call(scatterplot.matrix, args)
+    do.call(scatterplotMatrix, args)
     invisible()
   }
   #########################################################################
