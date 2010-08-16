@@ -1,7 +1,7 @@
 UseDynLib(robCompositions)
 importFrom(robustbase, ltsReg)
 importFrom(rrcov, CovMcd, getCenter, getCov)
-importFrom(car, scatterplot.matrix)
+importFrom(car, scatterplotMatrix)
 importFrom(MASS, parcoord, mvrnorm)
 importFrom(utils, citation)
 
