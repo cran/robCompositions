@@ -46,7 +46,7 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
 }
 \references{ 
 Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
+\emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.  
  }
 \author{ Matthias Templ, Karel Hron }
 \seealso{ \code{\link{impKNNa}}, \code{\link{ilr}} }

@@ -10,7 +10,7 @@ function(x, robust=TRUE){
 	} else{
 		for( i in 1:ncol(x)){
 			for( j in 1:ncol(x)){
-				if( i < j ) rvars[i,j] <- (var(log(x[,i]/x[,j])))^2
+				if( i < j ) rvars[i,j] <- (var(log(x[,i]/x[,j])))
 			}
 		}		
 	}

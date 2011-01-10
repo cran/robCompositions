@@ -34,7 +34,7 @@ Aitchison, J. and Barcelo-Vidal, C. and Martin-Fernandez, J.A. and Pawlowsky-Gla
 compositional distance. \emph{Mathematical Geology}, \bold{32}, 271-275.
 
 Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
+\emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.  
 }
 \author{ Matthias Templ }
 \seealso{ \code{\link{ilr}} }

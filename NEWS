@@ -1,0 +1,9 @@
+Changes in robCompositions version 1.4.4
+
+    + Description for the Expenditures data changed. Wrong variable description fixed.
+    
+    + Wrong formula in robVariation method robust=FALSE fixed after an comment 
+      from from Mark Engle (thanks!).
+
+    + Improved code in 'CITATION' file.
+    

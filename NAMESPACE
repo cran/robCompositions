@@ -1,4 +1,4 @@
-UseDynLib(robCompositions)
+useDynLib(robCompositions)
 importFrom(robustbase, ltsReg)
 importFrom(rrcov, CovMcd, getCenter, getCov)
 importFrom(car, scatterplotMatrix)

@@ -10,10 +10,10 @@
   A data frame with 20 observations with the following 5 variables.
   \describe{
     \item{\code{housing}}{housing (including fuel and light)}
-    \item{\code{foodstuff}}{foodstuff}
-    \item{\code{alcohol}}{alcohol}
-    \item{\code{tobacco}}{tobacco}
-    \item{\code{other}}{ other goods (including clothing, footwear and durable goods)}
+    \item{\code{foodstuff}}{foodstuffs}
+    \item{\code{alcohol}}{alcohol and tobacco}
+    \item{\code{tobacco}}{other goods (including clothing, footwear and durable goods)}
+    \item{\code{other}}{services (including transport and vehicles)}
   }
 }
 \details{
