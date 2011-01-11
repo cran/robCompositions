@@ -22,7 +22,7 @@ compositional data analysis. \emph{Mathematical Geology}, \bold{35}(3)
 279-300 \\
 
 Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Computational Statistics and Data Analysis}, In Press, Corrected Proof, ISSN: 0167-9473, DOI:10.1016/j.csda.2009.11.023  
+\emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.  
 }
 \author{ Karel Hron }
 \seealso{ \code{\link{ilr}} }

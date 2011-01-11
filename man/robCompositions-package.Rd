@@ -45,7 +45,7 @@ P. Filzmoser, K. Hron, C. Reimann, R. Garrett (2009): Robust Factor Analysis for
 \emph{Computers and Geosciences}, \bold{35} (9), 1854--1861.
 
 Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods 
-\emph{Computational Statistics and Data Analysis}, accepted for publication.
+\emph{Computational Statistics and Data Analysis}, \bold{54} (12), 3095--3107.  
 
 C. Reimann, P. Filzmoser, R.G. Garrett, and R. Dutter (2008): 
 Statistical Data Analysis Explained. 
