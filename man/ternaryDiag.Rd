@@ -6,13 +6,14 @@
   Before plotting, the data are scaled.
 }
 \usage{
-ternaryDiag(x, name = colnames(x), grid = TRUE, gridCol=grey(0.6), ...)
+ternaryDiag(x, name = colnames(x), grid = TRUE, gridCol=grey(0.6), mcex = 1.2, ...)
 }
 \arguments{
   \item{x}{ matrix or data.frame with 3 columns }
   \item{name}{ names of the variables }
   \item{grid}{ if TRUE the grid is plotted }
   \item{gridCol}{ color for the grid lines }
+  \item{mcex}{ label size }
   \item{\dots}{ further parameters, see, e.g., \code{par()} }
 }
 \details{

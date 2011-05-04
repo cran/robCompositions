@@ -1,6 +1,6 @@
 `impCoda` <-
 function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE, 
-		init="KNN", k=5, dl=rep(0.05, ncol(x)), noise=0.1){
+		init="KNN", k=5, dl=rep(0.05, ncol(x)), noise=0.1, bruteforce=FALSE){
 
 	## MT & KH, 1. Version April 2008
 	## MT 01. August 2008 (modification).
@@ -9,16 +9,46 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 	## for regression: lm, ltsReg
 	## if closed  == FALSE, ilr is applied.
 
+#	`ilrM` <-
+#			function(x){
+#		x.ilr=matrix(NA,nrow=nrow(x),ncol=ncol(x)-1)
+#		D=ncol(x)
+#		for (i in 1:ncol(x.ilr)){
+#			x.ilr[,i]=sqrt((D-i)/(D-i+1))*log(((apply(as.matrix(x[,(i+1):D,drop=FALSE]),1,prod))^(1/(D-i)))/(x[,i]))
+#		} 
+#		invisible(-x.ilr)
+#	}
+#	`invilrM` <-
+#			function(x.ilr){
+#		y=matrix(0,nrow=nrow(x.ilr),ncol=ncol(x.ilr)+1)
+#		D=ncol(x.ilr)+1
+#		y[,1]=-sqrt((D-1)/D)*x.ilr[,1]
+#		for (i in 2:ncol(y)){
+#			for (j in 1:(i-1)){
+#				y[,i]=y[,i]+x.ilr[,j]/sqrt((D-j+1)*(D-j))
+#			}
+#		}
+#		for (i in 2:(ncol(y)-1)){
+#			y[,i]=y[,i]-sqrt((D-i)/(D-i+1))*x.ilr[,i]
+#		}
+#		yexp=exp(-y)
+#		x.back=yexp/apply(yexp,1,sum) # * rowSums(derOriginaldaten)
+#		invisible(x.back)
+##return(yexp)
+	#}
+	
+	
+	
 	if( is.vector(x) ) stop("x must be a matrix or data frame")
-	stopifnot((method %in% c("ltsReg", "ltsReg2", "classical", "lm", "roundedZero")))
+	stopifnot((method %in% c("ltsReg", "ltsReg2", "classical", "lm", "roundedZero","roundedZeroRobust")))
 	if( k > nrow(x)/4 ) warning("k might be too large")
-	if(method == "roundedZero") init <- "roundedZero"
+#	if(method == "roundedZero") init <- "roundedZero"
 
 	xcheck <- x
 
-	if(method == "roundedZero"){
-		x[x==0] <- NA
-	}
+#	if(method == "roundedZero"){
+#		x[x==0] <- NA
+#	}
 
 
 	##index of missings / non-missings
@@ -173,19 +203,49 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				  #  xilr <- data.frame(xilr)
 				  ###imp[w[, indM[i]]] + rnorm(length(imp[w[, indM[i]]]), 0, sd=0.5*sqrt(mad(xilr[,1]))) 
 				}
-				if(method == "roundedZero"){
-					phi <- ilr(cbind(rep(dl[indM[i]], nrow(x)), x[,-1,drop=FALSE]))[,1]
-					xilr <- data.frame(xilr)
-					c1 <- colnames(xilr)[1]
-					colnames(xilr)[1] <- "V1"
-					reg1 = lm(V1 ~ ., data=xilr)
-					yhat2 <- predict(reg1, new.data=xilr[,-i]) 	
-					#colnames(xilr)[1] <- c1
-					#s <- sd(xilr[,1], na.rm=TRUE)
-					#ex <- (phi - yhat)/s
-					#yhat2 <- yhat - s*dnorm(ex)/pnorm(ex)
-					xilr[w[, indM[i]], 1] <- ifelse(yhat2[w[, indM[i]]] <= phi[w[, indM[i]]], phi[w[, indM[i]]], yhat2[w[, indM[i]]] )
-				}
+#				if(method == "roundedZero"){
+#					xilr <- ilrM(x)
+#					phi <- ilr(cbind(rep(dl[indM[i]], nrow(x)), x[,-1,drop=FALSE]))[,1]
+#					xilr <- data.frame(xilr)
+#					c1 <- colnames(xilr)[1]
+#					colnames(xilr)[1] <- "V1"
+#					reg1 = lm(V1 ~ ., data=xilr)
+#					yhat2 <- predict(reg1, new.data=xilr[,-i]) 	
+#					#colnames(xilr)[1] <- c1
+#					#s <- sd(xilr[,1], na.rm=TRUE)
+#					#ex <- (phi - yhat)/s
+#					#yhat2 <- yhat - s*dnorm(ex)/pnorm(ex)
+#					if(bruteforce){ 
+#						xilr[w[, indM[i]], 1] <- ifelse(yhat2[w[, indM[i]]] <= phi[w[, indM[i]]], phi[w[, indM[i]]], yhat2[w[, indM[i]]] )
+#					} else {
+#						s <- sd(reg1$res, na.rm=TRUE)
+#						ex <- (phi - yhat2)/s 
+#						yhat2 <- yhat2 - s*dnorm(ex)/pnorm(ex)
+#						xilr[w[, indM[i]], 1] <- yhat2[w[, indM[i]]]
+#			        }
+#				}
+#				if(method == "roundedZeroRobust"){
+#					xilr <- ilrM(x)
+#					phi <- ilr(cbind(rep(dl[indM[i]], nrow(x)), x[,-1,drop=FALSE]))[,1]
+#					xilr <- data.frame(xilr)
+#					c1 <- colnames(xilr)[1]
+#					colnames(xilr)[1] <- "V1"
+#					reg1 = rlm(V1 ~ ., data=xilr, method="MM")
+#					yhat2 <- predict(reg1, new.data=xilr[,-i]) 	
+#					#colnames(xilr)[1] <- c1
+#					#s <- sd(xilr[,1], na.rm=TRUE)
+#					#ex <- (phi - yhat)/s
+#					#yhat2 <- yhat - s*dnorm(ex)/pnorm(ex)
+#					if(bruteforce){ 
+#						xilr[w[, indM[i]], 1] <- ifelse(yhat2[w[, indM[i]]] <= phi[w[, indM[i]]], phi[w[, indM[i]]], yhat2[w[, indM[i]]] )
+#					} else {
+##						s <- mad(reg1$res, na.rm=TRUE)
+	##					s <- reg1$s
+		#				ex <- (phi - yhat2)/s 
+		#				yhat2 <- yhat2 - s*dnorm(ex)/pnorm(ex)
+		#				xilr[w[, indM[i]], 1] <- yhat2[w[, indM[i]]]
+		##			}
+			#	}
 				#if( method == "rf" ){
 				#  xilr[w[, indM[i]], 1] <- NA
 				#  reg1 <- rfImpute(xilr[,1] ~ xilr[,-1], data=xilr)
@@ -193,7 +253,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				#}
 			
 				if( closed == FALSE ) x=invilr(xilr) else x=xilr
-			
+#				if( closed == FALSE && method %in% c("roundedZero","roundedZeroRobust")) x=invilrM(xilr) else x=xilr			
 				#return the order of columns
 			
 				xNA=x[,1]

@@ -16,4 +16,6 @@ citEntry(entry="Article",
               textVersion = 
                paste("Karel Hron, Matthias Templ, Peter Filzmoser",
                     " (2010). robCompositions: Robust Compositional Methods ", ".", sep=""))    
-                    
+  
+  
+  

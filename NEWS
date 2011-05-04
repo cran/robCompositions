@@ -1,3 +1,20 @@
+Changes in robCompositions version 1.5.0
+    
+    + variable names in expendiure data corrected
+    + graphical user interface added    
+    + vignette about an overview of the package added
+    + alrEM() function now renamed in impRZalr() to be consistent with notation
+
+Changes in robCompositions version 1.4.6
+    
+    + correct transformation of the detection limit in impRZilr when having not constant sum 1.
+
+Changes in robCompositions version 1.4.5
+
+    + Bug in alrEM fixed.
+    
+    + impRZilr included, but without documentation.
+
 Changes in robCompositions version 1.4.4
 
     + Description for the Expenditures data changed. Wrong variable description fixed.
@@ -7,3 +24,4 @@ Changes in robCompositions version 1.4.4
 
     + Improved code in 'CITATION' file.
     
+ 
