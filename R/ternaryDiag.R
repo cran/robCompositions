@@ -1,4 +1,4 @@
-ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), ...)
+ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), mcex=1.2, ...)
 {
 # Ternary plot
 #
@@ -22,7 +22,8 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), ...)
 	s <- rowSums(x)
 	if (any(s <= 0))
 		stop("each row of the input `object' must have a positive sum")
-	dat <- x/s
+	dat <- x/s 
+#	dat <- constSum(x)
 	
 	xp <- dat[,2] + dat[,3]/2
 	yp <- dat[,3] * sqrt(3)/2
@@ -35,9 +36,9 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), ...)
 	segments(0,0,1/2,sqrt(3)/2)
 	segments(1/2,sqrt(3)/2,1,0)
 	
-	mtext(name[1],side=1, line=-1, at=-0.05,cex=1.2)
-	mtext(name[2],side=1, line=-1, at=1.05,cex=1.2)
-	text(0.5, 0.9, name[3],cex=1.2)
+	mtext(name[1],side=1, line=-1, at=-0.05,cex=mcex)
+	mtext(name[2],side=1, line=-1, at=1.05,cex=mcex)
+	text(0.5, 0.9, name[3],cex=mcex)
 	
 	if(grid)
 	{    

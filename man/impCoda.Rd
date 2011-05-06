@@ -7,7 +7,7 @@
   Then iterative algorithms try to find better estimations for the former missing values.
 }
 \usage{
-impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN", k = 5, dl = rep(0.05, ncol(x)), noise=0.1)
+impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN", k = 5, dl = rep(0.05, ncol(x)), noise=0.1, bruteforce=FALSE)
 }
 \arguments{
   \item{x}{ data frame or matrix }
@@ -19,6 +19,7 @@ impCoda(x, maxit = 10, eps = 0.5, method = "ltsReg", closed = FALSE, init = "KNN
   \item{k}{ number of nearest neighbors (if init $==$ \dQuote{KNN}) }
   \item{dl}{ detection limit(s), only important for the imputation of rounded zeros }
   \item{noise}{ amount of adding random noise to predictors after convergency }  
+  \item{bruteforce}{ if TRUE, imputations over dl are set to dl. If FALSE, truncated (Tobit) regression is applied. }
 }
 \details{
   eps: The algorithm is finished as soon as the imputed values stabilize, i.e. until the sum of Aitchison distances from the present and previous iteration changes only marginally (eps).\\

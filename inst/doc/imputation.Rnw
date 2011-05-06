@@ -440,7 +440,7 @@ function (x, ..., labels = colnames(X), cn = colnames(X), aspanel = FALSE,
 %plot(ilr(x$z2), col=c(rep(1,90), rep(4,5), rep(3,5)), pch=c(rep(20,90),
 %rep(2,5), rep(4,5)), xlab=expression(z[1]), ylab=expression(z[2]), cex.lab=1.5, cex=c(rep(0.6,90), rep(0.9,5), rep(0.9,5))) 
 %@
-\includegraphics{imputation-plot-acomp}  
+\includegraphics{plot-acomp}  
 \vspace*{-33mm}
 \caption{Simulated data set with 5 points from
 {\it outlier group 1} (symbol \textcolor{green}{$\times$}) 
@@ -852,7 +852,7 @@ bootimpM <- function(x, R = 100) {
 %legend("top", bty="n", legend=c("original data", "mean imputation", "classical model-based imputation", "robust model-based imputation"), fill=c(gray(0.9), 
 %				gray(0.7), gray(0.5), gray(0.3)))
 %@
-\includegraphics{imputation-boxplot}
+\includegraphics{boxplot}
 \vspace*{-1cm}
 \caption{Boxplot comparison of the estimated column-wise geometric means of
 $1000$ bootstrap replicates of the original data set and the data sets 

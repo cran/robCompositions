@@ -12,8 +12,8 @@
     \item{\code{housing}}{housing (including fuel and light)}
     \item{\code{foodstuff}}{foodstuffs}
     \item{\code{alcohol}}{alcohol and tobacco}
-    \item{\code{tobacco}}{other goods (including clothing, footwear and durable goods)}
-    \item{\code{other}}{services (including transport and vehicles)}
+    \item{\code{other}}{other goods (including clothing, footwear and durable goods)}
+    \item{\code{services}}{services (including transport and vehicles)}
   }
 }
 \details{
