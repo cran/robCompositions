@@ -10,7 +10,7 @@
   A data frame with 20 observations with the following 5 variables.
   \describe{
     \item{\code{housing}}{housing (including fuel and light)}
-    \item{\code{foodstuff}}{foodstuffs}
+    \item{\code{foodstuffs}}{foodstuffs}
     \item{\code{alcohol}}{alcohol and tobacco}
     \item{\code{other}}{other goods (including clothing, footwear and durable goods)}
     \item{\code{services}}{services (including transport and vehicles)}

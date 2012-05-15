@@ -17,9 +17,11 @@
 #              textVersion = 
 #               paste("Karel Hron, Matthias Templ, Peter Filzmoser",
 #                    " (2010). robCompositions: Robust Compositional Methods ", ".", sep=""))    )
-cat("\n--------\n\n")   
-cat("for references have a look at\n")
-cat("citation('robCompositions')    \n")                 
-cat("--------\n\n")   
+#cat("\n--------\n\n")   
+#cat("for references have a look at\n")
+#cat("citation('robCompositions')    \n")                 
+#cat("--------\n\n")  
+
+packageStartupMessage("\n for references have a look at\n citation('robCompositions') \n")
 
 }

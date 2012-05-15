@@ -15,10 +15,14 @@ pcaCoDa <- function(x, method="robust"){
 		
 	if( method == "robust"){
 		cv <- covMcd(xilr, cor=FALSE)
-		pcaIlr <- suppressWarnings(princomp(xilr, covmat=cv, cor=TRUE))
+		pcaIlr <- suppressWarnings(princomp(xilr, covmat=cv, cor=FALSE))
+		eigenvalues <- eigen(cv$cov)$values
+	} else if (method =="mve"){
+		cv <- cov.mve(xilr)
+		pcaIlr <- suppressWarnings(princomp(xilr, covmat=cv, cor=FALSE))
 		eigenvalues <- eigen(cv$cov)$values
 	} else {
-		pcaIlr <- princomp(xilr, cor=TRUE)
+		pcaIlr <- princomp(xilr, cor=FALSE)
 		eigenvalues <- eigen(cov(xilr))$values
 	}
 	# construct orthonormal basis
@@ -33,10 +37,11 @@ pcaCoDa <- function(x, method="robust"){
 	# robust ilr result - back-transformed to clr-space
 	
 	loadings <- V %*% pcaIlr$loadings	
-	dimnames(loadings)[[1]] <- names(x)
+	if(!is.null(names(x))) dimnames(loadings)[[1]] <- names(x)
 	
 	pcaClr <- pcaIlr
-	pcaClr$scores <- pcaIlr$scores %*% t(V)
+#	pcaClr$scores <- pcaIlr$scores %*% t(V)
+	pcaClr$scores <- pcaIlr$scores 
 	pcaClr$loadings <- loadings
 	
 	res <- list(scores = pcaClr$scores,

@@ -14,6 +14,7 @@ function(x, robust=TRUE){
 			}
 		}		
 	}
-    invisible(rvars) 
+	rvars[lower.tri(rvars)] <- rvars[upper.tri(rvars)]
+    return(rvars) 
 }
 

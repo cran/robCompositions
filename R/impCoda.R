@@ -69,7 +69,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 	    else exp(mean(log(unclass(x)[is.finite(x) & x > 0])))
 	}
 	gm <- apply(x, 2, function(x) {
-	  geometricmean(x[complete.cases(x)])
+	  geometricmean(as.numeric(x[complete.cases(x)]))
 	})
 	
 	xmean <- x
@@ -91,7 +91,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 		  }
 		  else if (what == "mean") {
 			  retval <- apply(x, 2, function(z) {
-						  z[is.na(z)] <- mean(z, na.rm = TRUE)
+						  z[is.na(z)] <- mean(as.numeric(z), na.rm = TRUE)
 						  z
 					  })
 		  }

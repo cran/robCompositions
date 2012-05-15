@@ -5,7 +5,7 @@ adtest=function(x, R=1000, locscatt="standard") {
 	cv <- function(x, type) {
 		classical <- function(x){
 			if( (length(dim(x)) < 1) | is.vector(x) ){
-	 			list(mean=mean(x, na.rm=TRUE), varmat=var(x, na.rm=TRUE))
+	 			list(mean=mean(as.numeric(x), na.rm=TRUE), varmat=var(x, na.rm=TRUE))
 			} else {
 				list(mean=colMeans(x, na.rm=TRUE), varmat=cov(x))  
 			}
@@ -26,9 +26,9 @@ adtest=function(x, R=1000, locscatt="standard") {
 	
 	centre <- function(x, type) {
 		switch(type,
-				mean = mean(x),
-				median = median(x),
-				trimmed = mean(x, trim = .1))
+				mean = mean(as.numeric(x)),
+				median = median(as.numeric(x)),
+				trimmed = mean(as.numeric(x), trim = .1))
 	}
     if(locscatt=="standard") location <- "mean" else location <- "median"    
 
@@ -50,7 +50,7 @@ adtest=function(x, R=1000, locscatt="standard") {
 	  mv <- estCv$mean
 	  varmat <- estCv$varmat
       n=length(c(x))
-	  p <- sapply(X=1:R, FUN=function(X,...){ stat(rnorm(n, mv, varmat), location=location) })
+	  p <- sapply(X=1:R, FUN=function(X,...){ stat(rnorm(n, mv, sqrt(varmat)), location=location) })
       pvalue=mean(p>A)
       RVAL <- list(statistic = c(A = A), method = "A-D univariate normality test", 
         p.value=pvalue)
@@ -73,7 +73,7 @@ adtest=function(x, R=1000, locscatt="standard") {
 	estCv <- cv(x, locscatt)
 	varmat <- estCv$varmat
 	mv <- estCv$mean	
-	p <- sapply(X=1:R, FUN=function(X,...){ stat(mvrnorm(n, mv, varmat), location=location) })
+	p <- sapply(X=1:R, FUN=function(X,...){ stat(mvrnorm(n, mv, sqrt(varmat)), location=location) })
 	pvalue=mean(p>A)
 	RVAL <- list(statistic = c(A = A), method = "A-D bivariate normality test", 
 			 p.value=pvalue)
