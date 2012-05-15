@@ -1,4 +1,6 @@
-ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), mcex=1.2, ...)
+ternaryDiag <- function(x, name=colnames(x), grid=TRUE, 
+		                gridCol=grey(0.6), mcex=1.2, line="none", 
+						robust=TRUE, group=NULL, tol=0.975, ...)
 {
 # Ternary plot
 #
@@ -7,7 +9,7 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), mcex=
 # grid ... TRUE if grid should be plotted
 # "..." ... further graphical parameters, see par
 	
-	
+	if(!(line %in% c("none","pca","regression","regressionconf","regressionpred","ellipse","lda"))) stop("Choose a method for function argument *line*, which is implemented.")
 	if (is.null(name)) { name <- c("P1", "P2", "P3")}
 	if (length(name) != 3){ 
 		warning("incorrect length of name. Variable names P1, P2 and P3 are used instead.")
@@ -75,6 +77,163 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE, gridCol=grey(0.6), mcex=
 		text(0.25,0.54,"0.4", col=gridCol, cex = 0.6,srt = 300)
 		text(0.36,0.72,"0.2", col=gridCol, cex = 0.6,srt = 300)
 	}
-	
+
+  ## adding lines
+  plotTern <- function(x, conf=line, rob=robust){
+#	  x <- x[,c(3,2,1)]
+	  z <- data.frame(ilr(x))
+#	  z[,2] <- z[,2]*(-1)
+	  colnames(z) <- c("x", "y")
+	  if(rob) lm1 <- rlm(y ~ x, data=z, method="MM") else lm1 <- lm(y ~ x, data=z)
+#	  new <- data.frame(x = seq(min(z$x), max(z$x), length=100)) 
+	  new <- data.frame(x = seq(-30, 30, length=10000)) 
+	  if(conf=="regressionpred"){
+	    pred.w.plim <- predict(lm1, new, interval="prediction")
+		s1 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,1]))
+		s2 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,2]))
+		s3 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,3]))
+     } else if(conf=="regressionconf"){
+	    pred.w.plim <- predict(lm1, new, interval="confidence")		
+		s1 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,1]))
+		s2 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,2]))
+		s3 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,3]))
+	  } else {
+		pred.w.plim <- predict(lm1, new)	
+		s1 <- invilr(data.frame(z1=new$x, z2=pred.w.plim))
+		s2 <- invilr(data.frame(z1=new$x, z2=pred.w.plim))
+		s3 <- invilr(data.frame(z1=new$x, z2=pred.w.plim))
+	  }
+#	  s1 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,1]))
+#	  s2 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,2]))
+##	s2 <- invilr(data.frame(z1=new$x, z2=pred.w.clim[,2]))	
+#	  s3 <- invilr(data.frame(z1=new$x, z2=pred.w.plim[,3]))
+#	s3 <- invilr(data.frame(z1=new$x, z2=pred.w.clim[,3]))
+	  
+#	  s1r <- rowSums(s1)
+#	  s2r <- rowSums(s2)
+#	  s3r <- rowSums(s3)
+	  dat1 <- s1#/s1r
+	  dat2 <- s2#/s2r
+	  dat3 <- s3#/s3r
+	  
+	  xp1 <- dat1[, 2] + dat1[, 3]/2
+	  yp1 <- dat1[, 3] * sqrt(3)/2
+	  xp2 <- dat2[, 2] + dat2[, 3]/2
+	  yp2 <- dat2[, 3] * sqrt(3)/2
+	  xp3 <- dat3[, 2] + dat3[, 3]/2
+	  yp3 <- dat3[, 3] * sqrt(3)/2
+	  lines(xp1, yp1, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
+			  xaxt = "n", yaxt = "n", xlab = "", ylab = "", col=1,
+			  lwd=2)
+      if(conf %in% c("regressionpred", "regressionconf")){	  
+		 lines(xp2, yp2, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
+			  xaxt = "n", yaxt = "n", xlab = "", ylab = "", lty=2, col=gray(0.5))
+	     lines(xp3, yp3, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
+			  xaxt = "n", yaxt = "n", xlab = "", ylab = "", lty=2, col=gray(0.5))
+      }
+	  legend("topleft", legend=paste(colnames(x)[1], "~", colnames(x)[2], "+", colnames(x)[3]), lwd=2, col="black")
+  }
+  
+  f <- function(x, co="black", lt=1, rob=robust){
+	  a <- constSum(x,1)
+	  a <- ilr(x)
+	  if(rob){
+		  rc <- covMcd(a)
+		  me <- rc$center
+		  acov <- rc$cov
+	  } else {
+	      me <- apply(a, 2, mean)
+	      acov <- var(a)
+      }
+#	  cov.svd <- svd(acov, nv = 0)
+#	  r <- cov.svd[["u"]] %*% diag(sqrt(cov.svd[["d"]]))
+	  apca <- princomp(cov=acov)
+	  x0 <- -11*apca$loa[1,1]+me[1]
+	  y0 <- -11*apca$loa[2,1]+me[2]
+	  x1 <- 11*apca$loa[1,1]+me[1]
+	  y1 <- 11*apca$loa[2,1]+me[2]
+	  
+	  s1 <- seq(x0,x1,length=100)
+	  s2 <- seq(y0,y1,length=100)
+	  
+	  s <- data.frame(s1=s1,s2=s2)
+	  ss <- invilr(s)
+#	ternaryDiag(arcticLake)
+	  s1 <- rowSums(ss)
+	  dat <- ss/s1
+	  xp <- dat[, 2] + dat[, 3]/2
+	  yp <- dat[, 3] * sqrt(3)/2
+	  lines(xp, yp, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
+			  xaxt = "n", yaxt = "n", xlab = "", ylab = "", ...)
+	  legend("right", legend="PC 1", lty=1, lwd=2, col="black")
+  }
+  ### tollerance ellipses:
+  dcov <- function(x, tolerance=tol){
+	  z <- ilr(x)
+	  dat1 <- drawMahal(z, colMeans(z), cov(z), plot=FALSE, whichlines=tolerance) 
+	  for(i in 1:length(tolerance)){
+	      e <- invilr(cbind(dat1$mdX[,i], dat1$mdY[,i]))
+		  xp1 <- e[, 2] + e[, 3]/2
+		  yp1 <- e[, 3] * sqrt(3)/2	  
+		  lines(xp1, yp1, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
+				  xaxt = "n", yaxt = "n", xlab = "", ylab = "", ...)
+      }
+  }
+  da <- function(x, grp=group){
+	  z <- ilr(x)
+	  lev <- levels(factor(grp))
+	  if(length(lev) != 2) stop("group must be a factor with exactly two levels")
+	  z1 <- z[grp==lev[1],]
+	  z2 <- z[grp==lev[2],]
+	  n1=nrow(z1)
+	  n2=nrow(z2)
+	  n=n1+n2
+	  p1=n1/n
+	  p2=n2/n
+	  m1=apply(z1,2,mean)
+	  m2=apply(z2,2,mean)
+	  S1=cov(z1)
+	  S2=cov(z2)
+	  Sp=((n1-1)/(n1-1+n2-1))*S1+((n2-1)/(n1-1+n2-1))*S2
+	  Sp1=solve(Sp)
+	  yLDA=as.numeric(t(m1-m2)%*%Sp1%*%t(z)-as.numeric(1/2*t(m1-m2)%*%Sp1%*%(m1+m2)))-log(p2/p1)
+# LDA
+	  y1=seq(from=min(z[,1])-1.5,to=max(z[,1])+1.9,by=0.05)
+	  y2=seq(from=min(z[,2]),to=max(z[,2])+0.2,by=0.05)
+	  y1a=rep(y1,length(y2))
+	  y2a=sort(rep(y2,length(y1)))
+	  ya=cbind(y1a,y2a)
+	  
+	  yaLDA <- as.numeric(t(m1-m2)%*%Sp1%*%t(ya)-
+					  as.numeric(1/2*t(m1-m2)%*%Sp1%*%(m1+m2)))-log(p2/p1)
+	  
+	  boundLDA <- abs(yaLDA)<0.5
+	  bline <- lowess(y1a[boundLDA],y2a[boundLDA])
+#	  bline <- lowess(y1a,y2a)
+	  blines <- data.frame(z1=bline$x, z2=bline$y)
+	  #k*x+d
+      k <- (bline$x[2]-bline$x[1]) / (bline$y[2]-bline$y[1])
+	  LINE <- function(p,k){
+		  seq(p,0.95,) ## stopped here!
+	  }
+	  blines <- data.frame(z1=seq(bline$x[1],bline$x[2],length=100), z2=seq(bline$y[1],bline$y[2],length=100))
+	  xblines <- invilr(blines)
+	  xp1 <- xblines[, 2] + xblines[, 3]/2
+	  yp1 <- xblines[, 3] * sqrt(3)/2	  
+	  lines(xp1, yp1, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
+			  xaxt = "n", yaxt = "n", xlab = "", ylab = "", ...)
+  }
+  
+  
+  if(line == "pca") f(dat, co="black", lt=1)
+  if(line == "regression") plotTern(dat[,c(1,2,3)], conf=FALSE)
+  if(line == "regressionconf") plotTern(dat[,c(1,2,3)], conf="regressionconf")
+  if(line == "regressionpred") plotTern(dat[,c(1,2,3)], conf="regressionpred")
+  if(line == "ellipse") dcov(x)
+  if(line == "lda"){ 
+#	  if(is.null(group)) stop("parameter group must be specified.")
+	  da(x, grp=group)
+  }
 }
+
 

@@ -20,7 +20,7 @@ if(coda){
 	n <- sum(ni)
 	pi <- ni/n
 if (method=="classical"){
-  muil <- by(x,factor(grp),mean)
+  muil <- by(x,factor(grp),colMeans)
   sigil <- by(x,factor(grp),cov)
 }
 else {

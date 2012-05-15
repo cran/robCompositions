@@ -5,10 +5,10 @@ summary.imp <- function(object, ...){
     else exp(mean(log(unclass(x)[is.finite(x) & x > 0])))
   }
 gm <- apply(object$xOrig, 2, function(x) {
-  geometricmean(x[complete.cases(x)])
+  geometricmean(as.numeric(x[complete.cases(x)]))
 })
 gmI <- apply(object$xImp, 2, function(x) {
-  geometricmean(x[complete.cases(x)]) ## gewichten!
+  geometricmean(as.numeric(x[complete.cases(x)])) ## gewichten!
 })
 
   d <- data.frame(orig=gm,

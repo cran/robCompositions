@@ -142,6 +142,7 @@ function(x, maxit=10, eps=0.1, method="roundedZero",
 			}
 			if(method == "roundedZeroRobust"){
 				xilr <- ilrM(x)
+				x[x < .Machine$double.eps] <- 0.00000000001  ## TODO: better solution 
 				phi <- ilrM(cbind(rep(dl[indM[i]], nrow(x)), x[,-1,drop=FALSE]), info=FALSE)[,1] # TODO: phi auserhalb der Schleife!
 				xilr2 <- data.frame(xilr$xilr)
 				c1 <- colnames(xilr2)[1]
