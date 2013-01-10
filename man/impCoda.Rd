@@ -50,7 +50,7 @@ Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for
 \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.  
  }
 \author{ Matthias Templ, Karel Hron }
-\seealso{ \code{\link{impKNNa}}, \code{\link{ilr}} }
+\seealso{ \code{\link{impKNNa}}, \code{\link{isomLR}} }
 \examples{
 data(expenditures)
 x <- expenditures

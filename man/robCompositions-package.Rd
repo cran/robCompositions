@@ -93,24 +93,24 @@ plot(oD)
 ## transformations
 data(arcticLake)
 x <- arcticLake
-x.alr <- alr(x, 2)
-y <- invalr(x.alr)
-invalr(alr(x, 3))
+x.alr <- addLR(x, 2)
+y <- addLRinv(x.alr)
+addLRinv(addLR(x, 3))
 data(expenditures)
 x <- expenditures
-y <- invalr(alr(x, 5))
+y <- addLRinv(addLR(x, 5))
 head(x)
 head(y)
-invalr(x.alr, ivar=2, useClassInfo=FALSE)
+addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
 
 data(expenditures)
-eclr <- clr(expenditures)
-inveclr <- invclr(eclr)
+eclr <- cenLR(expenditures)
+inveclr <- cenLRinv(eclr)
 head(expenditures)
 head(inveclr)
-head(invclr(eclr$x.clr))
+head(cenLRinv(eclr$x.clr))
 
 require(MASS)
 Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
-z <- invilr(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
+z <- isomLRinv(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
 }

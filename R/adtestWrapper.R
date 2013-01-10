@@ -1,6 +1,6 @@
 adtestWrapper=function(x,alpha=0.05,R=1000, robustEst=FALSE){
 if(robustEst == TRUE ) robust <- "robust" else robust <- "standard"
-z=ilr(x)
+z=isomLR(x)
 n=ncol(z)
 if(ncol(z)==1){
   res<-info<-list()

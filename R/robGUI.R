@@ -3,7 +3,22 @@
 
 
 robGUI = function() {
+	gtkHBoxNew <- gtkAlignmentNew <- gtkWindowNew <- gtkFrameNew <- 
+	gtkComboBoxNewText <- gtkLabelNew <- gtkEntryNew <- 
+	gtkRadioButtonNewWithLabel <- gtkButtonNewWithLabel <- 
+	gtkComboBoxEntryNewText <- gtkTextViewNew <- gtkScrolledWindowNew <- 
+	gtkMessageDialog <- gtkFileChooserDialogNew <- GtkResponseType <- 
+    gtkFileChooserDialogNew <- GtkResponseType <- gtkFileChooserDialogNew <- 
+	GtkResponseType <- gtkMenuBarNew <- gtkMenuItemNewWithLabel <- 
+	gtkMenuNew <- gtkFileChooserDialogNew <- GtkResponseType <- 
+	gtkFileChooserDialogNew <-  gtkVBoxNew <-  gSignalConnect <- 
+	GtkResponseType <- NULL
 	
+# access robGUIenv
+robGUIenv <- function() {
+	get("robGUIenvir", envir=as.environment("package:VIM"))
+}	
+
 	# check if RGtk2 is installed, it's not in dependencies, it's big and not necessary for statistics itself
 	
 	is.installed <- function(mypkg) is.element(mypkg, installed.packages()[,1])
@@ -650,15 +665,15 @@ robGUI = function() {
 				
 				indexVar = ivar$getText()
 				
-				if(nchar(indexVar)<1) str[3] = "result = alr(x)"
+				if(nchar(indexVar)<1) str[3] = "result = addLR(x)"
 				
-				else str[3] = paste("result = alr(x, ",indexVar,")", collapse="", sep="")
+				else str[3] = paste("result = addLR(x, ",indexVar,")", collapse="", sep="")
 				
 			}
 			
-			else if(variant == 1) str[3] = "result = clr(x)"
+			else if(variant == 1) str[3] = "result = cenLR(x)"
 			
-			else if(variant == 2) str[3] = "result = ilr(x)"
+			else if(variant == 2) str[3] = "result = isomLR(x)"
 			
 		} else if(index == 2) {
 			
@@ -666,15 +681,15 @@ robGUI = function() {
 				
 				indexVar = ivar$getText()
 				
-				if(nchar(indexVar)<1) str[3] = "result = invalr(x))"
+				if(nchar(indexVar)<1) str[3] = "result = addLRinv(x))"
 				
-				else str[3] = paste("result = alr(x, ",indexVar,")", collapse = "", sep = "")
+				else str[3] = paste("result = addLR(x, ",indexVar,")", collapse = "", sep = "")
 				
 			}
 			
-			else if(variant == 1) str[3] = "result = invclr(x)"
+			else if(variant == 1) str[3] = "result = cenLRinv(x)"
 			
-			else if(variant == 2) str[3] = "result = invilr(x)"
+			else if(variant == 2) str[3] = "result = isomLRinv(x)"
 			
 		} else if(index == 3) {
 			
@@ -906,15 +921,15 @@ robGUI = function() {
 				
 				indexVar = ivar$getText()
 				
-				if(nchar(indexVar)<1) result = try(alr(input))
+				if(nchar(indexVar)<1) result = try(addLR(input))
 				
-				else result = try(alr(input, as.numeric(indexVar)))
+				else result = try(addLR(input, as.numeric(indexVar)))
 				
 			}
 			
-			else if(variant == 1) result = try(clr(input))
+			else if(variant == 1) result = try(cenLR(input))
 			
-			else if(variant == 2) result = try(ilr(input))
+			else if(variant == 2) result = try(isomLR(input))
 			
 			else return(error("Variant not specified"))
 			
@@ -924,15 +939,15 @@ robGUI = function() {
 				
 				indexVar = ivar$getText()
 				
-				if(nchar(indexVar)<1) result = try(invalr(input))
+				if(nchar(indexVar)<1) result = try(addLRinv(input))
 				
-				else result = try(alr(input, as.numeric(indexVar)))
+				else result = try(addLR(input, as.numeric(indexVar)))
 				
 			}
 			
-			else if(variant == 1) result = try(invclr(input))
+			else if(variant == 1) result = try(cenLRinv(input))
 			
-			else if(variant == 2) result = try(invilr(input))
+			else if(variant == 2) result = try(isomLRinv(input))
 			
 			else return(error("Variant not specified"))
 			
@@ -1058,7 +1073,7 @@ robGUI = function() {
 			
 			if(nchar(outputVariableName)<1) return(error("You must specify output variable"))
 			
-			res <- try(assign(outputVariableName, result, 1))
+			res <- try(assign(outputVariableName, result, envir=robGUIenv()))
 			
 			if(class(res) == "try-error") return(error("Cannot write data into given variable"))
 			

@@ -1,13 +1,17 @@
 \name{lmCoDaX}
 \alias{lmCoDaX}
+\alias{ilrregression}
+\alias{robilrregression}
 \title{
- Robust regression of non-compositional response on compositional predictors
+ Classical and robust regression of non-compositional response on compositional predictors
 }
 \description{
 Delivers appropriate inference for regression of y on a compositional matrix X.
 }
 \usage{
 lmCoDaX(y, X, method = "robust")
+ilrregression(X, y)
+robilrregression(X, y)
 }
 \arguments{
   \item{y}{
@@ -17,7 +21,8 @@ The response which should be non-compositional
 The compositional predictors as a matrix, data.frame or numeric vector
 }
   \item{method}{
-if robust, lts-regression is applied while with method equals \dQuote{classical} the conventional least squares estimates are applied.
+If robust, LTS-regression is applied, while with method equals \dQuote{classical},
+the conventional least squares regression is applied.
 }
 }
 \details{
@@ -31,7 +36,8 @@ An object of class \sQuote{lts} or \sQuote{lm} and two summary objects.
 }
 \references{
  Filzmoser, P., Hron, K., Thompsonc, K. (2012)
-Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, accepted for publication.
+Linear regression with compositional explanatory variables. 
+\emph{Journal of Applied Statistics}, 39, 1115-1128.
 }
 \author{
 Peter Filzmoser
@@ -40,6 +46,12 @@ Peter Filzmoser
 \code{\link{lm}}
 }
 \examples{
-## coming soon
+## How the total household expenditures in EU Member
+## States depend on relative contributions of 
+## single household expenditures:
+data(expendituresEU)
+y <- as.numeric(apply(expendituresEU,1,sum))
+lmCoDaX(y, expendituresEU, method="classical")
+lmCoDaX(y, expendituresEU, method="robust")
 }
 \keyword{ models }

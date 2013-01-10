@@ -22,7 +22,7 @@ impRZalr <- function(x, pos=ncol(x), dl=rep(0.05, ncol(x)-1), eps=0.0001, maxit=
   ## transform x into y=alr(x,pos):
   # x is already in the correct order
 #  y <- alr(x, ivar=pos)$x.alr
-  savey <- alr(x, ivar=ncol(x))
+  savey <- addLR(x, ivar=ncol(x))
   y <- savey$x.alr	
   y <- data.frame(y)
   w <- is.na(y)
@@ -101,7 +101,7 @@ impRZalr <- function(x, pos=ncol(x), dl=rep(0.05, ncol(x)-1), eps=0.0001, maxit=
   
 
   ## backtransform:	
-  ximp <- suppressWarnings(invalr(y)) 
+  ximp <- suppressWarnings(addLRinv(y)) 
   
   ## change order of the column to original order:
   w <- which(colnames(ximp) == "rat")

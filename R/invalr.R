@@ -1,5 +1,9 @@
 invalr <- function(x, cnames=NULL, ivar=NULL, useClassInfo=TRUE){
 	if(class(x) == "alr" & useClassInfo==TRUE){
+		
+		.Deprecated("addLRinv")
+		
+		
 		xalr <- x$x.alr
 		ivar <- x$ivar
 		dat <- exp(xalr)*x$varx

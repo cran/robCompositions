@@ -25,13 +25,8 @@ Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for
 \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.  
 }
 \author{ Karel Hron }
-\seealso{ \code{\link{ilr}} }
+\seealso{ \code{\link{isomLRinv}}, \code{\link{isomLR}},  \code{\link[compositions]{ilrInv}}  }
 \examples{
-require(MASS)
-Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
-set.seed(123)
-z <- mvrnorm(100, mu=c(0,2), Sigma=Sigma)
-x <- invilr(z)
-head(x)
+## function is deprecated, use isomLRinv instead.
 }
 \keyword{ math }

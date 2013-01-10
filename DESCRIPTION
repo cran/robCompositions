@@ -1,8 +1,8 @@
 Package: robCompositions
 Type: Package
 Title: Robust Estimation for Compositional Data.
-Version: 1.6.0
-Date: 2012-05-15
+Version: 1.6.2
+Date: 2013-01-10
 Depends: R (>= 2.10), utils, robustbase, rrcov, car (>= 2.0-0), MASS
 Author: Matthias Templ, Karel Hron, Peter Filzmoser
 Maintainer: Matthias Templ <templ@tuwien.ac.at>
@@ -20,6 +20,6 @@ Description: The package includes methods for imputation of
         plot functions for the ternary diagram.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2012-05-15 13:12:18 UTC; templ
+Packaged: 2013-01-11 15:25:51 UTC; TEMPL$
 Repository: CRAN
-Date/Publication: 2012-05-15 15:35:41
+Date/Publication: 2013-01-11 16:29:55

@@ -53,9 +53,9 @@ These functions are use by \code{\link{adtestWrapper}}.
 adtest(rnorm(100))
 data(machineOperators)
 x <- machineOperators
-adtest(ilr(x[,1:2]))
-adtest(ilr(x[,1:3]))
-adtest(ilr(x))
-adtest(ilr(x[,1:2]), locscatt="robust")
+adtest(isomLR(x[,1:2]))
+adtest(isomLR(x[,1:3]))
+adtest(isomLR(x))
+adtest(isomLR(x[,1:2]), locscatt="robust")
 }
 \keyword{ htest }

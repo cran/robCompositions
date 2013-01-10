@@ -1,4 +1,7 @@
 alr <- function (x, ivar=ncol(x)){
+	
+	.Deprecated("addLR")
+	
 	if(dim(x)[2] < 2) stop("data must be of dimension greater equal 2")
 	x.alr <- log(x/x[, ivar])
 	res <- list(x.alr=x.alr[,-ivar], 

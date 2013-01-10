@@ -9,7 +9,7 @@ if(dim(x)[2] < 1){
 	stop("matrix or data.frame expected.")
 }
 if(coda){
-	x <- ilr(x)
+	x <- isomLR(x)
 }
 	
 
@@ -36,7 +36,7 @@ else {
 	B <- t(hlp)%*%hlp
 	sigi <- array(unlist(sigil),dim=c(p,p,ng))
 	W <- apply(sigi*array(sort(rep(pi,p*p)),dim=c(p,p,ng)),c(1,2),sum)
-	adir <- matrix(as.real(eigen(solve(W)%*%B)$vec),ncol=p)
+	adir <- matrix(as.numeric(eigen(solve(W)%*%B)$vec),ncol=p)
 	adirs <- t(t(adir)/(sqrt(diag(t(adir)%*%W%*%adir))))
 	scores=x%*%adirs
 if(plotScore){

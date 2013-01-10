@@ -50,10 +50,19 @@ if(metric=="Aitchison" & primitive==FALSE){
 findknn <- function(x, i, j){
   m1 <- which(!is.na(x[i,]))
   mi <- which(c(!is.na(x[,j,drop=FALSE])) & c(!is.na(rowSums(x[,m1,drop=FALSE]))))
-  xclr <- clr(rbind(x[mi, m1, drop=FALSE], x[i, m1]))$x.clr
+  xclr <- cenLR(rbind(x[mi, m1, drop=FALSE], x[i, m1]))$x.clr
+
   d <- rowSums(t(abs(t(xclr[-nrow(xclr),]) - c(xclr[nrow(xclr),]))))
   names(d) <- mi
   wA <- which(d <= quantile(d, k/length(d)))
+### new change for zeros paper:
+#			print(is.numeric(xclr))
+#if(is.numeric(xclr)) xclr <- matrix(xclr, ncol=length(xclr))
+#d <- rowSums(t(abs(t(xclr[-nrow(xclr),,drop=FALSE]) - c(xclr[nrow(xclr),,drop=FALSE]))), na.rm=TRUE)
+#names(d) <- mi
+#print(d)
+#wA <- which(d <= quantile(d, k/length(d)))
+### end new change
   w <- as.numeric(names(wA))
   list(knn=w, m1=m1)
 }
@@ -111,7 +120,7 @@ findknn <- function(x, i, j){
   a <- c(!is.na(x[,j,drop=FALSE]))
   b <- ifelse(rowSums(is.na(x[,-j])) == 0, TRUE, FALSE)
   mi <- which(a & b)
-  xclr <- clr(rbind(x[mi, m1, drop=FALSE], x[i, m1]))$x.clr
+  xclr <- cenLR(rbind(x[mi, m1, drop=FALSE], x[i, m1]))$x.clr
   d <- rowSums(t(abs(t(xclr[-nrow(xclr),]) - c(xclr[nrow(xclr),]))), na.rm=TRUE)
   #d[d == 0] <- NA   ## dirty
   names(d) <- mi

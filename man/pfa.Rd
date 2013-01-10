@@ -63,7 +63,7 @@ res0 <- pfa(x, factors=1, covmat="cov")
 
 ## the following produce always the same result:
 res1 <- pfa(x, factors=1, covmat="covMcd")
-res2 <- pfa(x, factors=1, covmat=covMcd(ilr(x))$cov)
-res3 <- pfa(x, factors=1, covmat=covMcd(ilr(x)))
+res2 <- pfa(x, factors=1, covmat=covMcd(isomLR(x))$cov)
+res3 <- pfa(x, factors=1, covmat=covMcd(isomLR(x)))
 }
 \keyword{ multivariate }
