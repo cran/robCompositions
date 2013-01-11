@@ -18,7 +18,7 @@ The ilr transformation moves D-part compositional data from the simplex into a (
   \eqn{x_1} by regression of the remaining variables.
 }
 \value{
-  The ilr transformed data.
+  The isomLR transformed data.
 }
 \references{ Egozcue J.J., V. Pawlowsky-Glahn, G. Mateu-Figueras and
 C. Barcel'o-Vidal (2003) Isometric logratio transformations for
@@ -29,10 +29,8 @@ Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for
 \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.   
  }
 \author{ Karel Hron, Matthias Templ }
-\seealso{ \code{\link{invilr}}, \code{\link[compositions]{ilr}} }
+\seealso{ \code{\link{isomLR}}, \code{\link{isomLRinv}},\code{\link[compositions]{ilr}} }
 \examples{
-require(MASS)
-Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
-z <- invilr(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
+## function is deprecated, use isomLR instead.
 }
 \keyword{ math }

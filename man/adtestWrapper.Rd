@@ -45,7 +45,7 @@ Data} Monographs on Statistics and Applied Probability. Chapman \&
 Hall Ltd., London (UK). 416p.
  }
 \author{ Matthias Templ and Karel Hron }
-\seealso{ \code{\link{adtest}}, \code{\link{ilr}} }
+\seealso{ \code{\link{adtest}}, \code{\link{isomLR}} }
 \examples{
 data(machineOperators)
 a <- adtestWrapper(machineOperators, R=50) # choose higher value of R

@@ -14,7 +14,7 @@ outCoDa <- function(x, quantile=0.975, method="robust", h=1/2){
 				robust = robust(x))
 	}
 		
-	z <- ilr(x)
+	z <- isomLR(x)
 	cv <- covEst(z, method)
 	dM <- sqrt(mahalanobis(z, center=cv$mean, cov=cv$varmat))
 	limit <- sqrt(qchisq(p=quantile, df=ncol(x)-1))

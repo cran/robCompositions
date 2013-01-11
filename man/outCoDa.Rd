@@ -52,7 +52,7 @@ Rousseeuw, P.J., Van Driessen, K. (1999)
 \note{
 It is highly recommended to use the robust version of the procedure.
 }
-\seealso{\code{\link{ilr}}}
+\seealso{\code{\link{isomLR}}}
 \examples{
 data(expenditures)
 oD <- outCoDa(expenditures)

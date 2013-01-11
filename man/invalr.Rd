@@ -39,25 +39,9 @@ Hall Ltd., London (UK). 416p.
 Matthias Templ
 }
 \seealso{
-\code{\link{invilr}}, \code{\link{invclr}}, \code{\link{clr}}, \code{\link{alr}}, \code{\link[compositions]{ilrInv}}
+\code{\link{addLRinv}}, \code{\link{addLR}}, \code{\link[compositions]{alrInv}}
 }
 \examples{
-data(arcticLake)
-x <- arcticLake
-x.alr <- alr(x, 2)
-y <- invalr(x.alr)
-## This exactly fulfills:
-invalr(alr(x, 3))
-data(expenditures)
-x <- expenditures
-y <- invalr(alr(x, 5))
-head(x)
-head(y)
-## --> absolute values are preserved as well.
-
-## preserve only the ratios:
-invalr(x.alr, ivar=2, useClassInfo=FALSE)
-
-
+## function is deprecated, use addLRinv instead.
 }
 \keyword{ manip }

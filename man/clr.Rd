@@ -34,14 +34,9 @@ Matthias Templ
 The resulting transformed data set is singular by definition.
 }
 \seealso{
-\code{\link{invclr}}, \code{\link{alr}}, \code{\link{ilr}}, \code{\link{invalr}}, \code{\link{invilr}}
+\code{\link{cenLR}}, \code{\link{cenLRinv}}, \code{\link[compositions]{clr}}
 }
 \examples{
-data(expenditures)
-eclr <- clr(expenditures)
-inveclr <- invclr(eclr)
-head(expenditures)
-head(inveclr)
-head(invclr(eclr$x.clr))
+## function is deprecated, use cenLR instead.
 }
 \keyword{ manip }

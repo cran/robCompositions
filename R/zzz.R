@@ -22,6 +22,6 @@
 #cat("citation('robCompositions')    \n")                 
 #cat("--------\n\n")  
 
-packageStartupMessage("\n for references have a look at\n citation('robCompositions') \n")
-
 }
+
+robGUIenvir <- new.env()

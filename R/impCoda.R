@@ -126,6 +126,12 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 		if(init=="roundedZero"){
 		  x[is.na(x)] <- 0.001
 		}
+		if(init=="geometricmean"){
+		  gm <- apply(x, 2, function(x) geometricmean(x[!is.na(x)]))
+		  for(i in 1:ncol(x)){
+			  x[is.na(x[,i]),i] <- gm[[i]]
+		  }
+		}
 		
 		
 		
@@ -159,7 +165,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 			    x[,1]=xNA
 			    x[,indM[i]]=x1
 			
-			    if( closed == FALSE ) xilr=ilr(x) else xilr=x
+			    if( closed == FALSE ) xilr=isomLR(x) else xilr=x
 			
 			    #apply the PCA algorithm -> ximp
 			    ind <- cbind(w[, indM[i]], rep(FALSE, dim(w)[1]))
@@ -252,7 +258,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				#  xilr[w[, indM[i]], 1] <- reg1[w[, indM[i]]] 
 				#}
 			
-				if( closed == FALSE ) x=invilr(xilr) else x=xilr
+				if( closed == FALSE ) x=isomLRinv(xilr) else x=xilr
 #				if( closed == FALSE && method %in% c("roundedZero","roundedZeroRobust")) x=invilrM(xilr) else x=xilr			
 				#return the order of columns
 			
@@ -278,7 +284,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				x1=x[,1]
 				x[,1]=xNA
 				x[,indM[i]]=x1
-				if( closed == FALSE ) xilr=ilr(x) else xilr=x
+				if( closed == FALSE ) xilr=isomLR(x) else xilr=x
 				  ind <- cbind(w[, indM[i]], rep(FALSE, dim(w)[1]))	
 				  xilr <- data.frame(xilr)
 				  #c1 <- colnames(xilr)[1]
@@ -289,7 +295,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				  xilr[w[, indM[i]], 1] <- xilr[w[, indM[i]], 1] +  
 				    rnorm(length(which(w[, indM[i]])), 0, sd=error[indM[i]]) 
 				  xilr <- data.frame(xilr)
-				  if( closed == FALSE ) x=invilr(xilr) else x=xilr
+				  if( closed == FALSE ) x=isomLRinv(xilr) else x=xilr
 				  xNA=x[,1]
 				  x1=x[,indM[i]]
 				  x[,1]=x1

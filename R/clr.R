@@ -1,4 +1,7 @@
 clr <- function(x){
+	
+	.Deprecated("cenLR")
+	
 	#if(dim(x)[2] < 2) stop("data must be of dimension greater equal 2")
 	if(dim(x)[2] == 1){
 		res <- list(x.clr=x, gm=rep(1,dim(x)[1]))	    	

@@ -30,14 +30,9 @@ Hall Ltd., London (UK). 416p.
 Matthias Templ
 }
 \seealso{
-\code{\link{clr}}, \code{\link{alr}}, \code{\link{ilr}}, \code{\link{invalr}}, \code{\link{invilr}}
+\code{\link{cenLRinv}}, \code{\link{cenLR}}, \code{\link[compositions]{clrInv}}
 }
 \examples{
-data(expenditures)
-eclr <- clr(expenditures)
-inveclr <- invclr(eclr)
-head(expenditures)
-head(inveclr)
-head(invclr(eclr$x.clr))
+## function is deprecated, use cenLRinv instead.
 }
 \keyword{ manip }

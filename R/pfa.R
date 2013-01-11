@@ -8,7 +8,7 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
         "Bartlett"), rotation = "varimax", maxiter = 5, control = NULL, 
     ...) 
 {
-	z <- ilr(x)    #ilr transformed data
+	z <- isomLR(x)    #ilr transformed data
 	## orthonormal basis:
 	V <- matrix(0,nrow=ncol(x),ncol=ncol(x)-1)
 	for (i in 1:ncol(V)){

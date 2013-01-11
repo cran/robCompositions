@@ -1,5 +1,5 @@
 ternaryDiagEllipse <- function(x, tolerance=c(0.9,0.95,0.975), locscatt="MCD", ...){
-	z <- ilr(x)
+	z <- isomLR(x)
 	if(locscatt=="MCD"){
 		cv <- covMcd(z)
 		mu <- cv$center
@@ -10,7 +10,7 @@ ternaryDiagEllipse <- function(x, tolerance=c(0.9,0.95,0.975), locscatt="MCD", .
 	}
 	dat1 <- drawMahal(z, mu, cm, plot=FALSE, whichlines=tolerance) 
 	for(i in 1:length(tolerance)){
-		e <- invilr(cbind(dat1$mdX[,i], dat1$mdY[,i]))
+		e <- isomLRinv(cbind(dat1$mdX[,i], dat1$mdY[,i]))
 		xp1 <- e[, 2] + e[, 3]/2
 		yp1 <- e[, 3] * sqrt(3)/2	  
 		lines(xp1, yp1, xlim = c(0, 1), ylim = c(0, 0.9), #frame.plot = FALSE, 
