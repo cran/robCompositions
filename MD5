@@ -1,6 +1,6 @@
-3c25df538c379a006478411da2d0e906 *DESCRIPTION
-26e76080470bad4b6080a35980fc0d05 *NAMESPACE
-510e4b21187a4c15d3c075102e40135e *NEWS
+ce1e5bb7e83668c4f9f394c7716aa359 *DESCRIPTION
+ac35c311ea96fdead6edea4601d277af *NAMESPACE
+3cbe8c6cddaa125d3e07f93af75d4635 *NEWS
 8109e3c349779e82a8972b1ae733421f *R/aDist.R
 aa85a6c114623211f0ddc658120776bc *R/addLR.R
 dc1f74dcc9d625095f709084cbcb90f3 *R/addLRinv.R
@@ -18,6 +18,7 @@ ad30c9f221f8e25f4a146cb608940e4e *R/cenLRinv.R
 63bb5bb73d07ec2244d414fa6aaffa40 *R/gm.R
 01f18a11770ae4feff5b6ec4fa6b5756 *R/ilr.R
 032d9645b8d8af14e4fe428da859694c *R/ilrregression.R
+194057789deb0890d5832be7259e6491 *R/impAll.R
 fc69c218988cf725bec1f06840400676 *R/impCoda.R
 1a5e452bf1d01ec13d9c924dfda4f67b *R/impKNNa.R
 611f3064b227112f2b4e8dc0c97aa784 *R/impPCA.R
@@ -42,7 +43,6 @@ ac87b159c9d5bdf19fe02f945d9e6778 *R/print.daFisher.R
 3f7261f65c3f238765d457cf7cd85fbf *R/print.imp.R
 6b126377ac9abe3af7ac4e613742efcd *R/print.outCoDa.R
 ed6c58f64aeec815ea0e93861f398f2e *R/print.pcaCoDa.R
-7a52cdcf475fd053eb2f4ed4c099d7eb *R/robGUI.R
 3c7b8129681539615e2d3f5ab9554101 *R/robVariation.R
 2bd4e9d269daac49b0689389c6f831df *R/robilrregression.R
 f62dbdb42e11938fe65fcba64f9e05c2 *R/summary.adtestWrapper.R
@@ -52,7 +52,7 @@ d45edcc1f3da401d572c19f6dca66af5 *R/ternaryDiagAbline.R
 623aaaad06c7d3e0c264da5281767a93 *R/ternaryDiagEllipse.R
 35ecd030f88e8246d4a69f1770c1e7b0 *R/ternaryDiagLines.R
 c277e429aee48689f0b804093df97492 *R/ternaryDiagPoints.R
-44bdb359e77a4532e9ff096055da2258 *R/utils.R
+6a867af2c76e0f3dfa596e7c4ab9b93b *R/utils.R
 3a257f2d41f15ca305bbe48dc7bdb331 *R/zzz.R
 aecedc97c51a3760a5eaedd8ea75094f *data/arcticLake.rda
 b5bdeac7f83e390242c1b01a56e5b600 *data/coffee.rda
@@ -64,9 +64,9 @@ c288c5ce7525d2c48cc8186bf2979832 *data/machineOperators.rda
 49aa12e8a2c7c72fefb8da4e7c767d8b *data/skyeLavas.rda
 5ad0189b09a54e2660d72bc0910055c6 *inst/CITATION
 25759dd3907ef4e7740306f157c79e3a *inst/doc/imputation.Rnw
-7fffc0b8a03d088c9d5af796e79499f9 *inst/doc/imputation.pdf
+3ce8579482dc2267509f21fc45c1818f *inst/doc/imputation.pdf
 ae1f8cc344d33f286781e15e37959173 *inst/doc/robCompositions-overview.Rnw
-7118b020ff5d2bfd46772e394b996393 *inst/doc/robCompositions-overview.pdf
+94adc59c8f63af67bc489139fb5efe62 *inst/doc/robCompositions-overview.pdf
 b04925b9780203824ef35cb4badfa950 *man/aDist.Rd
 3870feaf0491cb21e94a92e4789c14f8 *man/addLR.Rd
 8f54d7198d6ee599490d74dcfa20e316 *man/addLRinv.Rd
@@ -86,6 +86,7 @@ ed19cff4b730aaf4208320ac4e9ddfbe *man/cenLRinv.Rd
 287ec4facdd1325f06a54f448f0e0e65 *man/gm.Rd
 2078c6a1d4aef61a541d5cdb6af5ec85 *man/haplogroups.Rd
 16f4d009931ec986a8ebb35e428a179a *man/ilr.Rd
+2362d9ad7290ec19bdd1392ad39935a5 *man/impAll.Rd
 adcc8b859ef54f15639256fd23713a1e *man/impCoda.Rd
 13841d29e7272f7906aa231054e95a01 *man/impKNNa.Rd
 0ebcfe5b04882f087332942bbaa9971f *man/impRZalr.Rd
@@ -112,7 +113,6 @@ ef069d24af1f6b99914cc3d64454fa08 *man/plot.pcaCoDa.Rd
 a5de380e5b00e6374aa39b9faba06f40 *man/print.outCoDa.Rd
 dbc78bab26fd52ea8867defa5807559b *man/print.pcaCoDa.Rd
 a3d95615ee00fecfe3bc28508a5f2f3e *man/robCompositions-package.Rd
-9533d5bec1dd1a42be33e9596c56c671 *man/robGUI.Rd
 7c5cf7011fe6b364249178ccdb6804d1 *man/robVariation.Rd
 eeefb8ac4fdc35b5fb0f046ad663d80f *man/skyeLavas.Rd
 6cd9bddb3a88104e6deca72cd7c90f5c *man/summary.adtestWrapper.Rd
