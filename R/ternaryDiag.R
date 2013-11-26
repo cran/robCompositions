@@ -207,7 +207,7 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE,
 	  yaLDA <- as.numeric(t(m1-m2)%*%Sp1%*%t(ya)-
 					  as.numeric(1/2*t(m1-m2)%*%Sp1%*%(m1+m2)))-log(p2/p1)
 	  
-	  boundLDA <- abs(yaLDA)<0.5
+	  boundLDA <- abs(yaLDA)<1.5
 	  bline <- lowess(y1a[boundLDA],y2a[boundLDA])
 #	  bline <- lowess(y1a,y2a)
 	  blines <- data.frame(z1=bline$x, z2=bline$y)
@@ -216,7 +216,7 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE,
 	  LINE <- function(p,k){
 		  seq(p,0.95,) ## stopped here!
 	  }
-	  blines <- data.frame(z1=seq(bline$x[1],bline$x[2],length=100), z2=seq(bline$y[1],bline$y[2],length=100))
+#	  blines <- data.frame(z1=seq(bline$x[1],bline$x[2],length=100), z2=seq(bline$y[1],bline$y[2],length=100))
 	  xblines <- isomLRinv(blines)
 	  xp1 <- xblines[, 2] + xblines[, 3]/2
 	  yp1 <- xblines[, 3] * sqrt(3)/2	  
@@ -233,6 +233,9 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE,
   if(line == "lda"){ 
 #	  if(is.null(group)) stop("parameter group must be specified.")
 	  da(x, grp=group)
+	  grp <- group
+	  points(xp[grp==levels(factor(grp))[1]],yp[grp==levels(factor(grp))[1]], pch=1)
+	  points(xp[grp==levels(factor(grp))[2]],yp[grp==levels(factor(grp))[2]], pch=4)	  
   }
 }
 
