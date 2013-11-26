@@ -1,6 +1,7 @@
 daFisher <- function(x,grp,coda=TRUE,method="classical",plotScore=FALSE)
 {
 
+if(class(x)=="data.frame") x <- as.matrix(x)
 # Fisher LDA:
 if(length(grp) != dim(x)[1]){
 	stop(paste("grp must be of length",dim(x)[1]))
@@ -11,8 +12,6 @@ if(dim(x)[2] < 1){
 if(coda){
 	x <- isomLR(x)
 }
-	
-
 
 	p <- ncol(x)
 	ni <- table(grp)
@@ -47,6 +46,7 @@ if(plotScore){
 #    postgroup <- apply(scores, 1, which.min)
 #	print(postgroup)
 	res <- list(B=B,W=W,loadings=adir,scores=scores,#classification=postgroup, 
+			mu=muil, sigma=sigil,
 			coda=coda)
 	class(res) <- "daFisher"
 	
