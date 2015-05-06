@@ -1,8 +1,60 @@
+#' EM-based replacement of rounded zeros in compositional data
+#' 
+#' Parametric replacement of rounded zeros for compositional data using
+#' classical and robust methods based on ilr-transformations with special
+#' choice of balances.
+#' 
+#' Statistical analysis of compositional data including zeros runs into
+#' problems, because log-ratios cannot be applied.  Usually, rounded zeros are
+#' considerer as missing not at random missing values.
+#' 
+#' The algorithm iteratively imputes parts with rounded zeros whereas in each
+#' step (1) an specific ilr transformation is applied (2) tobit regression is
+#' applied (3) the rounded zeros are replaced by the expected values (4) the
+#' corresponding inverse ilr transformation is applied. After all parts are
+#' imputed, the algorithm starts again until the imputations do not change.
+#' 
+#' @param x data.frame or matrix
+#' @param maxit maximum number of iterations
+#' @param eps convergency criteria
+#' @param method either \dQuote{lm}, \dQuote{MM} or \dQuote{pls}
+#' @param dl Detection limit for each variable. zero for variables with
+#' variables that have no detection limit problems.
+#' @param nComp if determined, it fixes the number of pls components. If
+#' \dQuote{boot}, the number of pls components are estimated using a
+#' bootstraped cross validation approach.
+#' @param bruteforce sets imputed values above the detection limit to the
+#' detection limit. Replacement above the detection limit are only exeptionally
+#' occur due to numerical instabilities. The default is FALSE!
+#' @param noisemethod adding noise to imputed values. Experimental
+#' @param noise TRUE to activate noise (experimental)
+#' @param R number of bootstrap samples for the determination of pls
+#' components. Only important for method \dQuote{pls}.
+#' @param correction normal or density
+#' @param verbose additional print output during calculations.
+#' @return \item{x }{imputed data} \item{criteria }{change between last and
+#' second last iteration} \item{iter }{number of iterations} \item{maxit
+#' }{maximum number of iterations} \item{wind}{index of zeros}
+#' \item{nComp}{number of components for method pls} \item{method}{chosen
+#' method}
+#' @author Matthias Templ and Peter Filzmoser
+#' @seealso \code{\link{impRZalr}}
+#' @keywords manip multivariate
+#' @examples
+#' 
+#' data(arcticLake)
+#' x <- arcticLake
+#' ## generate rounded zeros artificially:
+#' #x[x[,1] < 5, 1] <- 0
+#' x[x[,2] < 44, 2] <- 0
+#' xia <- impRZilr(x, dl=c(5,44,0), eps=0.01, method="lm")
+#' xia$x
+#' 
 `impRZilr` <-
   function(x, maxit=10, eps=0.1, method="pls", 
            dl=rep(0.05, ncol(x)), 	nComp = "boot", 
            bruteforce=FALSE,  noisemethod="residuals", 
-           noise=FALSE, R=10,
+           noise=FALSE, R=10, correction="normal",
            verbose=FALSE){
     
     
@@ -25,6 +77,7 @@
 	} else  {
 	  pre <- FALSE	
 	}
+  if(!(correction %in% c("normal","density"))) stop("correction method must be normal or density")
 #     pre <- TRUE
 #      if(length(nComp) != ncol(x) & nComp!="boot") stop("nComp must be NULL, boot or of length ncol(x)")
 #    } else if(nComp == "boot"){#
@@ -51,6 +104,29 @@
     x[x == 0] <- NA
     x[x < 0] <- NA
     indexFinalCheck <- is.na(x)
+
+    ## check if rows consists of only zeros:
+    checkRows <- unlist(apply(x, 1, function(x) all(is.na(x))))
+    if(any(checkRows)){ 
+      w <- which(checkRows)
+      cat("\n--------\n")
+      message("Rows with only zeros are not allowed")
+      message("Remove this rows before running the algorithm")
+      cat("\n--------\n")      
+      stop(paste("Following rows with only zeros:", w))
+    }  
+
+  ## check if cols consists of only zeros:
+  checkCols <- unlist(apply(x, 2, function(x) all(is.na(x))))
+  if(any(checkCols)){ 
+    w <- which(checkCols)
+    cat("\n--------\n")
+    message("Cols with only zeros are not allowed")
+    message("Remove this columns before running the algorithm")
+    cat("\n--------\n")      
+    stop(paste("Following cols with only zeros:", colnames(x)[w]))
+  }  
+ 
     
     ################
     ## sort variables of x based on 
@@ -77,17 +153,35 @@
 #    indM <- sort(wcol, index.return=TRUE, decreasing=TRUE)$ix
     xcheck <- x
     w2 <- is.na(x)
-    
+
+  
     
     ################
     ## initialisation
     indNA <- apply(x, 2, function(x){any(is.na(x))})
+    print(indNA)
     for(i in 1:length(dl)){
       ind <- is.na(x[,i])
       #		if(length(ind) > 0) x[ind,i] <- dl[i]*runif(sum(ind),1/3,2/3)
       if(length(ind) > 0) x[ind,i] <- dlordered[i] *2/3
     }
     xOrig <- x
+
+    ################
+    ## check if for any variable with zeros,
+    ## the detection limit should be larger than 0:
+    if(any(dlordered[indNA]==0)){
+      w <- which(dlordered[indNA]==0)
+      invalidCol <- colnames(x)[w]
+      for(i in 1:length(invalidCol)){
+        cat("-------\n")
+         cat(paste("Error: variable/part", invalidCol[i], 
+                           "has detection limit 0 but includes zeros"))
+        cat("\n-------\n")
+      }
+      stop(paste("Set detection limits larger than 0 for variables/part \n including zeros"))
+    }
+
     
     ################
     n <- nrow(x) 
@@ -95,14 +189,15 @@
     ###  start the iteration
     if(verbose) cat("\n start the iteration:")
     it <- 1; criteria <- 99999999
-    
     while(it <= maxit & criteria >= eps){
       if(verbose) cat("\n iteration", it, "; criteria =", criteria)	
       xold <- x  
       for(i in which(indNA)){
         if(verbose) cat("\n replacement on part", i)
         ## detection limit in ilr-space
-        phi <- -isomLR(cbind(rep(dlordered[i], n), x[,-i,drop=FALSE]))[,1] 
+        forphi <- cbind(rep(dlordered[i], n), x[,-i,drop=FALSE])
+        if(any(is.na(forphi))) break()
+        phi <- -isomLR(forphi)[,1] 
         #		part <- cbind(x[,i,drop=FALSE], x[,-i,drop=FALSE])
         x[x < 2*.Machine$double.eps] <- 2*.Machine$double.eps
         xilr <- data.frame(-isomLR(cbind(x[,i,drop=FALSE], x[,-i,drop=FALSE])))
@@ -129,9 +224,14 @@
         #		s <- sqrt(sum(reg1$res^2)/abs(nrow(xilr)-ncol(xilr))) ## quick and dirty: abs()
         s <- sqrt(sum(reg1$res^2)/nrow(xilr)) 
         ex <- (phi - yhat)/s 
-        yhat2sel <- ifelse(dnorm(ex[w[, i]]) > .Machine$double.eps,
-                           yhat[w[, i]] - s*dnorm(ex[w[, i]])/pnorm(ex[w[, i]]),
-                           yhat[w[, i]])
+        if(correction=="normal"){
+          yhat2sel <- ifelse(dnorm(ex[w[, i]]) > .Machine$double.eps,
+                             yhat[w[, i]] - s*dnorm(ex[w[, i]])/pnorm(ex[w[, i]]),
+                             yhat[w[, i]])
+        } else if(correction=="density"){
+          den <- density(ex[w[,i]])
+          distr <- kCDF(ex[w,i])
+        }
         if(any(is.na(yhat)) || any(yhat=="Inf")) stop("Problems in ilr because of infinite or NA estimates")
         # check if we are under the DL:
         if(any(yhat2sel >= phi[w[, i]])){
@@ -220,7 +320,7 @@
          }
       }
       if(any(check)){
-        message("few imputed values have been corrected")      
+        message("few replaced values have been corrected")      
       }
       return(x)
     }
@@ -234,6 +334,29 @@
     invisible(res)
   }
 
+
+
+#' Bootstrap to find optimal number of components
+#' 
+#' Combined bootstrap and cross validation procedure to find optimal number of
+#' PLS components
+#' 
+#' Heavily used internally in function impRZilr.
+#' 
+#' @param X predictors as a matrix
+#' @param y response
+#' @param R number of bootstrap samples
+#' @param plotting if TRUE, a diagnostic plot is drawn for each bootstrap
+#' replicate
+#' @return Including other information in a list, the optimal number of
+#' components
+#' @author Matthias Templ
+#' @seealso \code{\link{impRZilr}}
+#' @keywords manip
+#' @examples
+#' 
+#' ## we refer to impRZilr()
+#' 
 bootnComp <- function(X,y, R=99, plotting=FALSE){
   ind <- 1:nrow(X)
   d <- matrix(, ncol=R, nrow=nrow(X))#nrow(X))
@@ -287,7 +410,7 @@ bootnCompHD <- function(X,y, R=99, plotting=FALSE){
     reg1 <- mvr(V1~., data=data.frame(ds), method="simpls", validation="CV")
     d[1:reg1$ncomp,i] <- as.numeric(apply(reg1$validation$pred, 3, function(x) sum(((y - x)^2)) ) )
   }
-  d <<- na.omit(d)
+  d <- na.omit(d)
   sdev <- apply(d, 1, mad, na.rm=TRUE)
   means <- apply(d, 1, median, na.rm=TRUE)
   mi <- which.min(means)
