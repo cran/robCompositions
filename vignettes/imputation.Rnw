@@ -1,3 +1,4 @@
+%\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Imputation Methods in robCompositions}
 \documentclass{scrartcl}
 \usepackage[pdftex]{hyperref}
@@ -27,6 +28,14 @@
 \newcommand{\Rlogo}{\raisebox{-.1mm}{\includegraphics[width=1.2em]{logo.pdf}}}
  
 \begin{document}
+
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+concordance=TRUE
+)
+@
+
 \begin{flushleft}
   {\LARGE\bf Robust Imputation of Missing
   Values in \\[2mm]  \vspace*{-0.8cm} Compositional Data Using the\Rlogo-Package 
@@ -206,7 +215,7 @@ As a regression method we propose to use robust regression, like LTS regression
 %\subsection{Data Sets in the Package}
 %
 %Three data sets are included in the package, namely
-<<load package, echo=FALSE, results=hide>>=
+<<load package, echo=FALSE, results='hide'>>=
 library(robCompositions)
 constSum <- function(x, const=1){
 	x / rowSums(x) * const
@@ -263,7 +272,7 @@ part, 10\% in the second, and 5\% in the third part to missing, using an
 MCAR mechanism. The new data set is stored in the list element \texttt{zmiss} of object $x$.
 
 %% original:
-<<echo=FALSE, results=hide>>=
+<<echo=FALSE, results='hide'>>=
 ##require(compositions)
 genData <- function(n=1000, out=0.05, 
             Sigma=5*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
@@ -294,7 +303,7 @@ genData <- function(n=1000, out=0.05,
 @
 
 %% neu:
-<<echo=FALSE, results=hide>>=
+<<echo=FALSE, results='hide'>>=
 genData <- function(n=1000, out=0.05, 
             Sigma=1*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
     ## Gruppe ohne Ausreisser:
@@ -517,7 +526,8 @@ We apply $k$-nearest neighbor imputation for the generated compositional data
 set, and use the parameter $k=6$:
 
 <<knn>>=
-library(robCompositions)
+library(robCompositions) 
+packageDescription("robCompositions")$Version
 xImp <- impKNNa(x$zmiss, k=6)
 @
 
@@ -653,9 +663,9 @@ gives more reasonable results than its classical counterpart
 
 
 <<variations, echo=FALSE>>=
-v1 <- robVariation(constSum(x$z2[1:95,]), robust=FALSE)
-v2 <- robVariation(constSum(xImp1$xImp[1:95,]), robust=FALSE)
-v22 <- robVariation(constSum(xImp2$xImp[1:95,]), robust=FALSE)
+v1 <- variation(constSum(x$z2[1:95,]), robust=FALSE)
+v2 <- variation(constSum(xImp1$xImp[1:95,]), robust=FALSE)
+v22 <- variation(constSum(xImp2$xImp[1:95,]), robust=FALSE)
 variations1 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v2[upper.tri(v2, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v2, diag=FALSE))) 
 variations2 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v22[upper.tri(v22, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v22, diag=FALSE))) 
 @
@@ -854,19 +864,18 @@ bootimpM <- function(x, R = 100) {
 %@
 \includegraphics{boxplot}
 \vspace*{-1cm}
-\caption{Boxplot comparison of the estimated column-wise geometric means of
+\caption{\label{boxplot}Boxplot comparison of the estimated column-wise geometric means of
 $1000$ bootstrap replicates of the original data set and the data sets 
 where missing values were imputated with different methods. The red line
 is the column-wise geometric mean of the original data. Outliers are excluded
 in the computation of the geometric means.}
-\label{boxplot}
 \end{center}
 \end{figure}
 
-%<<bootstat-erg>>=
-%R <- 5
-%bootimp(x$z2, R=R)
-%@
+<<bootstat-erg>>=
+R <- 5
+bootimp(x$z2, R=R)
+@
 
 
 %<<bootstat-erg-lm>>=
@@ -901,84 +910,82 @@ This plot can also be generated for instance for log-ratio transformed data
 \citep{Aitchison86}, taking care of the compositional nature of the data.
 
 
-%Note that this plot cannot be applied after an isometric log-ratio transformation
-%because the dimension of the data is reduced by 1.
+%' %Note that this plot cannot be applied after an isometric log-ratio transformation
+%' %because the dimension of the data is reduced by 1.
+%' 
+%' %\begin{center}
+%' %\begin{figure}[h]
+%' %<<plot1, fig=TRUE>>=
+%' %plot(xImp1, which=1)
+%' %@
+%' %\caption{Multiple Scatterplot to highlight observation which includes
+%' %imputations resulting from $k$-nearest neighbor imputation within the
+%' %Aitchison space.}
+%' %\label{repFig1}
+%' %\end{figure}
+%' %\end{center}
+%' 
+%' \begin{figure}[h]
+%' \begin{center}
+%' <<plot1,echo=FALSE>>=
+%' dimnames(xImp2$xImp)[[2]] <- c("x1","x2","x3")
+%' plot(xImp2, which=1)
+%' @
+%' \vspace*{-0.4cm}
+%' \caption{\label{repFig1b}Multiple Scatterplot to highlight imputed observations.}
+%' \end{center}
+%' \end{figure}
 
-%\begin{center}
-%\begin{figure}[h]
-%<<plot1, fig=TRUE>>=
-%plot(xImp1, which=1)
-%@
-%\caption{Multiple Scatterplot to highlight observation which includes
-%imputations resulting from $k$-nearest neighbor imputation within the
-%Aitchison space.}
-%\label{repFig1}
-%\end{figure}
-%\end{center}
-
-\begin{figure}[h]
-\begin{center}
-<<plot1, fig=TRUE,echo=FALSE>>=
-dimnames(xImp2$xImp)[[2]] <- c("x1","x2","x3")
-plot(xImp2, which=1)
-@
-\vspace*{-0.4cm}
-\caption{Multiple Scatterplot to highlight imputed observations.}
-\label{repFig1b}
-\end{center}
-\end{figure}
-
-A parallel coordinate plot \citep{Wegman90} can be generated by \texttt{plot(xImp2, which=2)}
-(plot not shown here). The imputed values in certain variables are highlighted.
-One can select variables interactively, and imputed values in any of the 
-selected variables will be highlighted. 
-
-%\begin{center}
-%\begin{figure}[h]
-%<<plot2, fig=TRUE>>=
-%plot(xImp2, which=2, interactive = FALSE)
-%@
-%\vspace*{-1cm}
-%\caption{Interactive parallel coordinate plot of object \texttt{xImp2} in which
-%observations with imputed values are highlighted in \textcolor{red}{red}.}
-%\label{repFig2}
-%\end{figure}
-%\end{center}
-
-The third diagnostic plot (see Figure \ref{repFig4}), a ternary diagram \citep{Aitchison86},
-can be generated by \texttt{plot(xImp2, which=3, seg1=FALSE)}.
-The 3-part compositions are presented by three spikes, pointing in the
-directions of the corresponding three variables. The spikes of
-the imputed values are highlighted. This presentation allows gaining a multivariate
-view of the data, being helpful for interpreting possible irregularities
-of imputed values.
-
-%\begin{center}
-%\begin{figure}
-%<<plot4, fig=TRUE>>=
-%plot(xImp1, which=3, seg1=FALSE)
-%@
-%\caption{ternary plot with plotting symbols with no justification.}
-%\label{repFig4}
-%\end{figure}
-%\end{center}
-
-\setkeys{Gin}{width=0.6\textwidth}
-\begin{figure}[h]
-\begin{center}
-<<plot4, fig=TRUE, echo=FALSE>>=
-par(mar=c(0,0,0,0))
-dimnames(xImp2$xImp)[[2]] <- c("x1","x2","x3")
-plot(xImp2, which=3, seg1=FALSE)
-@
-\vspace*{-3mm}
-\caption{Ternary diagram with special plotting symbols for highlighting imputed
-parts of the compositional data.}
-\label{repFig4}
-\end{center}
-\end{figure}
-
-
+%' A parallel coordinate plot \citep{Wegman90} can be generated by \texttt{plot(xImp2, which=2)}
+%' (plot not shown here). The imputed values in certain variables are highlighted.
+%' One can select variables interactively, and imputed values in any of the 
+%' selected variables will be highlighted. 
+%' 
+%' %\begin{center}
+%' %\begin{figure}[h]
+%' %<<plot2, fig=TRUE>>=
+%' %plot(xImp2, which=2, interactive = FALSE)
+%' %@
+%' %\vspace*{-1cm}
+%' %\caption{Interactive parallel coordinate plot of object \texttt{xImp2} in which
+%' %observations with imputed values are highlighted in \textcolor{red}{red}.}
+%' %\label{repFig2}
+%' %\end{figure}
+%' %\end{center}
+%' 
+%' The third diagnostic plot (see Figure \ref{repFig4}), a ternary diagram \citep{Aitchison86},
+%' can be generated by \texttt{plot(xImp2, which=3, seg1=FALSE)}.
+%' The 3-part compositions are presented by three spikes, pointing in the
+%' directions of the corresponding three variables. The spikes of
+%' the imputed values are highlighted. This presentation allows gaining a multivariate
+%' view of the data, being helpful for interpreting possible irregularities
+%' of imputed values.
+%' 
+%' %\begin{center}
+%' %\begin{figure}
+%' %<<plot4, fig=TRUE>>=
+%' %plot(xImp1, which=3, seg1=FALSE)
+%' %@
+%' %\caption{ternary plot with plotting symbols with no justification.}
+%' %\label{repFig4}
+%' %\end{figure}
+%' %\end{center}
+%' 
+%' \setkeys{Gin}{width=0.6\textwidth}
+%' \begin{figure}[h]
+%' \begin{center}
+%' <<plot4, echo=FALSE>>=
+%' par(mar=c(0,0,0,0))
+%' dimnames(xImp2$xImp)[[2]] <- c("x1","x2","x3")
+%' plot(xImp2, which=3, seg1=FALSE)
+%' @
+%' \vspace*{-3mm}
+%' \caption{\label{repFig4}Ternary diagram with special plotting symbols for highlighting imputed
+%' parts of the compositional data.}
+%' \end{center}
+%' \end{figure}
+%' 
+%' 
 
 \section{Conclusions}
 
@@ -997,8 +1004,8 @@ to highlight how well imputations are made and which compositions were imputed.
 Note that many additional options
 can be used within these plots given by the arguments of the 
 plotting function.
-
-%\newpage
+%' 
+%' %\newpage
 
 %\footnotesize
 \bibliography{refPCS}{}

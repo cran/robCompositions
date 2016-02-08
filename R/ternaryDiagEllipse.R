@@ -14,10 +14,11 @@
 #' @author Peter Filzmoser, Matthias Templ
 #' @seealso \code{\link{ternaryDiag}}
 #' @keywords aplot
+#' @export
 #' @examples
 #' 
 #' data(coffee)
-#' x <- coffee[,1:3]
+#' x <- coffee[,2:4]
 #' ternaryDiag(x, grid=FALSE)
 #' ternaryDiagEllipse(x)
 #' ## or directly:
@@ -26,7 +27,7 @@
 ternaryDiagEllipse <- function(x, tolerance=c(0.9,0.95,0.975), locscatt="MCD", ...){
 	z <- isomLR(x)
 	if(locscatt=="MCD"){
-		cv <- covMcd(z)
+		cv <- robustbase::covMcd(z)
 		mu <- cv$center
 		cm <- cv$cov
 	} else {

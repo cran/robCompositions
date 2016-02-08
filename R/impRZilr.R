@@ -20,6 +20,7 @@
 #' @param method either \dQuote{lm}, \dQuote{MM} or \dQuote{pls}
 #' @param dl Detection limit for each variable. zero for variables with
 #' variables that have no detection limit problems.
+#' @param variation matrix is used to first select number of parts
 #' @param nComp if determined, it fixes the number of pls components. If
 #' \dQuote{boot}, the number of pls components are estimated using a
 #' bootstraped cross validation approach.
@@ -40,6 +41,9 @@
 #' @author Matthias Templ and Peter Filzmoser
 #' @seealso \code{\link{impRZalr}}
 #' @keywords manip multivariate
+#' @export
+#' @importFrom sROC kCDF
+#' @importFrom MASS rlm
 #' @examples
 #' 
 #' data(arcticLake)
@@ -52,19 +56,19 @@
 #' 
 `impRZilr` <-
   function(x, maxit=10, eps=0.1, method="pls", 
-           dl=rep(0.05, ncol(x)), 	nComp = "boot", 
+           dl=rep(0.05, ncol(x)), variation=FALSE,	nComp = "boot", 
            bruteforce=FALSE,  noisemethod="residuals", 
            noise=FALSE, R=10, correction="normal",
            verbose=FALSE){
-    
-    
+
     if( is.vector(x) ) stop("x must be a matrix or data frame")
     ## check if only numeric variables are in x:
     cl <- lapply(x, class)
     if(!all(cl %in% "numeric")) stop("some of your variables are not of class numeric.")
-    stopifnot((method %in% c("lm", "MM", "pls")))
+    stopifnot((method %in% c("lm", "MM", "pls", "variation")))
     if( length(dl) < ncol(x)) stop(paste("dl has to be a vector of ", ncol(x)))
     if(method=="pls" & ncol(x)<5) stop("too less variables/parts for method pls")
+    if(any(is.na(x))) stop("missing values are not allowed. \n Use impKNNa or impCoda to impute them first.")
     if(is.null(nComp)){
 	  pre <- FALSE
 	  nC <- NULL
@@ -130,12 +134,12 @@
     
     ################
     ## sort variables of x based on 
-    ## decreasing number of missings in the variables
+    ## decreasing number of zeros in the variables
     cn <- colnames(x)
     wcol <- - abs(apply(x, 2, function(x) sum(is.na(x))))
     o <- order(wcol)
     x <- x[,o]
-    if(verbose) cat("variables with decreasing number of missings:", o)
+    if(verbose) cat("variables with decreasing number of missings:\n", colnames(x))
     ## --> now work in revised order of variables
     ## dl must also be in correct order
     dlordered <- dl[o]
@@ -194,13 +198,21 @@
       xold <- x  
       for(i in which(indNA)){
         if(verbose) cat("\n replacement on part", i)
+        ## if based on variation matrix:
+        if(variation == TRUE){
+        orig <- x  
+        rv <- variation(x, robust = FALSE)[1,]
+        s <- sort(rv)[11]
+        cols <- which(rv <= s)[1:11]
+        x <- x[, cols]
+        }
         ## detection limit in ilr-space
         forphi <- cbind(rep(dlordered[i], n), x[,-i,drop=FALSE])
         if(any(is.na(forphi))) break()
-        phi <- -isomLR(forphi)[,1] 
+        phi <- isomLR(forphi)[,1] 
         #		part <- cbind(x[,i,drop=FALSE], x[,-i,drop=FALSE])
         x[x < 2*.Machine$double.eps] <- 2*.Machine$double.eps
-        xilr <- data.frame(-isomLR(cbind(x[,i,drop=FALSE], x[,-i,drop=FALSE])))
+        xilr <- data.frame(isomLR(cbind(x[,i,drop=FALSE], x[,-i,drop=FALSE])))
         c1 <- colnames(xilr)[1]					
         colnames(xilr)[1] <- "V1"	
         response <- as.matrix(xilr[,1,drop=FALSE])
@@ -209,7 +221,7 @@
           reg1 <- lm(response ~ predictors)
           yhat <- predict(reg1, new.data=data.frame(predictors))
         } else if(method=="MM"){
-          reg1 <- rlm(response ~ predictors, method="MM",maxit = 100)#rlm(V1 ~ ., data=xilr2, method="MM",maxit = 100)
+          reg1 <- MASS::rlm(response ~ predictors, method="MM",maxit = 100)#rlm(V1 ~ ., data=xilr2, method="MM",maxit = 100)
           yhat <- predict(reg1, new.data=data.frame(predictors))
         } else if(method=="pls"){
           if(it == 1 & pre){ ## evaluate ncomp.
@@ -230,7 +242,7 @@
                              yhat[w[, i]])
         } else if(correction=="density"){
           den <- density(ex[w[,i]])
-          distr <- kCDF(ex[w,i])
+          distr <- sROC::kCDF(ex[w,i])
         }
         if(any(is.na(yhat)) || any(yhat=="Inf")) stop("Problems in ilr because of infinite or NA estimates")
         # check if we are under the DL:
@@ -238,7 +250,12 @@
           yhat2sel <- ifelse(yhat2sel > phi[w[, i]], phi[w[, i]], yhat2sel)
         }
         xilr[w[, i], 1] <- yhat2sel
-        xinv <- isomLRinv(-xilr)
+        xinv <- isomLRinv(xilr)
+        ## if variation:
+        if(variation == TRUE){
+          orig[, cols] <- xinv
+          xinv <- orig
+        }
         ## reordering of xOrig
         if(i %in% 2:(d-1)){
           xinv <- cbind(xinv[,2:i], xinv[,c(1,(i+1):d)])
@@ -290,7 +307,7 @@
           yhat2sel <- ifelse(yhat2sel > phi[w[, i]], phi[w[, i]], yhat2sel)
         }
         xilr[w[, i], 1] <- yhat2sel
-        xinv <- isomLRinv(-xilr)
+        xinv <- isomLRinv(xilr)
         ## reordering of xOrig
         if(i %in% 2:(d-1)){
           xinv <- cbind(xinv[,2:i], xinv[,c(1,(i+1):d)])
@@ -334,105 +351,105 @@
     invisible(res)
   }
 
-
-
-#' Bootstrap to find optimal number of components
-#' 
-#' Combined bootstrap and cross validation procedure to find optimal number of
-#' PLS components
-#' 
-#' Heavily used internally in function impRZilr.
-#' 
-#' @param X predictors as a matrix
-#' @param y response
-#' @param R number of bootstrap samples
-#' @param plotting if TRUE, a diagnostic plot is drawn for each bootstrap
-#' replicate
-#' @return Including other information in a list, the optimal number of
-#' components
-#' @author Matthias Templ
-#' @seealso \code{\link{impRZilr}}
-#' @keywords manip
-#' @examples
-#' 
-#' ## we refer to impRZilr()
-#' 
-bootnComp <- function(X,y, R=99, plotting=FALSE){
-  ind <- 1:nrow(X)
-  d <- matrix(, ncol=R, nrow=nrow(X))#nrow(X))
-  nc <- integer(R)
-  for(i in 1:R){
-    bootind <- sample(ind)
-#    XX <- X
-#    yy <- y
-    ds <- cbind(X[bootind,], as.numeric(y[bootind]))
-    colnames(ds)[ncol(ds)] <- "V1"
-    res1 <- mvr(V1~., data=data.frame(ds), method="simpls", 
-                  validation="CV")
-    d[1:res1$ncomp, i] <- res1$validation$PRESS
-    nc[i] <- which.min(res1$validation$PRESS)
-#    d[1:reg1$ncomp,i] <- as.numeric(apply(reg1$validation$pred, 3, 
-#                                  function(x) sum(((y - x)^2)) ) )
-  }
-  d <- na.omit(d)
-  sdev <- apply(d, 1, sd, na.rm=TRUE)
-  means <- apply(d, 1, mean, na.rm=TRUE)
-  mi <- which.min(means)
-  r <- round(ncol(X)/20)
-  mi2 <- which.min(means[r:length(means)])+r-1
-  w <- means < min(means) + sdev[mi]
-  threshold <- min(means) + sdev[mi]
-  sdev <- sdev
-  means <- means
-  mi <- mi
-  means2 <- means
-  means2[!w] <- 999999999999999
-  res <- which.min(means2)
-  mi3 <- which.max(w)
-#  minsd <- means - sdev > means[mi]
-#  check <- means
-#  check[!minsd] <- 99999999
-  if(plotting) plot(means, type="l")
-#  res <- which.min(check)
-  list(res3=mi3, res2=mi2, res=res, means=means)
-}
-
-
-bootnCompHD <- function(X,y, R=99, plotting=FALSE){
-  ind <- 1:nrow(X)
-  d <- matrix(, ncol=R, nrow=nrow(X))#nrow(X))
-  for(i in 1:R){
-    bootind <- sample(ind)
-    XX <- X
-    yy <- y
-    ds <- cbind(X[bootind,], as.numeric(y[bootind]))
-    colnames(ds)[ncol(ds)] <- "V1"
-    reg1 <- mvr(V1~., data=data.frame(ds), method="simpls", validation="CV")
-    d[1:reg1$ncomp,i] <- as.numeric(apply(reg1$validation$pred, 3, function(x) sum(((y - x)^2)) ) )
-  }
-  d <- na.omit(d)
-  sdev <- apply(d, 1, mad, na.rm=TRUE)
-  means <- apply(d, 1, median, na.rm=TRUE)
-  mi <- which.min(means)
-  if(plotting) plot(means, type="l", col="blue", ylab="squared total prediction error", xlab="number of components")
-  themean <- mean(means)
-  thesd <- sd(means)
-  abovethreshold <- themean - sdev > means
-  check <- means
-  check[!abovethreshold] <- 9999999999
-  res <- which.min(check)
-  #	minsd <- means - sdev > means[mi]
-  #	check <- means
-  #	check[!minsd] <- 99999999
-  #	res <- which.min(check)
-  if(plotting){
-    abline(v=res, lwd=3)
-    abline(h=mi, col="red")
-    #		abline(h=means-sdev, lty=3)
-  }
-  list(res=res, mean=means)
-}
-
+# 
+# 
+# #' Bootstrap to find optimal number of components
+# #' 
+# #' Combined bootstrap and cross validation procedure to find optimal number of
+# #' PLS components
+# #' 
+# #' Heavily used internally in function impRZilr.
+# #' 
+# #' @param X predictors as a matrix
+# #' @param y response
+# #' @param R number of bootstrap samples
+# #' @param plotting if TRUE, a diagnostic plot is drawn for each bootstrap
+# #' replicate
+# #' @return Including other information in a list, the optimal number of
+# #' components
+# #' @author Matthias Templ
+# #' @seealso \code{\link{impRZilr}}
+# #' @keywords manip
+# #' @examples
+# #' 
+# #' ## we refer to impRZilr()
+# #' 
+# bootnComp <- function(X,y, R=99, plotting=FALSE){
+#   ind <- 1:nrow(X)
+#   d <- matrix(, ncol=R, nrow=nrow(X))#nrow(X))
+#   nc <- integer(R)
+#   for(i in 1:R){
+#     bootind <- sample(ind)
+# #    XX <- X
+# #    yy <- y
+#     ds <- cbind(X[bootind,], as.numeric(y[bootind]))
+#     colnames(ds)[ncol(ds)] <- "V1"
+#     res1 <- mvr(V1~., data=data.frame(ds), method="simpls", 
+#                   validation="CV")
+#     d[1:res1$ncomp, i] <- res1$validation$PRESS
+#     nc[i] <- which.min(res1$validation$PRESS)
+# #    d[1:reg1$ncomp,i] <- as.numeric(apply(reg1$validation$pred, 3, 
+# #                                  function(x) sum(((y - x)^2)) ) )
+#   }
+#   d <- na.omit(d)
+#   sdev <- apply(d, 1, sd, na.rm=TRUE)
+#   means <- apply(d, 1, mean, na.rm=TRUE)
+#   mi <- which.min(means)
+#   r <- round(ncol(X)/20)
+#   mi2 <- which.min(means[r:length(means)])+r-1
+#   w <- means < min(means) + sdev[mi]
+#   threshold <- min(means) + sdev[mi]
+#   sdev <- sdev
+#   means <- means
+#   mi <- mi
+#   means2 <- means
+#   means2[!w] <- 999999999999999
+#   res <- which.min(means2)
+#   mi3 <- which.max(w)
+# #  minsd <- means - sdev > means[mi]
+# #  check <- means
+# #  check[!minsd] <- 99999999
+#   if(plotting) plot(means, type="l")
+# #  res <- which.min(check)
+#   list(res3=mi3, res2=mi2, res=res, means=means)
+# }
+# 
+# 
+# bootnCompHD <- function(X,y, R=99, plotting=FALSE){
+#   ind <- 1:nrow(X)
+#   d <- matrix(, ncol=R, nrow=nrow(X))#nrow(X))
+#   for(i in 1:R){
+#     bootind <- sample(ind)
+#     XX <- X
+#     yy <- y
+#     ds <- cbind(X[bootind,], as.numeric(y[bootind]))
+#     colnames(ds)[ncol(ds)] <- "V1"
+#     reg1 <- mvr(V1~., data=data.frame(ds), method="simpls", validation="CV")
+#     d[1:reg1$ncomp,i] <- as.numeric(apply(reg1$validation$pred, 3, function(x) sum(((y - x)^2)) ) )
+#   }
+#   d <- na.omit(d)
+#   sdev <- apply(d, 1, mad, na.rm=TRUE)
+#   means <- apply(d, 1, median, na.rm=TRUE)
+#   mi <- which.min(means)
+#   if(plotting) plot(means, type="l", col="blue", ylab="squared total prediction error", xlab="number of components")
+#   themean <- mean(means)
+#   thesd <- sd(means)
+#   abovethreshold <- themean - sdev > means
+#   check <- means
+#   check[!abovethreshold] <- 9999999999
+#   res <- which.min(check)
+#   #	minsd <- means - sdev > means[mi]
+#   #	check <- means
+#   #	check[!minsd] <- 99999999
+#   #	res <- which.min(check)
+#   if(plotting){
+#     abline(v=res, lwd=3)
+#     abline(h=mi, col="red")
+#     #		abline(h=means-sdev, lty=3)
+#   }
+#   list(res=res, mean=means)
+# }
+# 
 
 #checkIfValuesUnderDL <- function(x, dl, wind){
 #	check <- logical(ncol(x))

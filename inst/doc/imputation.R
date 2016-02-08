@@ -1,17 +1,16 @@
-### R code from vignette source 'imputation.Rnw'
+## ----include=FALSE-------------------------------------------------------
+library(knitr)
+opts_chunk$set(
+concordance=TRUE
+)
 
-###################################################
-### code chunk number 1: load package
-###################################################
+## ----load package, echo=FALSE, results='hide'----------------------------
 library(robCompositions)
 constSum <- function(x, const=1){
 	x / rowSums(x) * const
 }
 
-
-###################################################
-### code chunk number 2: imputation.Rnw:266-293
-###################################################
+## ----echo=FALSE, results='hide'------------------------------------------
 ##require(compositions)
 genData <- function(n=1000, out=0.05, 
             Sigma=5*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
@@ -40,10 +39,7 @@ genData <- function(n=1000, out=0.05,
     list(zmiss=zmiss, z2=z, good=n2)
 }
 
-
-###################################################
-### code chunk number 3: imputation.Rnw:297-323
-###################################################
+## ----echo=FALSE, results='hide'------------------------------------------
 genData <- function(n=1000, out=0.05, 
             Sigma=1*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
     ## Gruppe ohne Ausreisser:
@@ -71,23 +67,14 @@ genData <- function(n=1000, out=0.05,
     list(zmiss=zmiss, z2=z, good=n2)
 }
 
-
-###################################################
-### code chunk number 4: seed
-###################################################
+## ----seed, echo=FALSE----------------------------------------------------
 set.seed(123)
 library(MASS)
 
-
-###################################################
-### code chunk number 5: new data
-###################################################
+## ----new data, echo=FALSE------------------------------------------------
 x <- genData(100)
 
-
-###################################################
-### code chunk number 6: plot.acomp
-###################################################
+## ----plot.acomp, echo=FALSE----------------------------------------------
 plot.acomp <- 
 function (x, ..., labels = colnames(X), cn = colnames(X), aspanel = FALSE,
     id = FALSE, idlabs = NULL, idcol = 2, center = FALSE, scale = FALSE,
@@ -182,37 +169,23 @@ function (x, ..., labels = colnames(X), cn = colnames(X), aspanel = FALSE,
     return(invisible(NULL))
 }
 
-
-###################################################
-### code chunk number 7: knn
-###################################################
-library(robCompositions)
+## ----knn-----------------------------------------------------------------
+library(robCompositions) 
+packageDescription("robCompositions")$Version
 xImp <- impKNNa(x$zmiss, k=6)
 
-
-###################################################
-### code chunk number 8: class
-###################################################
+## ----class---------------------------------------------------------------
 class(xImp)
 
-
-###################################################
-### code chunk number 9: printSummary
-###################################################
+## ----printSummary--------------------------------------------------------
 methods(class = "imp")
 xImp
 
-
-###################################################
-### code chunk number 10: imp
-###################################################
+## ----imp-----------------------------------------------------------------
 xImp1 <- impCoda(x$zmiss, method='lm')
 xImp2 <- impCoda(x$zmiss, method='ltsReg')
 
-
-###################################################
-### code chunk number 11: da
-###################################################
+## ----da, echo=FALSE------------------------------------------------------
 cda <- function(xOrig, xImp, w){
   da <- function(x,y){
 	d <- 0
@@ -232,29 +205,20 @@ cda <- function(xOrig, xImp, w){
   das/w
 }
 
-
-###################################################
-### code chunk number 12: variations
-###################################################
-v1 <- robVariation(constSum(x$z2[1:95,]), robust=FALSE)
-v2 <- robVariation(constSum(xImp1$xImp[1:95,]), robust=FALSE)
-v22 <- robVariation(constSum(xImp2$xImp[1:95,]), robust=FALSE)
+## ----variations, echo=FALSE----------------------------------------------
+v1 <- variation(constSum(x$z2[1:95,]), robust=FALSE)
+v2 <- variation(constSum(xImp1$xImp[1:95,]), robust=FALSE)
+v22 <- variation(constSum(xImp2$xImp[1:95,]), robust=FALSE)
 variations1 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v2[upper.tri(v2, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v2, diag=FALSE))) 
 variations2 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v22[upper.tri(v22, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v22, diag=FALSE))) 
 
-
-###################################################
-### code chunk number 13: erg-variations
-###################################################
+## ----erg-variations, echo=FALSE------------------------------------------
 paste("RDA: iterative lm approach:", round(cda(x$z2, xImp1$xImp, xImp1$w),3))
 paste("RDA: iterative ltsReg approach:", round(cda(x$z2, xImp2$xImp, xImp2$w), 3))
 paste("DV: iterative lm approach:", round(variations1, 3))
 paste("DV: iterative ltsReg approach:", round(variations2, 3))
 
-
-###################################################
-### code chunk number 14: bootstrap-old
-###################################################
+## ----bootstrap-old, echo=FALSE-------------------------------------------
 bootimp <- function(x, R = 100, method = "lm") {
      d <- dim(x)[2]
      n <- dim(x)[1]
@@ -278,10 +242,7 @@ bootimp <- function(x, R = 100, method = "lm") {
      res
 }
 
-
-###################################################
-### code chunk number 15: bootstrap-new
-###################################################
+## ----bootstrap-new, echo=FALSE-------------------------------------------
 bootimp <- function(x, R = 100, method = "lm") {
      d <- dim(x)[2]
      n <- dim(x)[1]
@@ -371,19 +332,7 @@ bootimpM <- function(x, R = 100) {
 }
 
 
-
-###################################################
-### code chunk number 16: plot1
-###################################################
-dimnames(xImp2$xImp)[[2]] <- c("x1","x2","x3")
-plot(xImp2, which=1)
-
-
-###################################################
-### code chunk number 17: plot4
-###################################################
-par(mar=c(0,0,0,0))
-dimnames(xImp2$xImp)[[2]] <- c("x1","x2","x3")
-plot(xImp2, which=3, seg1=FALSE)
-
+## ----bootstat-erg--------------------------------------------------------
+R <- 5
+bootimp(x$z2, R=R)
 

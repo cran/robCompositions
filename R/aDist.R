@@ -18,7 +18,9 @@
 #' @param y a vector, matrix or data.frame with equal dimension as \code{x}
 #' @return The Aitchison distance between two compositions or between two data
 #' sets.
-#' @author Matthias Templ
+#' @author Matthias Templ, Bernhard Meindl
+#' @export
+#' @useDynLib robCompositions
 #' @seealso \code{\link{isomLR}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.

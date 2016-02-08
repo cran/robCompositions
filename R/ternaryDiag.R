@@ -26,14 +26,15 @@
 #' Statistical Data Analysis Explained. Applied Environmental Statistics with
 #' R. John Wiley and Sons, Chichester, 2008.
 #' @keywords multivariate aplot
+#' @export
 #' @examples
 #' 
 #' data(arcticLake)
 #' ternaryDiag(arcticLake)
 #' 
 #' data(coffee)
-#' x <- coffee[,1:3]
-#' grp <- as.integer(factor(coffee[,4]))
+#' x <- coffee[,2:4]
+#' grp <- as.integer(coffee[,1])
 #' ternaryDiag(x, col=grp, pch=grp)
 #' ternaryDiag(x, grid=FALSE, col=grp, pch=grp)
 #' legend("topright", legend=unique(coffee[,4]), pch=1:2, col=1:2)
@@ -128,7 +129,7 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE,
 	  z <- data.frame(isomLR(x))
 #	  z[,2] <- z[,2]*(-1)
 	  colnames(z) <- c("x", "y")
-	  if(rob) lm1 <- rlm(y ~ x, data=z, method="MM") else lm1 <- lm(y ~ x, data=z)
+	  if(rob) lm1 <- MASS::rlm(y ~ x, data=z, method="MM") else lm1 <- lm(y ~ x, data=z)
 #	  new <- data.frame(x = seq(min(z$x), max(z$x), length=100)) 
 	  new <- data.frame(x = seq(-30, 30, length=10000)) 
 	  if(conf=="regressionpred"){
@@ -182,7 +183,7 @@ ternaryDiag <- function(x, name=colnames(x), grid=TRUE,
 	  a <- constSum(x,1)
 	  a <- isomLR(x)
 	  if(rob){
-		  rc <- covMcd(a)
+		  rc <- robustbase::covMcd(a)
 		  me <- rc$center
 		  acov <- rc$cov
 	  } else {
