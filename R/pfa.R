@@ -1,3 +1,4 @@
+
 # PF, 2008-09-18
 # Computes principal factor analysis for compositional data
 # Uniquenesses are nor longer of diagonal form
@@ -18,6 +19,7 @@
 #' 
 #' @param x (robustly) scaled input data
 #' @param factors number of factors
+#' @param robust default value is TRUE
 #' @param data default value is NULL
 #' @param covmat (robustly) computed covariance or correlation matrix
 #' @param n.obs number of observations
@@ -31,7 +33,7 @@
 #' @param \dots arguments for creating a list
 #' @return \item{loadings }{A matrix of loadings, one column for each factor.
 #' The factors are ordered in decreasing order of sums of squares of loadings.}
-#' \item{uniquness }{uniquness} \item{correlation }{correlation matrix}
+#' \item{uniqueness }{uniqueness} \item{correlation }{correlation matrix}
 #' \item{criteria}{The results of the optimization: the value of the negativ
 #' log-likelihood and information of the iterations used.} \item{factors }{the
 #' factors } \item{dof }{degrees of freedom} \item{method }{\dQuote{principal}}
@@ -53,7 +55,9 @@
 #' 
 #' data(expenditures)
 #' x <- expenditures
-#' res0 <- pfa(x, factors=1)
+#' res.rob <- pfa(x, factors=1)
+#' res.cla <- pfa(x, factors=1, robust=FALSE)
+#' 
 #' 
 #' ## the following produce always the same result:
 #' res1 <- pfa(x, factors=1, covmat="covMcd")
@@ -61,12 +65,12 @@
 #' res3 <- pfa(x, factors=1, covmat=covMcd(isomLR(x)))
 #' 
 pfa <-
-function (x, factors, data = NULL, covmat = NULL, n.obs = NA, 
+function (x, factors, robust=TRUE, data = NULL, covmat = NULL, n.obs = NA, 
     subset, na.action, start = NULL, scores = c("none", "regression", 
         "Bartlett"), rotation = "varimax", maxiter = 5, control = NULL, 
     ...) 
 {
-	z <- -isomLR(x)    #ilr transformed data
+  z <- -isomLR(x)    #ilr transformed data
 	## orthonormal basis:
 	V <- matrix(0,nrow=ncol(x),ncol=ncol(x)-1)
 	for (i in 1:ncol(V)){
@@ -74,7 +78,7 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
 		V[i+1,i] <- (-1)
 		V[,i] <- V[,i]*sqrt(i/(i+1))
 	}
-	y <- z%*%t(V)  #clr transformed data
+	y <- as.matrix(z)%*%t(V)  #clr transformed data
 #	if(transformation=="ilr") x <- ilr(x) else if(transformation=="clr") x <- clr(x)$x.clr else stop("This transformation is not supported by pfa().")
 	x <- scale(x, scale=FALSE)  ## TODO: check this line if needed! (not in Peters code)
 	sortLoadings <- function(Lambda) {
@@ -199,6 +203,7 @@ function (x, factors, data = NULL, covmat = NULL, n.obs = NA,
 	  fit$PVAL <- pchisq(fit$STATISTIC, dof, lower.tail = FALSE)
 	}
 	fit$n.obs <- n.obs
+	fit$robust <- robust
 	fit$call <- cl
 	fit
 }

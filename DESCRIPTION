@@ -1,10 +1,11 @@
 Package: robCompositions
 Type: Package
 Title: Robust Estimation for Compositional Data
-Version: 2.0.0
-Date: 2016-02-07
+Version: 2.0.2
+Date: 2016-08-22
 Depends: R (>= 2.10), robustbase, ggplot2, data.table, pls
-Imports: e1071, cvTools, rrcov, GGally, MASS, sROC, VIM
+Imports: car, e1071, rrcov, cluster, cvTools, fpc, GGally, kernlab,
+        MASS, mclust, sROC, VIM
 Suggests: knitr
 VignetteBuilder: knitr
 Author: Matthias Templ, Karel Hron, Peter Filzmoser
@@ -24,6 +25,6 @@ LazyLoad: yes
 LazyData: true
 RoxygenNote: 5.0.1
 NeedsCompilation: yes
-Packaged: 2016-02-08 10:08:45 UTC; templ
+Packaged: 2016-08-22 08:32:56 UTC; templ
 Repository: CRAN
-Date/Publication: 2016-02-08 15:39:39
+Date/Publication: 2016-08-22 12:00:07

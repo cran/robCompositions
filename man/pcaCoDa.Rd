@@ -3,21 +3,28 @@
 \name{pcaCoDa}
 \alias{pcaCoDa}
 \alias{print.pcaCoDa}
+\alias{summary.pcaCoDa}
 \title{Robust principal component analysis for compositional data}
 \usage{
-pcaCoDa(x, method = "robust", mult_comp = NULL)
+pcaCoDa(x, method = "robust", mult_comp = NULL, external = NULL)
 
 \method{print}{pcaCoDa}(x, ...)
+
+\method{summary}{pcaCoDa}(object, ...)
 }
 \arguments{
 \item{x}{compositional data}
 
-\item{method}{either \dQuote{robust} (default) or \dQuote{standard}}
+\item{method}{must be either \dQuote{robust} (default) or \dQuote{classical}}
 
 \item{mult_comp}{a list of numeric vectors holding the indices of linked
 compositions}
 
+\item{external}{external non-compositional variables}
+
 \item{...}{additional parameters for print method passed through}
+
+\item{object}{object of class pcaCoDa}
 }
 \value{
 \item{scores }{scores in clr space} \item{loadings }{loadings in clr
@@ -45,14 +52,32 @@ to each group independently whenever the \code{mult_comp} is set correctly.
 }
 \examples{
 
-data(expenditures)
-p1 <- pcaCoDa(expenditures)
-p1
-plot(p1)
+data(arcticLake)
 
-## just for illustration how to set the mult_comp argument
+## robust estimation (default):
+res.rob <- pcaCoDa(arcticLake)
+res.rob
+summary(res.rob)
+plot(res.rob)
+
+## classical estimation:
+res.cla <- pcaCoDa(arcticLake, method="classical")
+biplot(res.cla)
+
+## just for illustration how to set the mult_comp argument:
+data(expenditures)
 p1 <- pcaCoDa(expenditures, mult_comp=list(c(1,2,3),c(4,5)))
 p1
+
+## example with external variables:
+data(election)
+# transform external variables
+election$unemployment <- log((election$unemployment/100)/(1-election$unemployment/100))
+election$income <- scale(election$income)
+
+res <- pcaCoDa(election[,1:6], method="classical", external=election[,7:8])
+res
+biplot(res, scale=0)
 }
 \author{
 K. Hron, P. Filzmoser, M. Templ
@@ -61,9 +86,13 @@ K. Hron, P. Filzmoser, M. Templ
 Filzmoser, P., Hron, K., Reimann, C. (2009) Principal Component
 Analysis for Compositional Data with Outliers. \emph{Environmetrics},
 \bold{20}, 621-632.
+
+Kynclova, P., Filzmoser, P., Hron, K. (2016) Compositional biplots including external non-compositional variables. 
+\emph{Statistics: A Journal of Theoretical and Applied Statistics},
+\bold{50}, 1132-1148.
 }
 \seealso{
-\code{\link{print.pcaCoDa}}, \code{\link{plot.pcaCoDa}}
+\code{\link{print.pcaCoDa}}, \code{\link{summary.pcaCoDa}}, \code{\link{biplot.pcaCoDa}}, \code{\link{plot.pcaCoDa}}
 }
 \keyword{multivariate}
 

@@ -4,14 +4,16 @@
 \alias{pfa}
 \title{Factor analysis for compositional data}
 \usage{
-pfa(x, factors, data = NULL, covmat = NULL, n.obs = NA, subset, na.action,
-  start = NULL, scores = c("none", "regression", "Bartlett"),
-  rotation = "varimax", maxiter = 5, control = NULL, ...)
+pfa(x, factors, robust = TRUE, data = NULL, covmat = NULL, n.obs = NA,
+  subset, na.action, start = NULL, scores = c("none", "regression",
+  "Bartlett"), rotation = "varimax", maxiter = 5, control = NULL, ...)
 }
 \arguments{
 \item{x}{(robustly) scaled input data}
 
 \item{factors}{number of factors}
+
+\item{robust}{default value is TRUE}
 
 \item{data}{default value is NULL}
 
@@ -38,7 +40,7 @@ pfa(x, factors, data = NULL, covmat = NULL, n.obs = NA, subset, na.action,
 \value{
 \item{loadings }{A matrix of loadings, one column for each factor.
 The factors are ordered in decreasing order of sums of squares of loadings.}
-\item{uniquness }{uniquness} \item{correlation }{correlation matrix}
+\item{uniqueness }{uniqueness} \item{correlation }{correlation matrix}
 \item{criteria}{The results of the optimization: the value of the negativ
 log-likelihood and information of the iterations used.} \item{factors }{the
 factors } \item{dof }{degrees of freedom} \item{method }{\dQuote{principal}}
@@ -62,7 +64,9 @@ are backtransformed to the clr space (see Filzmoser et al., 2009).
 
 data(expenditures)
 x <- expenditures
-res0 <- pfa(x, factors=1)
+res.rob <- pfa(x, factors=1)
+res.cla <- pfa(x, factors=1, robust=FALSE)
+
 
 ## the following produce always the same result:
 res1 <- pfa(x, factors=1, covmat="covMcd")

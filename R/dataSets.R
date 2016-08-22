@@ -1,3 +1,139 @@
+#' alcoholreg 
+#' 
+#' Regional alcohol per capita (15+) consumption by WHO region
+#'
+#' \itemize{
+#'  \item{\code{country }}{Country}
+#'  \item{\code{year }}{Year}
+#'  \item{\code{recorded }}{Recorded alcohol consumption}
+#'  \item{\code{unrecorded }}{Unrecorded alcohol consumption}
+#' }
+#'
+#' @name alcoholreg
+#' @docType data
+#' @usage data(alcoholreg)
+#' @author Matthias Templ \email{matthias.templ@@tuwien.ac.at}
+#' @source Transfered from the World Health Organisation website. 
+#' @format A data frame with 6 rows and 4 variables
+#' @keywords data
+#' @examples 
+#' 
+#' data("alcoholreg")
+#' alcoholreg
+NULL
+
+
+
+#' alcohol 
+#' 
+#' Alcohol consumptions by country and type of alcohol
+#'
+#' \itemize{
+#'  \item{\code{country }}{Country}
+#'  \item{\code{year }}{Year}
+#'  \item{\code{beer }}{Consumption of pure alcohol on beer (in percentages)}
+#'  \item{\code{wine }}{Consumption of pure alcohol on wine (in percentages)}
+#'  \item{\code{spirits }}{Consumption of pure alcohol on spirits (in percentages)}
+#'  \item{\code{other }}{Consumption of pure alcohol on other beverages (in percentages)}
+#' }
+#'
+#' @name alcohol
+#' @docType data
+#' @usage data(alcohol)
+#' @author Matthias Templ \email{matthias.templ@@tuwien.ac.at}
+#' @source Transfered from the World Health Organisation website. 
+#' @format A data frame with 193 rows and 6 variables
+#' @keywords data
+#' @examples 
+#' 
+#' data("alcohol")
+#' str(alcohol)
+#' summary(alcohol)
+NULL
+
+
+#' Production 
+#' 
+#' Production splitted by nationality on enterprise level
+#'
+#' \itemize{
+#'  \item{\code{nace }}{NACE classification, 2 digits}
+#'  \item{\code{oenace_2008 }}{Corresponding Austrian NACE classification (in German)}
+#'  \item{\code{year }}{year}
+#'  \item{\code{month }}{month}
+#'  \item{\code{enterprise }}{enterprise ID}
+#'  \item{\code{total }}{total ...}
+#'  \item{\code{home }}{home ...}
+#'  \item{\code{EU }}{EU ...}
+#'  \item{\code{non-EU }}{non-EU ...}
+#' }
+#'
+#' @name production
+#' @docType data
+#' @usage data(production)
+#' @author Matthias Templ \email{matthias.templ@@tuwien.ac.at}
+#' @source statCube data base at \url{www.statistik.ac.at}. The product and all 
+#' material contained therein are protected by copyright with all rights 
+#' reserved by the Bundesanstalt Statistik Oesterreich (STATISTICS AUSTRIA). 
+#' It is permitted to reproduce, distribute, make publicly available 
+#' and process the content for non-commercial purposes. Prior to any use for 
+#' commercial purposes a written consent of STATISTICS AUSTRIA must be obtained. 
+#' Any use of the contained material must 
+#' be correctly reproduced and clearly cite the source STATISTICS AUSTRIA. 
+#' If tables published by STATISTICS AUSTRIA are partially used, displayed or 
+#' otherwise changed, a note must be added at an adequate position to 
+#' show data was extracted or adapted. 
+#' @format A data frame with 535 rows and 9 variables
+#' @keywords data
+#' @examples 
+#' 
+#' data(production)
+#' str(production)
+#' summary(production)
+NULL
+
+#' Special payments
+#' 
+#' Payments splitted by different NACE categories and kind of employment in Austria 2004
+#'
+#' \itemize{
+#'  \item{\code{nace }}{NACE classification, 2 digits}
+#'  \item{\code{oenace_2008 }}{Corresponding Austrian NACE classification (in German)}
+#'  \item{\code{year }}{year}
+#'  \item{\code{month }}{month}
+#'  \item{\code{localunit }}{local unit ID}
+#'  \item{\code{spay }}{special payments (total)}
+#'  \item{\code{spay_wc }}{special payments for white colar workers}
+#'  \item{\code{spay_bc }}{special payments for blue colar workers}
+#'  \item{\code{spay_traintrade }}{special payments for trainees in trade businness}
+#'  \item{\code{spay_home }}{special payments for home workers}
+#'  \item{\code{spay_traincomm }}{special payments for trainees in commercial businness}
+#' }
+#'
+#' @name payments
+#' @docType data
+#' @usage data(payments)
+#' @author Matthias Templ \email{matthias.templ@@tuwien.ac.at}
+#' @source statCube data base at \url{www.statistik.ac.at}. The product and all 
+#' material contained therein are protected by copyright with all rights 
+#' reserved by the Bundesanstalt Statistik Oesterreich (STATISTICS AUSTRIA). 
+#' It is permitted to reproduce, distribute, make publicly available 
+#' and process the content for non-commercial purposes. Prior to any use for 
+#' commercial purposes a written consent of STATISTICS AUSTRIA must be obtained. 
+#' Any use of the contained material must 
+#' be correctly reproduced and clearly cite the source STATISTICS AUSTRIA. 
+#' If tables published by STATISTICS AUSTRIA are partially used, displayed or 
+#' otherwise changed, a note must be added at an adequate position to 
+#' show data was extracted or adapted. 
+#' @format A data frame with 535 rows and 11 variables
+#' @keywords data
+#' @examples 
+#' 
+#' data(payments)
+#' str(payments)
+#' summary(payments)
+NULL
+
 #' Arctic lake sediment data
 #' 
 #' Sand, silt, clay compositions of 39 sediment samples at different water depths in an Arctic lake.
@@ -27,6 +163,34 @@
 #' plot(isomLR(arcticLake))
 NULL
 
+#' Child, middle and eldery population
+#' 
+#' Percentages of childs, middle generation and eldery population in 195 countries.
+#'
+#' \itemize{
+#'  \item{\code{<15 }}{numeric vector of percentages of sand}
+#'  \item{\code{15-60 }}{numeric vector of percentages of silt}
+#'  \item{\code{60+ }}{numeric vector of percentages of clay}
+#'  \item{\code{country }}{country of origin}
+#' }
+#'
+#' @name ageCatWorld
+#' @docType data
+#' @usage data(ageCatWorld)
+#' @author extracted by Karel Hron and Eva Fiserova, implemented by Matthias Templ
+#' @details The rows sum up to 100. 
+#' @format A data frame with 195 rows and 4 variables
+#' @references Fiserova, E. and Hron, K. (2012). Statistical Inference in Orthogonal Regression for Three-Part Compositional Data Using a Linear Model with Type-II Constraints. \emph{Communications in Statistics - Theory and Methods}, 41 (13-14), 2367-2385. 
+#' @keywords data
+#' @examples 
+#' 
+#' data(ageCatWorld)
+#' str(ageCatWorld)
+#' summary(ageCatWorld)
+#' rowSums(ageCatWorld[, 1:3])
+#' ternaryDiag(ageCatWorld[, 1:3])
+#' plot(isomLR(ageCatWorld[, 1:3]))
+NULL
 
 
 #' coffee data set
@@ -60,7 +224,8 @@ NULL
 
 #' Economic indicators
 #' 
-#' Household and government consumptions, gross captial formation and import and exports of goods and services.
+#' Household and government consumptions, gross captial formation and import and exports of goods 
+#' and services.
 #'
 #' \itemize{
 #'  \item{\code{country }}{country name}
@@ -84,6 +249,48 @@ NULL
 #' data(economy)
 #' str(economy)
 NULL
+
+#' Election data
+#' 
+#' Results of a election in Germany 2013 in different
+#' federal states 
+#' 
+#' Votes for the political parties
+#' in the elections (compositional variables), and their relation to the unemployment rate
+#' and the average monthly income (external non-compositional variables). Votes are for the Christian Democratic Union and Christian Social Union of Bavaria, also
+#' called The Union (CDU/CSU), Social Democratic Party (SDP), The Left (DIE LINKE),
+#' Alliance '90/The Greens (GRUNE), Free Democratic Party (FDP) and the rest of the
+#' parties participated in the elections (other parties). The votes are examined in absolute
+#' values (number of valid votes). The unemployment in the federal states is reported in
+#' percentages, and the average monthly income in Euros.
+#'
+#' \itemize{
+#'  \item{\code{CDU_CSU }}{Christian Democratic Union and Christian Social Union of Bavaria, also
+#' called The Union}
+#'  \item{\code{SDP }}{Social Democratic Party}
+#'  \item{\code{GRUENE }}{Alliance '90/The Greens}
+#'  \item{\code{FDP }}{Free Democratic Party}
+#'  \item{\code{DIE_LINKE }}{The Left}
+#'  \item{\code{other_parties }}{Votes for the rest of the
+#' parties participated in the elections}
+#'  \item{\code{unemployment }}{Unemployment in the federal states in percentages}
+#'  \item{\code{income }}{Average monthly income in Euros}
+#' }
+#'
+#' @name election
+#' @docType data
+#' @usage data(election)
+#' @author Petra Klynclova, Matthias Templ
+#' @format A data frame with 16 observations and 8 variables
+#' @references Eurostat, \url{http://ec.europa.eu/eurostat/data}
+#' @keywords data
+#' @source German Federal Statistical Office 
+#' @examples 
+#' 
+#' data(election)
+#' str(election)
+NULL
+
 
 
 #' Gemas geochemical data set
@@ -505,11 +712,7 @@ NULL
 #' \item{\code{Restaurants}}{a numeric vector} 
 #' \item{\code{Other}}{a numeric vector} 
 #' }
-#' @references Eurostat provides a website with the data:
-#' 
-#' \url{http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Household_consumption_expenditure}
-#' @source Eurostat:
-#' \url{http://epp.eurostat.ec.europa.eu/statistics_explained/images/c/c2/Mean_consumption_expenditure_of_households,_2005(PPS).PNG}
+#' @source Eurostat
 #' @keywords datasets
 #' @examples
 #' 
@@ -580,8 +783,7 @@ NULL
 #' @name phd
 #' @docType data
 #' @format A data set on 32 compositions and 11 variables.
-#' @source
-#' \url{http://epp.eurostat.ec.europa.eu/cache/ITY_PUBLIC/1-18092009-AP/DE/1-18092009-AP-DE.PDF}
+#' @source Eurostat
 #' @references Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods. \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.
 #' @keywords datasets
 #' @examples

@@ -22,21 +22,9 @@ The robust compositional biplot according to Aitchison and Greenacre (2002),
 computed from resulting (robust) loadings and scores, is performed.
 }
 \examples{
-
 data(expenditures)
-p1 <- pcaCoDa(expenditures)
-p1
-biplot(p1)
-
-
-## with labels for the scores:
-data(arcticLake)
-rownames(arcticLake) <- paste(sample(letters[1:26],nrow(arcticLake), replace=TRUE), 
-                              1:nrow(arcticLake), sep="")
-pc <- pcaCoDa(arcticLake, method="standard")
-plot(pc, xlabs=rownames(arcticLake))
-
-
+res.rob <- pfa(expenditures, factors=2, scores = "regression")
+biplot(res.rob)
 }
 \author{
 M. Templ, K. Hron
