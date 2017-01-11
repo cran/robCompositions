@@ -28,7 +28,7 @@ str(ageCatWorld)
 summary(ageCatWorld)
 rowSums(ageCatWorld[, 1:3])
 ternaryDiag(ageCatWorld[, 1:3])
-plot(isomLR(ageCatWorld[, 1:3]))
+plot(pivotCoord(ageCatWorld[, 1:3]))
 }
 \author{
 extracted by Karel Hron and Eva Fiserova, implemented by Matthias Templ

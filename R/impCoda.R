@@ -19,9 +19,6 @@
 #' with mean and standard deviation related to the corresponding residuals and
 #' multiplied by \code{noise}.
 #' 
-#' method \sQuote{roundedZero} is experimental. It imputes rounded zeros within
-#' our iterative framework.
-#' 
 #' @param x data frame or matrix
 #' @param maxit maximum number of iterations
 #' @param eps convergence criteria
@@ -44,7 +41,7 @@
 #' @export
 #' @importFrom VIM kNN
 #' @importFrom robustbase ltsReg
-#' @seealso \code{\link{impKNNa}}, \code{\link{isomLR}}
+#' @seealso \code{\link{impKNNa}}, \code{\link{pivotCoord}}
 #' @references Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of
 #' missing values for compositional data using classical and robust methods
 #' \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages
@@ -104,7 +101,8 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 	
 	
 	if( is.vector(x) ) stop("x must be a matrix or data frame")
-	stopifnot((method %in% c("ltsReg", "ltsReg2", "classical", "lm", "roundedZero","roundedZeroRobust")))
+	stopifnot((method %in% c("ltsReg", "ltsReg2", "classical", "lm", 
+	                         "roundedZero","roundedZeroRobust")))
 	if( k > nrow(x)/4 ) warning("k might be too large")
 #	if(method == "roundedZero") init <- "roundedZero"
 
@@ -226,8 +224,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 			    x1=x[,1]
 			    x[,1]=xNA
 			    x[,indM[i]]=x1
-			
-			    if( closed == FALSE ) xilr <- isomLR(x) else xilr=x
+			    if( closed == FALSE ) xilr <- pivotCoord(x) else xilr=x
 			
 			    #apply the PCA algorithm -> ximp
 			    ind <- cbind(w[, indM[i]], rep(FALSE, dim(w)[1]))
@@ -320,7 +317,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				#  xilr[w[, indM[i]], 1] <- reg1[w[, indM[i]]] 
 				#}
 			
-				if( closed == FALSE ) x <- isomLRinv(xilr) else x=xilr
+				if( closed == FALSE ) x <- pivotCoordInv(xilr) else x=xilr
 #				if( closed == FALSE && method %in% c("roundedZero","roundedZeroRobust")) x=invilrM(xilr) else x=xilr			
 				#return the order of columns
 			
@@ -346,7 +343,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				x1=x[,1]
 				x[,1]=xNA
 				x[,indM[i]]=x1
-				if( closed == FALSE ) xilr <- -isomLR(x) else xilr=x
+				if( closed == FALSE ) xilr <- -pivotCoord(x) else xilr=x
 				  ind <- cbind(w[, indM[i]], rep(FALSE, dim(w)[1]))	
 				  xilr <- data.frame(xilr)
 				  #c1 <- colnames(xilr)[1]
@@ -357,7 +354,7 @@ function(x, maxit=10, eps=0.5, method="ltsReg", closed=FALSE,
 				  xilr[w[, indM[i]], 1] <- xilr[w[, indM[i]], 1] +  
 				    rnorm(length(which(w[, indM[i]])), 0, sd=error[indM[i]]) 
 				  xilr <- data.frame(xilr)
-				  if( closed == FALSE ) x <- isomLRinv(-xilr) else x=xilr
+				  if( closed == FALSE ) x <- pivotCoordInv(-xilr) else x=xilr
 				  xNA=x[,1]
 				  x1=x[,indM[i]]
 				  x[,1]=x1

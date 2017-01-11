@@ -7,12 +7,14 @@
 #' logarithm is taken.
 #' 
 #' @param x multivariate data ideally of class data.frame or matrix
+#' @param base a positive or complex number: 
+#' the base with respect to which logarithms are computed. Defaults to \code{exp(1)}.
 #' @return The transformed data, including \item{x.clr}{clr transformed data}
 #' \item{gm}{the geometric means of the original composition.}
 #' @note The resulting transformed data set is singular by definition.
 #' @author Matthias Templ
-#' @seealso \code{\link{cenLRinv}}, \code{\link{addLR}}, \code{\link{isomLR}},
-#' \code{\link{addLRinv}}, \code{\link{isomLRinv}}
+#' @seealso \code{\link{cenLRinv}}, \code{\link{addLR}}, \code{\link{pivotCoord}},
+#' \code{\link{addLRinv}}, \code{\link{pivotCoordInv}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
 #' Chapman \& Hall Ltd., London (UK). 416p.
@@ -25,9 +27,9 @@
 #' inveclr <- cenLRinv(eclr)
 #' head(expenditures)
 #' head(inveclr)
-#' head(isomLRinv(eclr$x.clr))
+#' head(pivotCoordInv(eclr$x.clr))
 #' 
-cenLR <- function(x){
+cenLR <- function(x, base = exp(1)){
 	#if(dim(x)[2] < 2) stop("data must be of dimension greater equal 2")
 	if(dim(x)[2] == 1){
 		res <- list(x.clr=x, gm=rep(1,dim(x)[1]))	    	
@@ -38,7 +40,7 @@ cenLR <- function(x){
 			else exp(mean(log(unclass(x)[is.finite(x) & x > 0])))
 		}
 		gm <- apply(x, 1, geometricmean)
-		x.clr <- log(x/gm)
+		x.clr <- log(x/gm, base)
 		res <- list(x.clr=x.clr, 
 				gm=gm
 		)

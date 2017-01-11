@@ -23,7 +23,7 @@ Applies the inverse centred log-ratio transformation.
 \examples{
 
 data(expenditures)
-eclr <- cenLR(expenditures)
+eclr <- cenLR(expenditures, 2)
 inveclr <- cenLRinv(eclr)
 head(expenditures)
 head(inveclr)
@@ -39,8 +39,8 @@ Compositional Data} Monographs on Statistics and Applied Probability.
 Chapman \& Hall Ltd., London (UK). 416p.
 }
 \seealso{
-\code{\link{cenLR}}, \code{\link{addLR}}, \code{\link{isomLR}},
-\code{\link{addLRinv}}, \code{\link{isomLRinv}}
+\code{\link{cenLR}}, \code{\link{addLR}}, \code{\link{pivotCoord}},
+\code{\link{addLRinv}}, \code{\link{pivotCoordInv}}
 }
 \keyword{manip}
 

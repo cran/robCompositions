@@ -2,9 +2,12 @@
 % Please edit documentation in R/aDist.R
 \name{aDist}
 \alias{aDist}
+\alias{iprod}
 \title{Aitchison distance}
 \usage{
 aDist(x, y = NULL)
+
+iprod(x, y)
 }
 \arguments{
 \item{x}{a vector, matrix or data.frame}
@@ -50,6 +53,10 @@ xImp <- impCoda(x, method="ltsReg")$xImp
 ## calculate the relative Aitchsion distance between xOrig and xImp:
 aDist(xOrig, xImp)
 
+data("expenditures")
+x <- expenditures[, 1]
+y <- expenditures[, 2]
+iprod(x, y)
 }
 \author{
 Matthias Templ, Bernhard Meindl
@@ -69,7 +76,7 @@ for compositional data using classical and robust methods
 3095-3107.
 }
 \seealso{
-\code{\link{isomLR}}
+\code{\link{pivotCoord}}
 }
 \keyword{arith}
 \keyword{math}

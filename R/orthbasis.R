@@ -12,15 +12,15 @@
 
 #' Orthonormal basis
 #' 
-#' Orthonormal basis from cenLR transformed data to isomLR transformated data.
+#' Orthonormal basis from cenLR transformed data to pivotCoord transformated data.
 #' 
-#' For the chosen balances for \dQuote{isomLR}, this is the orthonormal basis
+#' For the chosen balances for \dQuote{pivotCoord}, this is the orthonormal basis
 #' that transfers the data from centered logratio to isometric logratio.
 #' 
 #' @param D number of parts (variables)
 #' @return the orthonormal basis.
 #' @author Karel Hron, Matthias Templ
-#' @seealso \code{\link{isomLR}}, \code{\link{cenLR}}
+#' @seealso \code{\link{pivotCoord}}, \code{\link{cenLR}}
 #' @keywords manip
 #' @export
 #' @examples
@@ -28,9 +28,9 @@
 #' data(expenditures)
 #' V <- orthbasis(ncol(expenditures))
 #' xcen <- cenLR(expenditures)$x.clr
-#' xi <- as.matrix(xcen) %*% V
-#' xi2 <- isomLR(expenditures)
-#' all.equal(xi, xi2)
+#' xi <- as.matrix(xcen) %*% V$V
+#' xi2 <- pivotCoord(expenditures)
+#' # xi and xi2 include equal values
 #' 
 orthbasis <- function(D){
 	ilrBase <- NULL
@@ -70,7 +70,8 @@ orthbasis <- function(D){
 			codes[i,]=c(rep(0,i-1),-1,rep(1,D-i))
 		}
 	}   
-	t(codes)	
+	basisv <- t(codes)	
 	V <- gsicomp(t(codes))
-	return(V)
+	ll <- list("V" = V, "basisv" = basisv)
+	return(ll)
 }

@@ -2,29 +2,26 @@
 % Please edit documentation in R/gm.R
 \name{gm}
 \alias{gm}
-\title{geometric mean}
+\title{gmean}
 \usage{
 gm(x)
 }
 \arguments{
-\item{x}{A numeric vector.}
-}
-\value{
-The geometric mean.
+\item{x}{a vector}
 }
 \description{
 This function calculates the geometric mean.
 }
 \details{
-Calculates the geometric mean of all positive entries of a vector.
+\code{gm} calculates the geometric mean for all positive entries of a vector. 
+Please note that there is a faster version available implemented with Rcpp
+but it currently do not pass CRAN checks cause of use of Rcpp11 features. This C++ version
+accounts for over- and underflows. It is placed in inst/doc
 }
 \examples{
-
-gm(runif(100))
-
+gm(c(3,5,3,6,7))
 }
 \author{
 Matthias Templ
 }
-\keyword{math}
 

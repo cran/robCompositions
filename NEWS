@@ -1,3 +1,19 @@
+Changes in robCompositions version 2.0.3
+  + new function perturbation() and powering()
+  + new function for inner product (iprod())
+  + new funciton balances()
+  + addLR, cenLR with optional different base in logrithm
+  + isomLR with more possibilites for a normalizing constant
+  + isomLR depricated, using now pivotCoord instead
+  + isomLRinv depricated, using pivotCoordInv instead
+  + orthbasis() now returns also the basis vectors
+  + bug in aDist solved
+  + aDist now much faster
+  + new function center()
+  + method symm (symmetric balances) in pivotCoord
+  + bug in daFisher resolved
+  + include electionATbp data (data still has to be made tidy)
+
 Changes in robCompositions version 2.0.2
   + new function balZav()
   + new function daCoDa()
@@ -7,7 +23,7 @@ Changes in robCompositions version 2.0.2
   + pcaCoDa() with external variables
   + new data set alcoholreg 
   + new data set alcohol
-  + new data set economy
+  + new data set econom        y
   + new data set ageCatWorld
   + new data set election
   + new data set laborForce

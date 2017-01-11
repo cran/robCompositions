@@ -42,15 +42,13 @@ y <- addLRinv(x.alr)
 addLRinv(addLR(x, 3))
 data(expenditures)
 x <- expenditures
-y <- addLRinv(addLR(x, 5))
+y <- addLRinv(addLR(x, 5, 2))
 head(x)
 head(y)
 ## --> absolute values are preserved as well.
 
 ## preserve only the ratios:
 addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
-
-
 
 }
 \author{
@@ -62,7 +60,7 @@ Compositional Data} Monographs on Statistics and Applied Probability.
 Chapman \& Hall Ltd., London (UK). 416p.
 }
 \seealso{
-\code{\link{isomLRinv}}, \code{\link{cenLRinv}},
+\code{\link{pivotCoordInv}}, \code{\link{cenLRinv}},
 \code{\link{cenLR}}, \code{\link{addLR}}
 }
 \keyword{manip}

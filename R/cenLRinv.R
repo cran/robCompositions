@@ -10,8 +10,8 @@
 #' absolute values may be preserved.
 #' @return the transformed data set.
 #' @author Matthias Templ
-#' @seealso \code{\link{cenLR}}, \code{\link{addLR}}, \code{\link{isomLR}},
-#' \code{\link{addLRinv}}, \code{\link{isomLRinv}}
+#' @seealso \code{\link{cenLR}}, \code{\link{addLR}}, \code{\link{pivotCoord}},
+#' \code{\link{addLRinv}}, \code{\link{pivotCoordInv}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
 #' Chapman \& Hall Ltd., London (UK). 416p.
@@ -20,7 +20,7 @@
 #' @examples
 #' 
 #' data(expenditures)
-#' eclr <- cenLR(expenditures)
+#' eclr <- cenLR(expenditures, 2)
 #' inveclr <- cenLRinv(eclr)
 #' head(expenditures)
 #' head(inveclr)
@@ -30,7 +30,10 @@ cenLRinv <- function(x, useClassInfo=TRUE){
 	
 	if(class(x) != "clr" & useClassInfo == TRUE) warning("useClassInfo was set to FALSE, because x is not from class clr")
 	if(!(class(x) %in% c("clr", "data.frame", "matrix"))) stop("class from x must be either clr, data.frame or matrix")
-	xclr <- x$x.clr
+  # if(!is.null(x$base)){
+  #   if(!identical(x$base, exp(1))) warning("\n absolute values currently not preserved \n since base was different to exp(1)")
+  # }
+  if(class(x) == "clr") xclr <- x$x.clr
 	if(class(x) == "clr" & useClassInfo==TRUE){
 		dat <- exp(xclr)  * x$gm
 	} else if(class(x) != "clr" | useClassInfo==FALSE){

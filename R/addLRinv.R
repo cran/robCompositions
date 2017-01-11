@@ -19,7 +19,7 @@
 #' @return the transformed data matrix
 #' @export
 #' @author Matthias Templ
-#' @seealso \code{\link{isomLRinv}}, \code{\link{cenLRinv}},
+#' @seealso \code{\link{pivotCoordInv}}, \code{\link{cenLRinv}},
 #' \code{\link{cenLR}}, \code{\link{addLR}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
@@ -35,7 +35,7 @@
 #' addLRinv(addLR(x, 3))
 #' data(expenditures)
 #' x <- expenditures
-#' y <- addLRinv(addLR(x, 5))
+#' y <- addLRinv(addLR(x, 5, 2))
 #' head(x)
 #' head(y)
 #' ## --> absolute values are preserved as well.
@@ -43,11 +43,9 @@
 #' ## preserve only the ratios:
 #' addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
 #' 
-#' 
-#' 
 addLRinv <- function(x, cnames=NULL, ivar=NULL, useClassInfo=TRUE){
 	if(class(x) == "alr" & useClassInfo==TRUE){
-		
+	  if(!identical(x$base, exp(1))) warning("\n absolute values not preserved \n since base was different to exp(1)")
 		xalr <- x$x.alr
 		ivar <- x$ivar
 		dat <- exp(xalr)*x$varx

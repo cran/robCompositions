@@ -48,6 +48,10 @@
 #' @importFrom stats cor
 #' @importFrom stats cutree
 #' @importFrom stats dist
+#' @importFrom Rcpp sourceCpp
+#' @importFrom Rcpp evalCpp
+#' @importFrom graphics box
+#' @importFrom graphics image
 NULL
  
 #' Additive log-ratio transformation
@@ -60,6 +64,8 @@ NULL
 #' 
 #' @param x D-part compositional data
 #' @param ivar Rationing part
+#' @param base a positive or complex number: 
+#' the base with respect to which logarithms are computed. Defaults to \code{exp(1)}.
 #' @return A list of class \dQuote{alr} which includes the following content:
 #' \item{x.alr}{the transformed data} \item{varx}{the rationing variable}
 #' \item{ivar}{the index of the rationing variable, indicating the column
@@ -68,7 +74,7 @@ NULL
 #' as \emph{cnames} or \emph{ivar} is usefull when a back-transformation is
 #' applied on the \sQuote{same} data set.
 #' @author Matthias Templ
-#' @seealso \code{\link{addLRinv}}, \code{\link{isomLR}}
+#' @seealso \code{\link{addLRinv}}, \code{\link{pivotCoord}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
 #' Chapman \& Hall Ltd., London (UK). 416p.
@@ -93,12 +99,11 @@ NULL
 #' addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
 #' 
 #' 
-addLR <- function (x, ivar=ncol(x)){
-
+addLR <- function (x, ivar=ncol(x), base = exp(1)){
 	if(dim(x)[2] < 2) stop("data must be of dimension greater equal 2")
-	x.alr <- log(x/x[, ivar])
+	x.alr <- log(x/x[, ivar], base)
 	res <- list(x.alr=x.alr[,-ivar], 
-			varx=x[,ivar], ivar=ivar, cnames=colnames(x))
+			varx=x[,ivar], ivar=ivar, cnames=colnames(x), base = base)
 	class(res) <- "alr"
 	return(res)
 }

@@ -100,7 +100,7 @@ daFisher <- function(x, grp, coda=TRUE,
     stop("matrix or data.frame expected.")
   }
   if(coda){
-    x <- isomLR(x)
+    x <- pivotCoord(x)
   }
   n <- nrow(x)
   p <- ncol(x)
@@ -127,13 +127,12 @@ daFisher <- function(x, grp, coda=TRUE,
     }
   }
   
-  meanov <- t(t(meanj)*pj)
-  B <- matrix(0,p,p)
-  W <- matrix(0,p,p)
-  for (j in 1:g){
-    B <- B+pj[j]*((meanj-meanov)%*%t(meanj-meanov))
-#   W <- W+pj[j]*cov(x[grp==glev[j],])
-    W <- W+pj[j]*cv[[j]]
+  meanov <- apply(t(t(meanj) * pj),1,sum)
+  B <- matrix(0, p, p)
+  W <- matrix(0, p, p)
+  for (j in 1:g) {
+    B <- B + pj[j] * ((meanj[,j] - meanov) %*% t(meanj[,j] - meanov))
+    W <- W + pj[j] * cv[[j]]
   }
   l <- min(g-1,p) # use this number of components
   #V=matrix(Re(eigen(solve(W)%*%B)$vec)[,1:l],ncol=l)
@@ -209,7 +208,7 @@ daFisher <- function(x, grp, coda=TRUE,
 #   	stop("matrix or data.frame expected.")
 #   }
 #   if(coda){
-#   	x <- isomLR(x)
+#   	x <- pivotCoord(x)
 #   }
 #   
 #   	p <- ncol(x)

@@ -6,7 +6,7 @@
 \title{Cluster analysis for compositional data}
 \usage{
 clustCoDa(x, k = NULL, method = "Mclust", scale = "robust",
-  transformation = "isomLR", distMethod = NULL, iter.max = 100,
+  transformation = "pivotCoord", distMethod = NULL, iter.max = 100,
   vals = TRUE, alt = NULL, bic = NULL, verbose = TRUE)
 
 \method{plot}{clustCoDa}(x, y, ..., normalized = FALSE,
@@ -64,7 +64,7 @@ choice of parameters -  the Aitchison distance is used.
 \examples{
 data(expenditures)
 x <- expenditures
-rr <- clustCoDa(x, k=6, scale = "robust", transformation = "isomLR")
+rr <- clustCoDa(x, k=6, scale = "robust", transformation = "pivotCoord")
 rr2 <- clustCoDa(x, k=6, distMethod = "Aitchison", scale = "none", 
                  transformation = "identity")
 rr3 <- clustCoDa(x, k=6, distMethod = "Aitchison", method = "single",

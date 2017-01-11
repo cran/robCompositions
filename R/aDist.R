@@ -14,6 +14,7 @@
 #' The underlying code is partly written in C and allows a fast computation also for
 #' large data sets whenever \code{y} is supplied.
 #' 
+#' @aliases aDist iprod
 #' @param x a vector, matrix or data.frame
 #' @param y a vector, matrix or data.frame with equal dimension as \code{x} or NULL.
 #' @return The Aitchison distance between two compositions or between two data
@@ -21,7 +22,7 @@
 #' @author Matthias Templ, Bernhard Meindl
 #' @export
 #' @useDynLib robCompositions
-#' @seealso \code{\link{isomLR}}
+#' @seealso \code{\link{pivotCoord}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
 #' Chapman and Hall Ltd., London (UK). 416p.
@@ -77,19 +78,37 @@
 				  distance,
 				  PACKAGE="robCompositions", NUOK=TRUE
 		  )[[5]]
+#     } else if(is.null(y) & method == "R"){
+#       out <- matrix(, ncol = n, nrow = n)
+#       gms <- apply(x, 1, function(x) gm(as.numeric(x)))
+#       for(i in 1:(n-1)){
+#         for(j in (i+1):n){
+#           out[i, j] <- out[j, i] <- 
+#             sqrt(sum((log(as.numeric(x[i, ]) / gms[i]) - 
+#                        log(as.numeric(x[j, ]) / gms[j]))^2))
+#         }
+#       }
+#       diag(out) <- 0
+#       rownames(out) <- colnames(out) <- rn
     } else {
-      out <- matrix(, ncol = n, nrow = n)
-      for(i in 1:(n-1)){
-        for(j in (i+1):n){
-          out[i, j] <- out[j, i] <- 
-            1 / D * sum(log(as.numeric(x[i, 1:(D-1)]) / as.numeric(x[i, 2:D])) * 
-                          log(as.numeric(x[j, 1:(D-1)]) / as.numeric(x[j, 2:D])))
-        }
-      }
-      diag(out) <- 0
-      rownames(out) <- colnames(out) <- rn
+      out <- dist(cenLR(x)$x.clr)
     }
 	  return(out)
 }	  
-	  
+
+#' @rdname aDist
+#' @export
+#' @examples 
+#' data("expenditures")
+#' x <- expenditures[, 1]
+#' y <- expenditures[, 2]
+#' iprod(x, y)
+iprod <- function(x, y){
+  warning("wrong formula, has to be fixed.")
+  D <- length(x)
+  if(D != length(y)) stop("x and y should have the same length")
+  ip <- 1 / D * sum(log(as.numeric(x[1:(D-1)]) / as.numeric(x[2:D])) * 
+                      log(as.numeric(y[1:(D-1)]) / as.numeric(y[2:D])))
+  return(ip)
+}
 	

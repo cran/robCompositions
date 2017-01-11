@@ -4,10 +4,13 @@
 \alias{cenLR}
 \title{Centred log-ratio transformation}
 \usage{
-cenLR(x)
+cenLR(x, base = exp(1))
 }
 \arguments{
 \item{x}{multivariate data ideally of class data.frame or matrix}
+
+\item{base}{a positive or complex number: 
+the base with respect to which logarithms are computed. Defaults to \code{exp(1)}.}
 }
 \value{
 The transformed data, including \item{x.clr}{clr transformed data}
@@ -31,7 +34,7 @@ eclr <- cenLR(expenditures)
 inveclr <- cenLRinv(eclr)
 head(expenditures)
 head(inveclr)
-head(isomLRinv(eclr$x.clr))
+head(pivotCoordInv(eclr$x.clr))
 
 }
 \author{
@@ -43,8 +46,8 @@ Compositional Data} Monographs on Statistics and Applied Probability.
 Chapman \& Hall Ltd., London (UK). 416p.
 }
 \seealso{
-\code{\link{cenLRinv}}, \code{\link{addLR}}, \code{\link{isomLR}},
-\code{\link{addLRinv}}, \code{\link{isomLRinv}}
+\code{\link{cenLRinv}}, \code{\link{addLR}}, \code{\link{pivotCoord}},
+\code{\link{addLRinv}}, \code{\link{pivotCoordInv}}
 }
 \keyword{manip}
 

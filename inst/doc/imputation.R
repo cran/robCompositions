@@ -5,7 +5,7 @@ concordance=TRUE
 )
 
 ## ----load package, echo=FALSE, results='hide'----------------------------
-library(robCompositions)
+library("robCompositions")
 constSum <- function(x, const=1){
 	x / rowSums(x) * const
 }
