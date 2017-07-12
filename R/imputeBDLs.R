@@ -44,6 +44,9 @@
 #' \item{nComp}{number of components for method pls} \item{method}{chosen
 #' method}
 #' @author Matthias Templ
+#' @references Templ, M. and Hron, K. and Filzmoser and Gardlo, A. (2016). 
+#' Imputation of rounded zeros for high-dimensional compositional data. 
+#' \emph{Chemometrics and Intelligent Laboratory Systems}, 54 (12) 3095-3107.
 #' @seealso \code{\link{imputeBDLs}}
 #' @keywords manip multivariate
 #' @export
@@ -76,7 +79,13 @@
            nComp = "boot", bruteforce=FALSE,  
            noisemethod="residuals", noise=FALSE, R=10, 
            correction="normal", verbose=FALSE, test = FALSE){
-      
+    
+    ## needed for visible global function definition
+    isomLRInvp <- 1
+    isomLRinv <- function(x){
+      pivotCoordInv(x = x)
+    }
+    
     ## check if data are fine
     checkData(x, dl)
     
@@ -250,7 +259,7 @@
           yhat2sel <- ifelse(yhat2sel > phi[w[, i]], phi[w[, i]], yhat2sel)
         }
         xilr[w[, i], 1] <- yhat2sel
-        if(test) xinv <- pivotCoordInv(-xilr) else xinv <- pivotCoordInv(xilr)
+        if(test) xinv <- isomLRInvp(xilr) else xinv <- pivotCoordInv(xilr)
         ## if variation:
         if(variation == TRUE){
           xneworder <- adjustImputed(xinv, xneworder, w2[, cols])
@@ -312,7 +321,7 @@
           yhat2sel <- ifelse(yhat2sel > phi[w[, i]], phi[w[, i]], yhat2sel)
         }
         xilr[w[, i], 1] <- yhat2sel
-        if(test) xinv <- pivotCoordInv(-xilr) else xinv <- pivotCoordInv(xilr) 
+        if(test) xinv <- isomLRInvp(xilr) else xinv <- pivotCoordInv(xilr) 
         ## reordering of xOrig
         if(i %in% 2:(d-1)){
           xinv <- cbind(xinv[,2:i], xinv[,c(1,(i+1):d)])

@@ -3,6 +3,7 @@
 \name{missPatterns}
 \alias{missPatterns}
 \alias{zeroPatterns}
+\alias{zeroPatterns}
 \title{missing or zero pattern structure.}
 \usage{
 missPatterns(x)
@@ -20,6 +21,7 @@ zeros or missings in the variables} \item{tabcombPlus}{the pattern structure
 - all combinations of zeros or missings in the variables including the size
 of those combinations/patterns, i.e. the number of observations that belongs
 to each pattern.} \item{rsum}{the number of zeros or missing values in each
+row of the data set.} \item{rindex}{the index of zeros or missing values in each
 row of the data set}
 }
 \description{
@@ -39,12 +41,11 @@ expenditures[expenditures < 300] <- NA
 missPatterns(expenditures)
 
 }
+\seealso{
+\code{\link[VIM]{aggr}}
+}
 \author{
 Matthias Templ. The code is based on a previous version from Andreas
 Alfons and Matthias Templ from package VIM
 }
-\seealso{
-\code{\link[VIM]{aggr}}
-}
 \keyword{multivariate}
-

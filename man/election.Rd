@@ -3,7 +3,7 @@
 \docType{data}
 \name{election}
 \alias{election}
-\title{Election data}
+\title{election data}
 \format{A data frame with 16 observations and 8 variables}
 \source{
 German Federal Statistical Office
@@ -43,11 +43,10 @@ parties participated in the elections}
 data(election)
 str(election)
 }
-\author{
-Petra Klynclova, Matthias Templ
-}
 \references{
 Eurostat, \url{http://ec.europa.eu/eurostat/data}
 }
+\author{
+Petra Klynclova, Matthias Templ
+}
 \keyword{data}
-

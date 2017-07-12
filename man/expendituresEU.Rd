@@ -3,7 +3,7 @@
 \docType{data}
 \name{expendituresEU}
 \alias{expendituresEU}
-\title{Mean consumption expenditures data.}
+\title{mean consumption expenditures data.}
 \format{A data frame with 27 observations on the following 12 variables.
 \itemize{ 
 \item{\code{Food}}{a numeric vector} 
@@ -33,4 +33,3 @@ data(expendituresEU)
 
 }
 \keyword{datasets}
-

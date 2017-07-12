@@ -3,13 +3,13 @@
 \docType{data}
 \name{phd}
 \alias{phd}
-\title{PhD Students in the EU}
+\title{PhD students in the EU}
 \format{A data set on 32 compositions and 11 variables.}
 \source{
 Eurostat
 }
 \description{
-PhD students in Europe based on the standard klassification system splitted
+PhD students in Europe based on the standard classification system splitted
 by different kind of studies (given as percentages).
 }
 \details{
@@ -39,4 +39,3 @@ str(phd)
 Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values for compositional data using classical and robust methods. \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages 3095-3107.
 }
 \keyword{datasets}
-

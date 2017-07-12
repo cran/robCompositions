@@ -3,7 +3,7 @@
 \docType{data}
 \name{trondelagC}
 \alias{trondelagC}
-\title{Regional geochemical survey of soil C in Norway}
+\title{regional geochemical survey of soil C in Norway}
 \format{A data frame with 754 observations and 70 variables}
 \usage{
 data(trondelagC)
@@ -92,11 +92,10 @@ Sampling was based on a 6.6km grid, i.e. 1 sample site/36 km2.
 data(trondelagC)
 str(trondelagC)
 }
-\author{
-NGU, \url{http://www.ngu.no}, transfered to R by Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 C.Reimann, J.Schilling, D.Roberts, K.Fabian. A regional-scale geochemical survey of soil C horizon samples in Nord-Trondelag, Central Norway. Geology and mineral potential, \emph{Applied Geochemistry} 61 (2015) 192-205.
 }
+\author{
+NGU, \url{http://www.ngu.no}, transfered to R by Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{data}
-

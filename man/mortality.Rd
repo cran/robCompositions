@@ -3,7 +3,7 @@
 \docType{data}
 \name{mortality}
 \alias{mortality}
-\title{Mortality and life expectancy in the EU}
+\title{mortality and life expectancy in the EU}
 \format{A data frame with 60 observations and 12 variables}
 \usage{
 data(mortality)
@@ -32,11 +32,10 @@ str(mortality)
 aggregate(mortality[,5:ncol(mortality)], 
           list(mortality$country2), sum)
 }
-\author{
-Peter Filzmoser, Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 Eurostat, \url{http://ec.europa.eu/eurostat/data}
 }
+\author{
+Peter Filzmoser, Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{data}
-

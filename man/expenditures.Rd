@@ -3,7 +3,7 @@
 \docType{data}
 \name{expenditures}
 \alias{expenditures}
-\title{Synthetic household expenditures toy data set}
+\title{synthetic household expenditures toy data set}
 \format{A data frame with 20 observations on the following 5 variables.}
 \usage{
 data(expenditures)
@@ -30,11 +30,10 @@ expenditures[1,3]
 expenditures[1,3] <- NA
 impKNNa(expenditures)$xImp[1,3]
 }
-\author{
-Matthias Templ \email{matthias.templ@tuwien.ac.at}, Karel Hron
-}
 \references{
 Aitchison, J. (1986) \emph{The Statistical Analysis of Compositional Data} Monographs on Statistics and Applied Probability. Chapman \& Hall Ltd., London (UK). 416p.
 }
+\author{
+Matthias Templ \email{matthias.templ@tuwien.ac.at}, Karel Hron
+}
 \keyword{data}
-

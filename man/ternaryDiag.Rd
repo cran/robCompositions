@@ -4,14 +4,16 @@
 \alias{ternaryDiag}
 \title{Ternary diagram}
 \usage{
-ternaryDiag(x, name = colnames(x), grid = TRUE, gridCol = grey(0.6),
-  mcex = 1.2, line = "none", robust = TRUE, group = NULL, tol = 0.975,
-  ...)
+ternaryDiag(x, name = colnames(x), text = NULL, grid = TRUE,
+  gridCol = grey(0.6), mcex = 1.2, line = "none", robust = TRUE,
+  group = NULL, tol = 0.975, ...)
 }
 \arguments{
 \item{x}{matrix or data.frame with 3 columns}
 
 \item{name}{names of the variables}
+
+\item{text}{default NULL, text for each point can be provided}
 
 \item{grid}{if TRUE a grid is plotted additionally in the ternary diagram}
 
@@ -57,10 +59,6 @@ ternaryDiag(x, grid=FALSE, line="pca")
 ternaryDiag(x, grid=FALSE, col=grp, pch=grp, line="pca", lty=2, lwd=2)
 
 }
-\author{
-Peter Filzmoser <\email{P.Filzmoser@tuwien.ac.at}>
-\url{http://www.statistik.tuwien.ac.at/public/filz/}, Matthias Templ
-}
 \references{
 C. Reimann, P. Filzmoser, R.G. Garrett, and R. Dutter:
 Statistical Data Analysis Explained. Applied Environmental Statistics with
@@ -69,6 +67,9 @@ R. John Wiley and Sons, Chichester, 2008.
 \seealso{
 \code{\link[StatDA]{ternary}}
 }
+\author{
+Peter Filzmoser <\email{P.Filzmoser@tuwien.ac.at}>
+\url{http://www.statistik.tuwien.ac.at/public/filz/}, Matthias Templ
+}
 \keyword{aplot}
 \keyword{multivariate}
-

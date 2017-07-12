@@ -3,7 +3,7 @@
 \docType{data}
 \name{lifeExpGdp}
 \alias{lifeExpGdp}
-\title{Life expectancy and GDP (2008) for EU-countries}
+\title{life expectancy and GDP (2008) for EU-countries}
 \format{A data set on 27 compositions on 9 variables.}
 \source{
 \url{http://www.ec.europa.eu/eurostat} and \url{http://unstats.un.org/unsd}
@@ -29,11 +29,10 @@ Social-economic data for compositional regression.
 data(lifeExpGdp)
 str(lifeExpGdp)
 }
-\author{
-conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 K. Hron, P. Filzmoser, K. Thompson (2012). Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, Volume 39, Issue 5, 2012.
 }
+\author{
+conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{datasets}
-

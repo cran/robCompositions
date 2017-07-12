@@ -3,39 +3,39 @@
 \docType{data}
 \name{electionATbp}
 \alias{electionATbp}
-\title{Votes at presidental elections}
-\format{A data frame with 16 observations and 8 variables}
+\title{Austrian presidential election data}
+\format{A data frame with 2202 observations and 10 variables}
 \source{
-\url{https://www.data.gv.at/}
+OpenData Austria, \url{https://www.data.gv.at/}
 }
 \usage{
 data(electionATbp)
 }
 \description{
-Votes from the final election for the president in Austria 2016
+Results the Austrian presidential election in October 2016.
 }
 \details{
-Votes for Hofer and Van der Bellen for each district in Austria.
+Votes for the candidates Hofer and Van der Bellen.
 
 \itemize{
- \item{\code{GKZ }}{community code}
- \item{\code{Name }}{name of the region}
+ \item{\code{GKZ }}{Community code}
+ \item{\code{Name }}{Name of the community}
  \item{\code{Eligible }}{eligible votes}
- \item{\code{Votes_total }}{total number of votes}
- \item{\code{Votes_invalid }}{number of invalid votes}
- \item{\code{Votes_valid }}{number of valid votes}
- \item{\code{Hofer_total }}{total number of votes for Hofer}
- \item{\code{Hofer_perc }}{percentage of votes for hofer}
+ \item{\code{Votes_total }}{total votes}
+ \item{\code{Votes_invalid }}{invalid votes}
+ \item{\code{Votes_valid }}{valid votes}
+ \item{\code{Hofer_total }}{votes for Hofer}
+ \item{\code{Hofer_perc }}{votes for Hofer in percentages}
+ \item{\code{VanderBellen_total }}{votes for Van der Bellen}
+ \item{\code{VanderBellen_perc }}{votes for Van der Bellen in percentages}
 }
 }
 \examples{
 
 data(electionATbp)
-# data still have not been made tidy (to-do):
 str(electionATbp)
 }
 \author{
 Peter Filzmoser
 }
 \keyword{data}
-

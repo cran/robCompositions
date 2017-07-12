@@ -1,3 +1,50 @@
+Changes in robCompositions version 2.0.4
+  + improved documentation
+  + version of robCompositions fits now to the Springer book
+  + orthbasis now times -1
+  + ilr.2x2 now fits to the formulas in the book, and not for the paper
+  + bug in daFisher resolved
+  + bug in external variables in pcaCoDa solved
+  + registering C-code
+
+Changes in robCompositions version 2.0.4
+  + aDist now again works for vectors
+  + added following data sets: 
+  socExp, 
+  cancerMN, 
+  educFM, 
+  electionATbp, 
+  employment, 
+  employment_df, 
+  GDPsatis, 
+  govexp,
+  instw, 
+  isic32, 
+  mortality_tab, 
+  precipitation,  
+  rcodes, 
+  teachingStuff,
+  unemployed
+  + corrected documentation for ageCatWorld data
+  + new functions: 
+  coord, 
+  gmean, 
+  gmean_sum, 
+  ilr.2x2, 
+  ind2x2, 
+  indTab, 
+  int2x2, 
+  indTab, 
+  int2x2, 
+  intArray, 
+  intTab, 
+  pTab, 
+  rSDev, 
+  rSDev.test.R, 
+  SDev, 
+  stats
+  + bug in daFisher solved and new adapted predict function
+
 Changes in robCompositions version 2.0.3
   + new function perturbation() and powering()
   + new function for inner product (iprod())
@@ -11,8 +58,6 @@ Changes in robCompositions version 2.0.3
   + aDist now much faster
   + new function center()
   + method symm (symmetric balances) in pivotCoord
-  + bug in daFisher resolved
-  + include electionATbp data (data still has to be made tidy)
 
 Changes in robCompositions version 2.0.2
   + new function balZav()
@@ -23,7 +68,7 @@ Changes in robCompositions version 2.0.2
   + pcaCoDa() with external variables
   + new data set alcoholreg 
   + new data set alcohol
-  + new data set econom        y
+  + new data set econom        
   + new data set ageCatWorld
   + new data set election
   + new data set laborForce

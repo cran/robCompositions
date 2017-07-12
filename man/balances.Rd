@@ -51,4 +51,6 @@ balances(machineOperators, sbp)
 \references{
 (Egozcue, J.J., Pawlowsky-Glahn, V. (2005) Groups of parts and their balances in compositional data analysis. Mathematical Geology, 37 (7), 795???828.)
 }
-
+\author{
+Veronika Pintar, Karel Hron, Matthias Templ
+}

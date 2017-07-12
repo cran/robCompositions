@@ -25,15 +25,15 @@ data(expenditures)
 V <- orthbasis(ncol(expenditures))
 xcen <- cenLR(expenditures)$x.clr
 xi <- as.matrix(xcen) \%*\% V$V
+xi
 xi2 <- pivotCoord(expenditures)
-# xi and xi2 include equal values
-
-}
-\author{
-Karel Hron, Matthias Templ
+xi2
 }
 \seealso{
 \code{\link{pivotCoord}}, \code{\link{cenLR}}
 }
+\author{
+Karel Hron, Matthias Templ. Some code lines of this function are a copy 
+from function gsi.buildilr from
+}
 \keyword{manip}
-

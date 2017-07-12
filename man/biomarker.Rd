@@ -2,6 +2,8 @@
 % Please edit documentation in R/biomarker.R
 \name{biomarker}
 \alias{biomarker}
+\alias{print.biomarker}
+\alias{summary.biomarker}
 \alias{plot.biomarker}
 \alias{print.biomarker}
 \alias{summary.biomarker}
@@ -79,10 +81,11 @@ X <- (1-S)*(C*R+B)*exp(M)
 # Biomarker identification
 b <- biomarker(X, g1 = 1:20, g2 = 21:40, type = "tau")
 }
-\author{
-Jan Walach
-}
 \seealso{
 \link{plot.biomarker}
 }
+\author{
+Jan Walach
 
+Jan Walach
+}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{cancer}
 \alias{cancer}
-\title{Hospital discharges on cancer and distribution of age}
+\title{hospital discharges on cancer and distribution of age}
 \format{A data set on 24 compositions on 6 variables.}
 \source{
 \url{http://www.ec.europa.eu/eurostat} and \url{http://unstats.un.org/unsd}
@@ -28,11 +28,10 @@ The response (discharges) is provided for the European Union countries (except G
 data(cancer)
 str(cancer)
 }
-\author{
-conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 K. Hron, P. Filzmoser, K. Thompson (2012). Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, Volume 39, Issue 5, 2012.
 }
+\author{
+conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{datasets}
-

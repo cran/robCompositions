@@ -3,7 +3,7 @@
 \docType{data}
 \name{skyeLavas}
 \alias{skyeLavas}
-\title{Aphyric skye lavas data}
+\title{aphyric skye lavas data}
 \format{A data frame with 23 observations on the following 3 variables.}
 \usage{
 data(skyeLavas)
@@ -25,11 +25,10 @@ str(skyeLavas)
 summary(skyeLavas)
 rowSums(skyeLavas)
 }
-\author{
-Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 Aitchison, J. (1986) \emph{The Statistical Analysis of Compositional Data} Monographs on Statistics and Applied Probability. Chapman \& Hall Ltd., London (UK). 416p.
 }
+\author{
+Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{data}
-

@@ -3,7 +3,7 @@
 #' Robust biomarker identification and outlier diagnostics
 #' 
 #' @name biomarker
-#' @author 
+#' @author Jan Walach
 #' @aliases biomarker print.biomarker summary.biomarker
 #' @param x data frame
 #' @param cut cut-off value, initialy set as 0.975 quantile of standard normal distribution
@@ -16,7 +16,7 @@
 #' @description The function for identification of biomakers and 
 #' outlier diagnostics as described in paper "Robust biomarker 
 #' identification in a two-class problem based on pairwise log-ratios"
-#' @author Jan Walach
+#' @author Jan Walach 
 #' @details The method computes variation matrices separately with 
 #' observations from both groups and also together with all observations. 
 #' Then, \emph{V} statistics is then computed and normalized. 

@@ -3,7 +3,7 @@
 \docType{data}
 \name{laborForce}
 \alias{laborForce}
-\title{Labour force by status in employment}
+\title{labour force by status in employment}
 \format{A data set on 124 compositions on 9 variables.}
 \source{
 \url{http://unstats.un.org/unsd/demographic/products/indwm/tab5c.htm}
@@ -30,11 +30,10 @@ data(laborForce)
 str(laborForce)
 
 }
-\author{
-conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 K. Hron, P. Filzmoser, K. Thompson (2012). Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, Volume 39, Issue 5, 2012.
 }
+\author{
+conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{datasets}
-

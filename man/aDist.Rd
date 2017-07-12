@@ -3,6 +3,7 @@
 \name{aDist}
 \alias{aDist}
 \alias{iprod}
+\alias{iprod}
 \title{Aitchison distance}
 \usage{
 aDist(x, y = NULL)
@@ -53,13 +54,12 @@ xImp <- impCoda(x, method="ltsReg")$xImp
 ## calculate the relative Aitchsion distance between xOrig and xImp:
 aDist(xOrig, xImp)
 
-data("expenditures")
+data("expenditures") 
+aDist(expenditures)  
 x <- expenditures[, 1]
 y <- expenditures[, 2]
-iprod(x, y)
-}
-\author{
-Matthias Templ, Bernhard Meindl
+aDist(x, y)
+aDist(expenditures, expenditures)
 }
 \references{
 Aitchison, J. (1986) \emph{The Statistical Analysis of
@@ -78,6 +78,8 @@ for compositional data using classical and robust methods
 \seealso{
 \code{\link{pivotCoord}}
 }
+\author{
+Matthias Templ, Bernhard Meindl
+}
 \keyword{arith}
 \keyword{math}
-

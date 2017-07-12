@@ -2,16 +2,18 @@
 % Please edit documentation in R/daFisher.R
 \name{daFisher}
 \alias{daFisher}
-\alias{predict.daFisher}
 \alias{print.daFisher}
+\alias{print.daFisher}
+\alias{predict.daFisher}
 \alias{summary.daFisher}
 \title{Discriminant analysis by Fisher Rule.}
 \usage{
-daFisher(x, grp, coda = TRUE, method = "classical", plotScore = FALSE)
+daFisher(x, grp, coda = TRUE, method = "classical", plotScore = FALSE,
+  ...)
 
 \method{print}{daFisher}(x, ...)
 
-\method{predict}{daFisher}(object, ...)
+\method{predict}{daFisher}(object, ..., newdata)
 
 \method{summary}{daFisher}(object, ...)
 }
@@ -31,11 +33,28 @@ observation.}
 \item{...}{additional arguments for the print method passed through}
 
 \item{object}{object of class \dQuote{daFisher}}
+
+\item{newdata}{new data in the appropriate form (CoDa, etc)}
 }
 \value{
 an object of class \dQuote{daFisher} including the following
-elements \item{B }{Between variance of the groups} \item{W }{Within variance
-of the groups} \item{loadings}{loadings} \item{scores}{fisher scores} \item{mc}{table indicating misclassifications} \item{mcrate}{misclassification rate}  \item{coda}{coda}
+elements 
+\item{B }{Between variance of the groups} 
+\item{W }{Within variance
+of the groups} 
+\item{loadings}{loadings} 
+\item{scores}{fisher scores} 
+\item{mc}{table indicating misclassifications} 
+\item{mcrate}{misclassification rate}  
+\item{coda}{coda}
+\item{grp}{grouping}
+\item{grppred}{predicted groups}
+\item{xc}{xc}
+\item{meanj}{meanj}
+\item{cv}{cv}
+\item{pj}{pj}
+\item{meanov}{meanov}
+\item{fdiscr}{fdiscr}
 }
 \description{
 Discriminant analysis by Fishers rule using CoDa methods.
@@ -69,7 +88,7 @@ d1 <- daFisher(X,grp=grp,method="classical",coda=FALSE)
 d2 <- daFisher(X,grp=grp,method="robust",coda=FALSE)
 d2
 summary(d2)
-predict(d2)
+predict(d2, newdata = X)
 
 ## example with olive data:
 \dontrun{
@@ -83,12 +102,11 @@ grp <- olives$Region # 3 groups
 res <- daFisher(x,grp)
 res
 summary(res)
-predict(res)
 res <- daFisher(x, grp, plotScore = TRUE)
 res <- daFisher(x, grp, method = "robust")
 res
 summary(res)
-predict(res)
+predict(res, x)
 res <- daFisher(x,grp, plotScore = TRUE, method = "robust")
 
 # 9 regions
@@ -96,11 +114,8 @@ grp <- olives$Area
 res <- daFisher(x, grp, plotScore = TRUE)
 res
 summary(res)
-predict(res)
+predict(res, x)
 }
-}
-\author{
-Peter Filzmoser, Matthias Templ.
 }
 \references{
 Filzmoser, P. and Hron, K. and Templ, M. (2012) 
@@ -117,5 +132,7 @@ Series B, 10:159-203.
 \seealso{
 \code{\link[rrcov]{Linda}}
 }
+\author{
+Peter Filzmoser, Matthias Templ.
+}
 \keyword{multivariate}
-

@@ -3,7 +3,7 @@
 \docType{data}
 \name{mcad}
 \alias{mcad}
-\title{Metabolomics mcad data set}
+\title{metabolomics mcad data set}
 \format{A data frame with 50 observations and 279 variables}
 \usage{
 data(mcad)
@@ -30,4 +30,3 @@ str(mcad)
 Najdekr L., Gardlo A., Madrova L., Friedeckyy D., Janeckova H., Correa E.S., Goodacre R., Adam T., Oxidized phosphatidylcholines suggest oxidative stress in patients with medium-chain acyl-CoA dehydrogenase deficiency, \emph{Talanta} 139, 2015, 62-66.
 }
 \keyword{data}
-

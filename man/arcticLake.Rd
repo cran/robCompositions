@@ -3,7 +3,7 @@
 \docType{data}
 \name{arcticLake}
 \alias{arcticLake}
-\title{Arctic lake sediment data}
+\title{arctic lake sediment data}
 \format{A data frame with 39 rows and 3 variables}
 \usage{
 data(arcticLake)
@@ -30,11 +30,10 @@ rowSums(arcticLake)
 ternaryDiag(arcticLake)
 plot(pivotCoord(arcticLake))
 }
-\author{
-Matthias Templ \email{matthias.templ@tuwien.ac.at}
-}
 \references{
 Aitchison, J. (1986). \emph{The Statistical Analysis of Compositional Data}. Monographs on Statistics and Applied Probability. Chapman \& Hall Ltd., London (UK). 416p.
 }
+\author{
+Matthias Templ \email{matthias.templ@tuwien.ac.at}
+}
 \keyword{data}
-
