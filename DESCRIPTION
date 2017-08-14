@@ -1,8 +1,8 @@
 Package: robCompositions
 Type: Package
 Title: Robust Estimation for Compositional Data
-Version: 2.0.5
-Date: 2017-06-14
+Version: 2.0.6
+Date: 2017-08-14
 Depends: R (>= 3.0.0), robustbase, ggplot2, data.table, e1071, pls
 LinkingTo: Rcpp
 Imports: car, rrcov, cluster, cvTools, fpc, GGally, kernlab, MASS,
@@ -21,11 +21,11 @@ Description: Methods for analysis of compositional data including robust
     isomLR, and their inverse transformations). In addition, visualisation and
     diagnostic tools are implemented as well as high and low-level plot functions
     for the ternary diagram.
-License: GPL-2
+License: GPL (>= 2)
 LazyLoad: yes
 LazyData: true
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2017-07-12 15:58:20 UTC; teml
+Packaged: 2017-08-14 12:03:28 UTC; teml
 Repository: CRAN
-Date/Publication: 2017-07-12 19:31:22 UTC
+Date/Publication: 2017-08-14 13:14:11 UTC

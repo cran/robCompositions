@@ -1,4 +1,4 @@
-6ddf61c115985666ba298b97408531e1 *DESCRIPTION
+fba9a3726005c7dcb6c8e15c9ad63b1f *DESCRIPTION
 d4b4bcd6f138c0d43d35dcb439110b79 *NAMESPACE
 4f9591065e7d598308095d70979fe12c *NEWS
 64bc4112a513209e10b8fa065713cc4d *R/SDev.R
@@ -18,9 +18,9 @@ da84b69c91d7755858a266d39247115a *R/biomarker.R
 8ff480fe99ac98cc8489b3a15d8721df *R/cenLR.R
 e09cc753baa878fbf26c2bdd0476cef7 *R/cenLRinv.R
 fbb365dfb8af6d4c2c24df4ebdf791a4 *R/center.R
-cdb533f86e19acc7bef4ce55383d6ee8 *R/clustCoDa.R
+5454d4bfb4bab088934b547519d31d1a *R/clustCoDa.R
 948d6d2a71651a7661f55bc960902be6 *R/clustCoDa_qmode.R
-02d61a3fbda84f6d1edbd71c675a5c0c *R/compareMahal.R
+ba7daee7ed1a7e4366319dd542fe70b6 *R/compareMahal.R
 a050800e3a9cfd8764e5408282cc359f *R/constSum.R
 81e755d762eac3fbbdf57624f3e96897 *R/coord.R
 2afd176012d1a6ae57a7520af49c2dc4 *R/corCoDa.R
@@ -122,9 +122,9 @@ aff4a38f3de4857f13fd9b7e7d7cbae3 *data/trondelagO.rda
 b511b64cb9b37457907ceb5bb081a7ac *inst/doc/gm.cpp
 cd13d967744296a13ce3ae6c863f9367 *inst/doc/imputation.R
 d0e039f7fd753871b132afcb52de8707 *inst/doc/imputation.Rnw
-73f5291f208b6d7538b75d536f0c02f8 *inst/doc/imputation.pdf
+ba8832860476c5440b6d6f9021b009d4 *inst/doc/imputation.pdf
 ae1f8cc344d33f286781e15e37959173 *inst/doc/robCompositions-overview.Rnw
-2b2b1196194e8f4cd16bbdf4e5f37a54 *inst/doc/robCompositions-overview.pdf
+c8d9e49fab05d7a901e47267c00a5b30 *inst/doc/robCompositions-overview.pdf
 0a440624cb6fb417e86edb290bc8e35c *inst/doc/test.sh
 8153d94b16b1da931ced512630521134 *inst/doc/writecsvs.R
 69b0cc4c77f30273b6884669e54f1ac4 *man/GDPsatis.Rd
@@ -151,10 +151,10 @@ e35d156c43a8708d6d3a4491ebd97244 *man/ced.Rd
 43541aba090064c68321d9de0710f965 *man/cenLR.Rd
 c8cb5de6681b23158a4f7ae97f777fc4 *man/cenLRinv.Rd
 042b2baca4a90d37ecfbb2f34e7fc42c *man/chorizonDL.Rd
-9f4bbff1ed5a4dfe547cdc4e8abcccbc *man/clustCoDa.Rd
+03b406fa646d3d139e2902b75556c94f *man/clustCoDa.Rd
 59df3e0fc6f33bb6c2055e3df5b25dc4 *man/clustCoDa_qmode.Rd
 674b240c6f5b66a2656c17837bd46073 *man/coffee.Rd
-bd615c31b148c8b316ef93ae44b09f65 *man/compareMahal.Rd
+e4885c770bd4144775555af14c4c7df8 *man/compareMahal.Rd
 d51c848c5bb04b433583fd6ea26bc63c *man/constSum.Rd
 91a33b51efa94fb0f5383bec9a3360f9 *man/coord.Rd
 dea797a637dae85af40bbf217b8a0fe7 *man/corCoDa.Rd
@@ -238,14 +238,12 @@ ba52a79e997227c702152bea7d03b262 *tests/imp_test.R
 46a322d5f5b05c87f44b398963d83d93 *tests/rz.R
 972a8c9653bcf03ecd6e1bc3affc5c7c *vignettes/CoDaWork.sty
 6eee41d55feae22ff895415960ae1ec9 *vignettes/boxplot.pdf
-7ec15c16d0d66790f28e90343c5434a3 *vignettes/framed.sty
 c0adc3c86986ff717ced634fcb5db594 *vignettes/ilr.pdf
 1c7d711bc25f723a2732a906832a439a *vignettes/imputation-concordance.tex
 24b96fd9e394c3b00023803486ee5606 *vignettes/imputation-plot1.pdf
 6fb39fd6fdd3f85ed71a5ddbfb896d61 *vignettes/imputation-plot4.pdf
 d0e039f7fd753871b132afcb52de8707 *vignettes/imputation.Rnw
 4c69a07329f245721312fdad5c6dcd2c *vignettes/logo.pdf
-11be28266146968e29ba9514d18c7ff5 *vignettes/natbib.sty
 c0acc54a949fd4258055c062b6d011c3 *vignettes/pca1.pdf
 ffacbd8ae30713d2eca8eda2801e6b86 *vignettes/pcaOrig.pdf
 9aca008445bf9ffb6df27baa0dba3430 *vignettes/plainnat.bst
@@ -254,5 +252,4 @@ ffacbd8ae30713d2eca8eda2801e6b86 *vignettes/pcaOrig.pdf
 f96334eff4ebd93999b93ca027f26b76 *vignettes/refPCS.bib
 549c57a48db16c0a3080b73fa2dc5280 *vignettes/refPCSn.bib
 ae1f8cc344d33f286781e15e37959173 *vignettes/robCompositions-overview.Rnw
-1d3da78e0f66f3c62133fbabffd13cf5 *vignettes/subfigure.sty
 f2d841365a95d680d194b12b1b1dd093 *vignettes/ternary.pdf
