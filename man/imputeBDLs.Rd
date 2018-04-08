@@ -10,7 +10,7 @@
 \alias{print.replaced}
 \title{EM-based replacement of rounded zeros in compositional data}
 \usage{
-imputeBDLs(x, maxit = 10, eps = 0.1, method = "pls", dl = rep(0.05,
+imputeBDLs(x, maxit = 10, eps = 0.1, method = "subPLS", dl = rep(0.05,
   ncol(x)), variation = TRUE, nPred = NULL, nComp = "boot",
   bruteforce = FALSE, noisemethod = "residuals", noise = FALSE, R = 10,
   correction = "normal", verbose = FALSE, test = FALSE)
@@ -91,9 +91,38 @@ imputed, the algorithm starts again until the imputations do not change.
 }
 \examples{
 
+p <- 10
+n <- 50
+k <- 2
+T <- matrix(rnorm(n*k), ncol=k)
+B <- matrix(runif(p*k,-1,1),ncol=k)
+X <- T \%*\% t(B)
+E <-  matrix(rnorm(n*p, 0,0.1), ncol=p)
+XE <- X + E
+data <- data.frame(pivotCoordInv(XE))
+col <- ncol(data)
+row <- nrow(data)
+DL <- matrix(rep(0),ncol=col,nrow=1)
+for(j in seq(1,col,2))
+{DL[j] <- quantile(data[,j],probs=0.06,na.rm=FALSE)}
+
+for(j in 1:col)        
+{data[data[,j]<DL[j],j] <- 0}
+
+imp <- imputeBDLs(data,dl=DL,maxit=10,eps=0.1,R=10,method="subPLS")
+imp
+imp <- imputeBDLs(data,dl=DL,maxit=10,eps=0.1,R=10,method="pls", variation = FALSE)
+imp
+imp <- imputeBDLs(data,dl=DL,maxit=10,eps=0.1,R=10,method="lm")
+imp
+imp <- imputeBDLs(data,dl=DL,maxit=10,eps=0.1,R=10,method="lmrob")
+imp
+
 data(mcad)
 \dontrun{
+## longer computation times...
 ## generate rounded zeros artificially:
+x <- mcad
 x <- x[1:25, 2:ncol(x)]
 dl <- apply(x, 2, quantile, 0.1)
 for(i in seq(1, ncol(x), 2)){
@@ -110,17 +139,24 @@ replaced_plsfull <- imputeBDLs(x, dl=dl, eps=1,
   method="pls", verbose=FALSE, R=50, 
   variation=FALSE)$x 
 }
+
+
+
 }
 \references{
 Templ, M. and Hron, K. and Filzmoser and Gardlo, A. (2016). 
 Imputation of rounded zeros for high-dimensional compositional data. 
 \emph{Chemometrics and Intelligent Laboratory Systems}, 54 (12) 3095-3107.
+
+Jiajia Chen, Xiaoqin Zhang, Karel Hron ORCID Icon, Matthias Templ and Shengjia Li (2017). 
+Regression imputation with Q-mode clustering for rounded zero replacement in high-dimensional compositional data. 
+\emph{Journal of Applied Statistics}. DOI: 10.1080/02664763.2017.1410524
 }
 \seealso{
 \code{\link{imputeBDLs}}
 }
 \author{
-Matthias Templ
+Matthias Templ, method subPLS from Jiajia Chen
 }
 \keyword{manip}
 \keyword{multivariate}
