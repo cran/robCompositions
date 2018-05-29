@@ -337,9 +337,6 @@ R <- 5
 bootimp(x$z2, R=R)
 
 ## ----message=FALSE, warning=FALSE----------------------------------------
-plot(xImp1, which=1)
-
-## ----message=FALSE, warning=FALSE----------------------------------------
 plot(xImp1, which=2)
 
 ## ----message=FALSE, warning=FALSE----------------------------------------

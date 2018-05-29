@@ -1,8 +1,8 @@
 Package: robCompositions
 Type: Package
 Title: Robust Estimation for Compositional Data
-Version: 2.0.7
-Date: 2018-04-06
+Version: 2.0.8
+Date: 2018-05-29
 Depends: R (>= 3.0.0), robustbase, ggplot2, data.table, e1071, pls
 LinkingTo: Rcpp
 Imports: car, rrcov, cluster, cvTools, fpc, GGally, kernlab, MASS,
@@ -33,7 +33,7 @@ LazyLoad: yes
 LazyData: true
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2018-04-06 20:35:12 UTC; teml
+Packaged: 2018-05-29 10:31:32 UTC; teml
 Author: Matthias Templ [aut, cre],
   Karel Hron [aut],
   Peter Filzmoser [aut],
@@ -42,4 +42,4 @@ Author: Matthias Templ [aut, cre],
   Veronika Pintar [ctb],
   Jiajia Chen [ctb]
 Repository: CRAN
-Date/Publication: 2018-04-08 17:28:01 UTC
+Date/Publication: 2018-05-29 11:38:10 UTC

@@ -1,6 +1,6 @@
-cab83be03fbfd4ed424531e7c88c961e *DESCRIPTION
+046b8a0ab6c953d41455f36e801b9bd9 *DESCRIPTION
 85a55b3a7abecb8564c76d00ddf06935 *NAMESPACE
-51b373c904f24a0331d0d934b5a18998 *NEWS
+e8bcd699e4f8f2591aed99f5135fd271 *NEWS
 64bc4112a513209e10b8fa065713cc4d *R/SDev.R
 600a72e5e63fd16b892436f30d90184e *R/aDist.R
 40176be2d7b016f2e0d24bf865f4578b *R/addLR.R
@@ -120,11 +120,11 @@ aff4a38f3de4857f13fd9b7e7d7cbae3 *data/trondelagO.rda
 8f3936a3fadf2d8e19e8689a53fc194f *inst/CITATION
 1f3450a79385fd298e56ee841fdc3a6b *inst/doc/checkenc.sh
 b511b64cb9b37457907ceb5bb081a7ac *inst/doc/gm.cpp
-cd13d967744296a13ce3ae6c863f9367 *inst/doc/imputation.R
-d0e039f7fd753871b132afcb52de8707 *inst/doc/imputation.Rnw
-259bfb31d6ced3256ecc07b586fe285a *inst/doc/imputation.pdf
+bf8dfde0ec76e7a374cb0494d9a42f23 *inst/doc/imputation.R
+15a57c63c02c7ae4477a3851e8607e83 *inst/doc/imputation.Rnw
+533f484470a6083b9373c4a6965e89a8 *inst/doc/imputation.pdf
 ae1f8cc344d33f286781e15e37959173 *inst/doc/robCompositions-overview.Rnw
-8200274517db5a9c9042dfdc63ce1d30 *inst/doc/robCompositions-overview.pdf
+e9fa65a5c4d736a468ca4458903d3456 *inst/doc/robCompositions-overview.pdf
 0a440624cb6fb417e86edb290bc8e35c *inst/doc/test.sh
 8153d94b16b1da931ced512630521134 *inst/doc/writecsvs.R
 69b0cc4c77f30273b6884669e54f1ac4 *man/GDPsatis.Rd
@@ -242,7 +242,7 @@ c0adc3c86986ff717ced634fcb5db594 *vignettes/ilr.pdf
 1c7d711bc25f723a2732a906832a439a *vignettes/imputation-concordance.tex
 24b96fd9e394c3b00023803486ee5606 *vignettes/imputation-plot1.pdf
 6fb39fd6fdd3f85ed71a5ddbfb896d61 *vignettes/imputation-plot4.pdf
-d0e039f7fd753871b132afcb52de8707 *vignettes/imputation.Rnw
+15a57c63c02c7ae4477a3851e8607e83 *vignettes/imputation.Rnw
 4c69a07329f245721312fdad5c6dcd2c *vignettes/logo.pdf
 c0acc54a949fd4258055c062b6d011c3 *vignettes/pca1.pdf
 ffacbd8ae30713d2eca8eda2801e6b86 *vignettes/pcaOrig.pdf
