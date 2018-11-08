@@ -53,8 +53,10 @@ missPatterns <- function(x){
 	amountComb <- cbind(data.frame(tabcomb), csum=as.numeric(csum))
 	rsum <- apply(w, 1, sum)
 	## TODO: N variable dazu, + 2. zeilenweise, spaltenweise
-	list(groups=groups, cn=cn, tabcomb=tabcomb, tabcombPlus=amountComb, 
+	res <- list(groups=groups, cn=cn, tabcomb=tabcomb, tabcombPlus=amountComb, 
 	     rsum=rsum, rindex=rsum != 0)
+	class(res) <- "missPatterns"
+	return(res)
 }
 
 #' @rdname missPatterns
@@ -85,6 +87,37 @@ zeroPatterns <- function(x){
 	rsum2 <- NULL
 	rsum2 <- apply(w, 1, sum)
 	## TODO: N variable dazu, + 2. zeilenweise, spaltenweise
-	list(groups=groups, cn=cn, tabcomb=tabcomb, tabcombPlus=amountComb, 
+	res <- list(groups=groups, cn=cn, tabcomb=tabcomb, tabcombPlus=amountComb, 
 	     rsum=rsum2, rindex=rsum2 != 0)
+	class(res) <- "missPatterns"
+	return(res)
 }
+# NULL
+#
+#' #' @rdname missPatterns
+#' #' @export
+#' #' @method print missPatterns
+#' print.missPatterns <- function(x, ...){
+#'   cat("\n --------------------\n")	
+#'   print(sum(as.numeric(unlist(x$rsum))), "missings included")
+#'   cat("\n --------------------\n\n")		
+#' }
+#' NULL
+#' 
+#' #' @rdname missPatterns
+#' #' @export
+#' #' @method summary missPatterns
+#' summary.missPatterns <- function(object, ...){
+#'   cat("\n --------------------\n")	
+#'   print("hallo summary")
+#'   cat("\n --------------------\n\n")		
+#' }
+#' NULL
+#' 
+#' #' @rdname missPatterns
+#' #' @export 
+#' #' @method plot missPatterns
+#' plot.missPatterns <- function(x, y, ...){
+#'   plot(1)
+#' }
+#' NULL

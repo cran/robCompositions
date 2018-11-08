@@ -3,7 +3,6 @@
 \name{missPatterns}
 \alias{missPatterns}
 \alias{zeroPatterns}
-\alias{zeroPatterns}
 \title{missing or zero pattern structure.}
 \usage{
 missPatterns(x)
