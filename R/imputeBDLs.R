@@ -1,7 +1,7 @@
 #' EM-based replacement of rounded zeros in compositional data
 #' 
 #' Parametric replacement of rounded zeros for compositional data using
-#' classical and robust methods based on ilr-transformations with special
+#' classical and robust methods based on ilr coordinates with a special
 #' choice of balances.
 #' 
 #' Statistical analysis of compositional data including zeros runs into
@@ -9,9 +9,9 @@
 #' considerer as missing not at random missing values.
 #' 
 #' The algorithm iteratively imputes parts with rounded zeros whereas in each
-#' step (1) an specific ilr transformation is applied (2) tobit regression is
+#' step (1) compositional data are expressed in pivot coordinates (2) tobit regression is
 #' applied (3) the rounded zeros are replaced by the expected values (4) the
-#' corresponding inverse ilr transformation is applied. After all parts are
+#' corresponding inverse ilr mapping is applied. After all parts are
 #' imputed, the algorithm starts again until the imputations do not change.
 #' 
 #' @aliases imputeBDLs print.replaced checkData adjustImputed
@@ -46,13 +46,13 @@
 #' \item{nComp}{number of components for method pls} \item{method}{chosen
 #' method}
 #' @author Matthias Templ, method subPLS from Jiajia Chen
-#' @references Templ, M. and Hron, K. and Filzmoser and Gardlo, A. (2016). 
+#' @references Templ, M., Hron, K., Filzmoser, P., Gardlo, A. (2016). 
 #' Imputation of rounded zeros for high-dimensional compositional data. 
-#' \emph{Chemometrics and Intelligent Laboratory Systems}, 54 (12) 3095-3107.
+#' \emph{Chemometrics and Intelligent Laboratory Systems}, 155, 183-190.
 #' 
-#' Jiajia Chen, Xiaoqin Zhang, Karel Hron ORCID Icon, Matthias Templ and Shengjia Li (2017). 
+#' Chen, J., Zhang, X., Hron, K., Templ, M., Li, S. (2018). 
 #' Regression imputation with Q-mode clustering for rounded zero replacement in high-dimensional compositional data. 
-#' \emph{Journal of Applied Statistics}. DOI: 10.1080/02664763.2017.1410524
+#' \emph{Journal of Applied Statistics}, 45 (11), 2067-2080.
 #' @seealso \code{\link{imputeBDLs}}
 #' @keywords manip multivariate
 #' @export
@@ -142,7 +142,7 @@
     }
     
     ## check if data are fine
-    # checkData(x, dl)
+    checkData(x, dl)
     
     ## some specific checks
     stopifnot((method %in% c("lm", "MM", "lmrob", "pls", "subPLS")))
@@ -167,7 +167,7 @@
     } else  {
       pre <- FALSE	
     }
-
+    
     
     ## store some important values
     n <- nrow(x) 
@@ -198,7 +198,7 @@
         # pls <- mvr(form, data=cbind(u1, u), method="simpls", 
         #            ncomp=n) 
         pls <- mvr(as.matrix(u1)~ as.matrix(u[,-(1:col1)]),ncomp=n,method="simpls")
-       # pls <- mvr(u1~ u[,-(1:col1)],ncomp=n,method="simpls")
+        # pls <- mvr(u1~ u[,-(1:col1)],ncomp=n,method="simpls")
         mean <- matrix(predict(pls,ncomp=n),ncol=col1)
         sigma <- cov(u1-mean)
         sig_b <- x[,pos==b]==0
@@ -230,12 +230,12 @@
         criteria <- sum(((xold-impute)/impute)^2, na.rm = TRUE)
       }
       impute <- checkDL(impute, dl, indexFinalCheck)
-        res <- list(x=impute, criteria=criteria, iter=it,
-                    maxit=maxit, wind=w, nComp=nC, nPred=nPred,
-                    variation=variation,
-                    method=method, dl=dl)
-        class(res) <- "replaced"
-        return(res)
+      res <- list(x=impute, criteria=criteria, iter=it,
+                  maxit=maxit, wind=w, nComp=nC, nPred=nPred,
+                  variation=variation,
+                  method=method, dl=dl)
+      class(res) <- "replaced"
+      return(res)
     }
     
     # if(method == "pls_clust"){
@@ -322,7 +322,7 @@
     
     ## initialisation
     indNA <- apply(x, 2, function(x){any(is.na(x))})
-#    print(indNA)
+    #    print(indNA)
     for(i in 1:length(dl)){
       ind <- is.na(x[,i])
       #		if(length(ind) > 0) x[ind,i] <- dl[i]*runif(sum(ind),1/3,2/3)
@@ -360,7 +360,7 @@
           cve[np] <- suppressWarnings(cvFit(call, data = xilr, 
                                             y = xilr$Y, 
                                             cost = cvTools::rtmspe,
-                    K = 5, R = 1, costArgs = list(trim = 0.1), seed = 1234)$cv)
+                                            K = 5, R = 1, costArgs = list(trim = 0.1), seed = 1234)$cv)
         }
         nPred[i] <- which.min(cve)
         ## update progress bar
@@ -369,7 +369,7 @@
       if(verbose) close(pb)
       ptmcv <- proc.time() - ptmcv
     }
-
+    
     ###############################
     ###   start the iteration   ###
     ###############################
@@ -401,44 +401,34 @@
         #		part <- cbind(x[,i,drop=FALSE], x[,-i,drop=FALSE])
         xneworder[xneworder < 2*.Machine$double.eps] <- 2*.Machine$double.eps
         if(test) xilr <- data.frame(isomLRp(xneworder)) else xilr <- data.frame(pivotCoord(xneworder))
-#        c1 <- colnames(xilr)[1]					
-#        colnames(xilr)[1] <- "V1"	
+        #        c1 <- colnames(xilr)[1]					
+        #        colnames(xilr)[1] <- "V1"	
         response <- as.matrix(xilr[, 1, drop=FALSE])
         predictors <- as.matrix(xilr[, -1, drop=FALSE])
         if(method=="lm"){ 
           reg1 <- lm(response ~ predictors)
-          reg1 <- lm(response ~ predictors, subset=wn[,i]) 
-          s <- sqrt(sum(reg1$residuals^2)/(sum(wn[,i])-ncol(predictors)-1))  
-          yhat <- predict(reg1, new.data=data.frame(predictors))
+          yhat <- predict(reg1, newdata=data.frame(predictors))
         } else if(method=="MM" | method=="lmrob"){
-          #reg1 <- MASS::rlm(response ~ predictors, method="MM",maxit = 100)#rlm(V1 ~ ., data=xilr2, method="MM",maxit = 100)
-          reg1 <- MASS::rlm(response ~ predictors, method="MM", maxit = 100, subset=wn[,i])
-          s <- reg1$s 
-          yhat <- predict(reg1, new.data=data.frame(predictors))
+          reg1 <- MASS::rlm(response ~ predictors, method="MM",maxit = 100)#rlm(V1 ~ ., data=xilr2, method="MM",maxit = 100)
+          yhat <- predict(reg1, newdata=data.frame(predictors))
         } else if(method=="pls"){
           if(it == 1 & pre){ ## evaluate ncomp.
             nC[i] <- bootnComp(xilr[, 2:ncol(xilr), drop=FALSE], y=xilr[, 1], R, 
                                plotting=FALSE)$res #$res2
           }
           if(verbose) cat("   ;   ncomp:", nC[i])
-          # reg1 <- mvr(as.matrix(response) ~ as.matrix(predictors), ncomp=nC[i], method="simpls")
-          reg1 <- mvr(as.matrix(response) ~ as.matrix(predictors),
-                     ncomp = nC[i], method = "simpls",subset=wn[,i])
-          s <- sqrt(sum(reg1$res^2)/nrow(xilr))
-          yhat <- predict(reg1, new.data=data.frame(predictors), ncomp=nC[i])
+          reg1 <- mvr(as.matrix(response) ~ as.matrix(predictors), ncomp=nC[i], method="simpls")
+          yhat <- predict(reg1, newdata=data.frame(predictors), ncomp=nC[i])
         }
         
-        #	s <- sqrt(sum(reg1$res^2)/abs(nrow(xilr)-ncol(xilr))) ## quick and dirty: abs()
-        # s <- sqrt(sum(reg1$res^2)/nrow(xilr)) 
+        #		s <- sqrt(sum(reg1$res^2)/abs(nrow(xilr)-ncol(xilr))) ## quick and dirty: abs()
+        s <- sqrt(sum(reg1$res^2)/nrow(xilr)) 
         yhat <- as.numeric(yhat)
         ex <- (phi - yhat)/s 
         if(correction=="normal"){
-          yhat2sel <- ifelse(dnorm(ex[w[, i]]) > 0.00001,
+          yhat2sel <- ifelse(dnorm(ex[w[, i]]) > .Machine$double.eps,
                              yhat[w[, i]] - s*dnorm(ex[w[, i]])/pnorm(ex[w[, i]]),
                              yhat[w[, i]])
-          # yhat2sel <- ifelse(dnorm(ex[w[, i]]) > .Machine$double.eps,
-          #                    yhat[w[, i]] - s*dnorm(ex[w[, i]])/pnorm(ex[w[, i]]),
-          #                    yhat[w[, i]])
         } else if(correction=="density"){
           den <- density(ex[w[,i]])
           distr <- sROC::kCDF(ex[w,i])
@@ -534,17 +524,17 @@
     if(verbose){
       message(paste(sum(w)), "values below detection limit has been imputed \n below the corresponding detection limits")
     }
-
-
+    
+    
     x <- checkDL(x, dl, indexFinalCheck)
-
+    
     res <- list(x=x, criteria=criteria, iter=it, 
                 maxit=maxit, wind=w, nComp=nC, nPred=nPred,
                 variation=variation,
                 method=method, dl=dl)
     class(res) <- "replaced"
     return(res)
-}
+  }
 
 #' @rdname imputeBDLs
 #' @export
@@ -595,7 +585,7 @@ adjustImputed <- function(xImp, xOrig, wind){
   if(!all(cl %in% "numeric")) stop("some of your variables are not of class numeric.")
   if( length(dl) < ncol(x)) stop(paste("dl has to be a vector of ", ncol(x)))
   if(any(is.na(x))) stop("missing values are not allowed. \n Use impKNNa or impCoda to impute them first.")
- 
+  
   #     pre <- TRUE
   #      if(length(nComp) != ncol(x) & nComp!="boot") stop("nComp must be NULL, boot or of length ncol(x)")
   #    } else if(nComp == "boot"){#
@@ -708,8 +698,8 @@ bootnComp <- function(X, y, R=99, plotting=FALSE){
       res1 <- mvr(form, data=data.frame(ds), method="simpls", 
                   validation="CV") 
     }
-
-
+    
+    
     d[1:res1$ncomp, i] <- res1$validation$PRESS
     nc[i] <- which.min(res1$validation$PRESS)
     #    d[1:reg1$ncomp,i] <- as.numeric(apply(reg1$validation$pred, 3, 

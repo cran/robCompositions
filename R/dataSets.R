@@ -620,7 +620,7 @@ NULL
 #' \item{\code{ID }}{a numeric vector}
 #' \item{\code{MAT }}{type of material}
 #' \item{\code{mE32wgs }}{longitude} 
-#' \item{\code{mN32wgs}}{lattitude} 
+#' \item{\code{mN32wgs}}lattitude} 
 #' \item{\code{XCOO }}{X coordinates}
 #' \item{\code{YCOO }}{Y coordinates}
 #' \item{\code{ALT }}{altitute}

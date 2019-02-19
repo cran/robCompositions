@@ -1,4 +1,4 @@
-#' alr EM-based Imputation for Rounded Zeros
+#' alr EM-based imputation of rounded zeros
 #' 
 #' A modified EM alr-algorithm for replacing rounded zeros in compositional
 #' data sets.
@@ -9,9 +9,9 @@
 #' applies an additive log-ratio transformation to the compositions. Then the
 #' rounded zeros are imputed using a modified EM algorithm.
 #' 
-#' @param x Compositional data
-#' @param pos Position of the rationing variable for alr transformation
-#' @param dl Detection limit for each part
+#' @param x compositional data
+#' @param pos position of the rationing variable for alr transformation
+#' @param dl detection limit for each part
 #' @param eps convergence criteria
 #' @param maxit maximum number of iterations
 #' @param bruteforce if TRUE, imputations over dl are set to dl. If FALSE,
@@ -30,6 +30,9 @@
 #' }{Number of iterations} \item{eps }{eps}
 #' @author Matthias Templ and Karel Hron
 #' @seealso \code{\link{impRZilr}}
+#' @references Palarea-Albaladejo, J., Martin-Fernandez, J.A. Gomez-Garcia, J. (2007) 
+#' A parametric approach for dealing with compositional rounded zeros. 
+#' \emph{Mathematical Geology}, 39(7), 625-645.
 #' @keywords manip multivariate
 #' @export
 #' @importFrom MASS stepAIC

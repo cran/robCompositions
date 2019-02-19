@@ -3,8 +3,8 @@
 #' Computes the Aitchison distance between two observations, between two data
 #' sets or within observations of one data set.
 #' 
-#' This distance measure accounts for the relative scale property of the
-#' Aitchison distance. It measures the distance between two compositions if
+#' This distance measure accounts for the relative scale property of
+#' compositional data. It measures the distance between two compositions if
 #' \code{x} and \code{y} are vectors. It evaluates the sum of the distances between
 #' \code{x} and \code{y} for each row of \code{x} and \code{y} if \code{x} and
 #' \code{y} are matrices or data frames. It computes a n times n distance matrix (with n
@@ -50,7 +50,7 @@
 #' ## set some missing values:
 #' x[1,3] <- x[3,5] <- x[2,4] <- x[5,3] <- x[8,3] <- NA
 #' 
-#' ## impute them:
+#' ## impute the missing values:
 #' xImp <- impCoda(x, method="ltsReg")$xImp
 #' 
 #' ## calculate the relative Aitchsion distance between xOrig and xImp:

@@ -1,38 +1,32 @@
 #' Pivot coordinates and their inverse
 #' 
-#' Isometric log-ratio transformations and it's inverse transformation with a 
-#' special choice of balances.
+#' Pivot coordinates as a special case of isometric logratio coordinates and their inverse mapping.
 #' 
-#' This transformation moves D-part compositional data from the simplex
-#' into a (D-1)-dimensional real space isometrically. From our choice of (pivot)
-#' balances, all the relative information of one part is seperated from the
-#' remaining parts. 
+#' Pivot coordinates map D-part compositional data from the simplex
+#' into a (D-1)-dimensional real space isometrically. From our choice of pivot
+#' coordinates, all the relative information about one of parts (or about two parts) is aggregated in the first coordinate
+#' (or in the first two coordinates in case of symmetric pivot coordinates, respectively). 
 #' 
 #' @aliases pivotCoord isomLR isomLRinv isomLRp isomLRinvp
 #' @param x object of class data.frame or matrix. Positive values only.
 #' @param pivotvar pivotal variable. If any other number than 1, the data are resorted in 
 #' that sense that the pivotvar is shifted to the first part.
 #' @param method pivot takes the method described in the description. Method "symm" 
-#' uses symmetric balances (parameters pivotvar and norm have then no effect)
+#' uses symmetric pivot coordinates (parameters pivotvar and norm have then no effect)
 #' @param fast if TRUE, it is approx. 10 times faster but numerical problems in case of 
-#' high-dimensional data numerical instabilities may occur. Only available for method \dQuote{pivot}.
+#' high-dimensional data may occur. Only available for method \dQuote{pivot}.
 #' @param base a positive or complex number: 
 #' the base with respect to which logarithms are computed. Defaults to \code{exp(1)}.
 #' @param norm if FALSE then the normalizing constant is not used, if TRUE \code{sqrt((D-i)/(D-i+1))} is 
 #' used (default). The user can also specify a self-defined constant.
 #' @return The data represented in pivot coordinates
 #' @author Matthias Templ, Karel Hron, Peter Filzmoser
-#' @references Egozcue J.J., V. Pawlowsky-Glahn, G. Mateu-Figueras and C.
-#' Barcel'o-Vidal (2003) Isometric logratio transformations for compositional
-#' data analysis. \emph{Mathematical Geology}, \bold{35}(3) 279-300. \
+#' @references Egozcue J.J., Pawlowsky-Glahn, V., Mateu-Figueras, G.,
+#' Barcel'o-Vidal, C. (2003) Isometric logratio transformations for compositional
+#' data analysis. \emph{Mathematical Geology}, \bold{35}(3) 279-300. 
 #' 
-#' Hron, K. and Templ, M. and Filzmoser, P. (2010) Imputation of missing values
-#' for compositional data using classical and robust methods
-#' 
-#' Kynclova, P., Hron, K., Filzmoser, P.
-#' Correlation between compositional parts based on symmetric balances. Submitted to \emph{Mathematical Geosciences}.
-#' \emph{Computational Statistics and Data Analysis}, vol 54 (12), pages
-#' 3095-3107.
+#' Filzmoser, P., Hron, K., Templ, M. (2018) \emph{Applied Compositional Data Analysis}.
+#' Springer, Cham.
 #' @keywords math
 #' @export
 #' @examples
@@ -57,7 +51,7 @@
 #' ## other normalization
 #' pivotCoord(expenditures, norm = "-sqrt((D-i)/(D-i+1))")
 #' 
-#' # symmetric balances (results in 2-dim symmetric balances)
+#' # symmetric balances (results in 2-dim symmetric pivot coordinates)
 #' pivotCoord(expenditures, method = "symm")
 pivotCoord <- function(x, pivotvar = 1, fast=FALSE, method = "pivot", 
                        base = exp(1), norm = "orthonormal"){
