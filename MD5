@@ -1,6 +1,6 @@
-c3fa3c7f21d9c502b151526a932e3410 *DESCRIPTION
-60c689557d05312f26e48a37719c6c8b *NAMESPACE
-41e07ffcba4b63e6da8c28b06aa74189 *NEWS
+862c9e3bed7306e30b36f85e08ca4fd2 *DESCRIPTION
+e2fbb6c39fc1da3a84427ce1d59e0f13 *NAMESPACE
+b7d4ad5e629acf8b61b9f43dfb2db431 *NEWS
 64bc4112a513209e10b8fa065713cc4d *R/SDev.R
 55d139e77f5bbaf784c5d32719fd5185 *R/aDist.R
 a7ee33406e6f648b471043aecc713e9c *R/addLR.R
@@ -24,9 +24,10 @@ c53fdecb4eb6016b040fc4e142177264 *R/clustCoDa_qmode.R
 a050800e3a9cfd8764e5408282cc359f *R/constSum.R
 e7f208e37c20d859f72c0ce029961461 *R/coord.R
 9ad47b3a5d263aa5a0db21ce87421b57 *R/corCoDa.R
+51efb7d9b826c963e44a9a6212bef76b *R/cubeCoord.R
 436faa653631b21dca19df5322aaa7b6 *R/daCoDa.R
 58ac31077bfb0aee1248804401f92c6e *R/daFisher.R
-97482349c5089f6f999b50c142bcc3c1 *R/dataSets.R
+1fd14acb2b7ef2b80fda990491ccc974 *R/dataSets.R
 9f96c9f6a91aa39a698ed4f199f4b788 *R/factanal.fit.principal1.R
 f6904a1038ea6d50f89790360f67837c *R/gm.R
 d687bbaf6f5932401f6c56aedbed0fa8 *R/gm_backup.R
@@ -65,6 +66,7 @@ be78c18f666b8adb40e186f85201dc01 *R/robCompositions-package.R
 8d432de9f899f7bac55fa66739969a6a *R/robilrregression.R
 277d210be38a6b5cc884fe236abc0adb *R/stats.R
 39f483251296267acaffe34bb7b93da0 *R/summary.imp.R
+448439566bf5f1cf0e9ed9ab98826e44 *R/tabCoord.R
 d68ba9fb13491149aa3f4c7ca22da255 *R/ternaryDiag.R
 7425742e5f4a9af9094ecffd56ad45f2 *R/ternaryDiagAbline.R
 bd59afbb2ea674b4a25ce38951faee9a *R/ternaryDiagEllipse.R
@@ -75,7 +77,7 @@ aff273acb3a3ad35314545779491e2dc *R/ternaryDiagPoints.R
 f5c75463e08c9a19fdbab0765bcf96f4 *R/zeroOut.R
 cbc8673715c29e6712df1f1accc05b3c *R/zzz.R
 18f763b1ecf1d41f64c009249e8ffcfe *README.md
-21acb9fb70d57f8bd965dd7578beb2bc *build/vignette.rds
+34387dd457852634640d2c46e7d5b9cd *build/vignette.rds
 e7062be9f620af6c5c403e0a52b96cac *data/GDPsatis.rda
 912143ce32585fa6c18f0b4525c54e36 *data/ageCatWorld.rda
 1ac6d5c63780f8409207e21ef7bebb9d *data/alcohol.rda
@@ -90,6 +92,7 @@ e6431824b8e3287e74e5559a8207944f *data/economy.rda
 e351d87792b26a4beca93c53eda56f14 *data/election.rda
 f4f238c5eb59022665d98272cfe88e6e *data/electionATbp.rda
 e9637234813abf38a3512991f95aa8b5 *data/employment.rda
+a20de6fa8d57fc9a7bcf0caecff21d55 *data/employment2.rda
 fcb0e4cd6f154a945225a5d725e29aeb *data/employment_df.rda
 72a5f3598abbdb3ae48640df63be4e42 *data/expenditures.rda
 da98587d08bafb3577eea8af06898126 *data/expendituresEU.rda
@@ -102,6 +105,7 @@ f8cd2ac8f0220fa0c304f31c373b3ad0 *data/instw.rda
 71dc7301f1011b2cc7bd2a49006564db *data/laborForce.rda
 be538a82c565efbaa4bc0751a58ff643 *data/lifeExpGdp.rda
 c288c5ce7525d2c48cc8186bf2979832 *data/machineOperators.rda
+1aa931647c3b2463edbcf590e35e542f *data/manu_abs.rda
 4b02ed7017c9dd75ab14451ac0a345de *data/mcad.rda
 3499605864ec18ad6fbafc29ad31decd *data/mortality.rda
 910f52bd347d878389626a52fa6eb30e *data/mortality_tab.rda
@@ -124,9 +128,9 @@ a0cc1b095f853c3390eb85512aa3f5ec *data/unemployed.rda
 b511b64cb9b37457907ceb5bb081a7ac *inst/doc/gm.cpp
 bf8dfde0ec76e7a374cb0494d9a42f23 *inst/doc/imputation.R
 15a57c63c02c7ae4477a3851e8607e83 *inst/doc/imputation.Rnw
-ae0092c605827312c4c8b7ccba41d5e4 *inst/doc/imputation.pdf
+4fd30c97eb97a7d982e537f962cd7ff5 *inst/doc/imputation.pdf
 ae1f8cc344d33f286781e15e37959173 *inst/doc/robCompositions-overview.Rnw
-6587732a238abd7739a648472a1dc0ab *inst/doc/robCompositions-overview.pdf
+fcc10f45240e4a747c33523789d0c370 *inst/doc/robCompositions-overview.pdf
 0a440624cb6fb417e86edb290bc8e35c *inst/doc/test.sh
 8153d94b16b1da931ced512630521134 *inst/doc/writecsvs.R
 69b0cc4c77f30273b6884669e54f1ac4 *man/GDPsatis.Rd
@@ -159,6 +163,7 @@ ffbaa10f547f03cda08e657ec93de8b6 *man/bootnComp.Rd
 d51c848c5bb04b433583fd6ea26bc63c *man/constSum.Rd
 0e1baf19ad8826c4e7793eacbd0f09f2 *man/coord.Rd
 c5efc552035d940c80c94c6dea6741b7 *man/corCoDa.Rd
+8d3a34bd14e5c4c292526d6ba1b52c33 *man/cubeCoord.Rd
 9338043deb5c0cd81d902565e5d84a3e *man/daCoDa.Rd
 f58a8fa9b4eff77cfa1faa0a14444388 *man/daFisher.Rd
 9f7dfa533a9e0eb2fcf7714054ab5ffd *man/economy.Rd
@@ -166,11 +171,12 @@ f58a8fa9b4eff77cfa1faa0a14444388 *man/daFisher.Rd
 ec1feb0558cf644c53ddea5dfeccc3e3 *man/election.Rd
 790556723e1796ee1cec2d844d300652 *man/electionATbp.Rd
 dfbbba8e036b76872a2a544747e387d4 *man/employment.Rd
+d22ad3f36a3f6ccde30880de854f311f *man/employment2.Rd
 b1371068de723dad1446cb7b329a2701 *man/employment_df.Rd
 279d4bd4dbe5e0b6f8f130b822d3ff30 *man/expenditures.Rd
 51c87189dd73d7e1a2497099d8ee39ca *man/expendituresEU.Rd
 45799673e47ea2e597786ddff9e54f5c *man/gemas.Rd
-b8bb6759f1001f5ac8540abf26a01a83 *man/gjovik.Rd
+a6e6a1df76d429b2a39e9bccf328fa2a *man/gjovik.Rd
 e3e92972e98a5fbdf9e3f49d7df51989 *man/gm.Rd
 d9f6ee413d930bb48eb7020ca5eb8f86 *man/gmean.Rd
 78e7096caf22ffe399b6f0cf8c80236d *man/govexp.Rd
@@ -194,6 +200,7 @@ b0cfb09b73b9335c77dec5b218996a74 *man/isic32.Rd
 7db1bc08324358465cc4a70ca7bcb1b9 *man/lifeExpGdp.Rd
 d7d75edce7abfce2ef19a6e824aaefa2 *man/lmCoDaX.Rd
 d33cb80419b1d50b59a73aa2179f8060 *man/machineOperators.Rd
+ecd68576c3070a49b31301f5fd71bc11 *man/manu_abs.Rd
 cec8c6d868c153ac2532abe130bd7500 *man/mcad.Rd
 5a8808e5bef0fc039676077de5ba6801 *man/missPatterns.Rd
 14cbb0fc69e35beacc91f01d60de81c5 *man/mortality.Rd
@@ -224,6 +231,7 @@ fe8794c54374f22441ef90e94f032e6a *man/rdcm.Rd
 98e33e45e6c6a0281839184b7402e243 *man/socExp.Rd
 5c1e3dcecf2da5b463f8341f4753db59 *man/stats.Rd
 ef26fdf4fe1a2e48116972f90f0eab9d *man/summary.imp.Rd
+0e2ab79798cc0fa97f86919f04ebea59 *man/tabCoord.Rd
 bedcea1064ed76e62b8160ed1a89635f *man/teachingStuff.Rd
 ee8ad4b20a081851967199d1d6e493fd *man/ternaryDiag.Rd
 1ff86f060667ae32c5a70f1a65c5d0bc *man/ternaryDiagAbline.Rd
