@@ -1,16 +1,16 @@
-## ----include=FALSE-------------------------------------------------------
+## ----include=FALSE------------------------------------------------------------
 library(knitr)
 opts_chunk$set(
 concordance=TRUE
 )
 
-## ----load package, echo=FALSE, results='hide'----------------------------
+## ----load package, echo=FALSE, results='hide'---------------------------------
 library("robCompositions")
 constSum <- function(x, const=1){
 	x / rowSums(x) * const
 }
 
-## ----echo=FALSE, results='hide'------------------------------------------
+## ----echo=FALSE, results='hide'-----------------------------------------------
 ##require(compositions)
 genData <- function(n=1000, out=0.05, 
             Sigma=5*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
@@ -39,7 +39,7 @@ genData <- function(n=1000, out=0.05,
     list(zmiss=data.frame(zmiss), z2=data.frame(z), good=n2)
 }
 
-## ----echo=FALSE, results='hide'------------------------------------------
+## ----echo=FALSE, results='hide'-----------------------------------------------
 genData <- function(n=1000, out=0.05, 
             Sigma=1*c(1,1)%*%t(c(1,1))+0.05*c(1,-1)%*%t(c(1,-1))){
     ## Gruppe ohne Ausreisser:
@@ -67,14 +67,14 @@ genData <- function(n=1000, out=0.05,
     list(zmiss=data.frame(zmiss), z2=data.frame(z), good=n2)
 }
 
-## ----seed, echo=FALSE, message=FALSE, warning=FALSE----------------------
+## ----seed, echo=FALSE, message=FALSE, warning=FALSE---------------------------
 set.seed(123)
 library("MASS")
 
-## ----new data, echo=FALSE------------------------------------------------
+## ----new data, echo=FALSE-----------------------------------------------------
 x <- genData(100)
 
-## ----plot.acomp, echo=FALSE----------------------------------------------
+## ----plot.acomp, echo=FALSE---------------------------------------------------
 plot.acomp <- 
 function (x, ..., labels = colnames(X), cn = colnames(X), aspanel = FALSE,
     id = FALSE, idlabs = NULL, idcol = 2, center = FALSE, scale = FALSE,
@@ -169,23 +169,23 @@ function (x, ..., labels = colnames(X), cn = colnames(X), aspanel = FALSE,
     return(invisible(NULL))
 }
 
-## ----knn, message=FALSE, warning=FALSE-----------------------------------
+## ----knn, message=FALSE, warning=FALSE----------------------------------------
 library("robCompositions") 
 packageDescription("robCompositions")$Version
 xImp <- impKNNa(x$zmiss, k=6)
 
-## ----class---------------------------------------------------------------
+## ----class--------------------------------------------------------------------
 class(xImp)
 
-## ----printSummary--------------------------------------------------------
+## ----printSummary-------------------------------------------------------------
 methods(class = "imp")
 xImp
 
-## ----imp-----------------------------------------------------------------
+## ----imp----------------------------------------------------------------------
 xImp1 <- impCoda(x$zmiss, method='lm')
 xImp2 <- impCoda(x$zmiss, method='ltsReg')
 
-## ----da, echo=FALSE------------------------------------------------------
+## ----da, echo=FALSE-----------------------------------------------------------
 cda <- function(xOrig, xImp, w){
   da <- function(x,y){
 	d <- 0
@@ -205,20 +205,20 @@ cda <- function(xOrig, xImp, w){
   das/w
 }
 
-## ----variations, echo=FALSE----------------------------------------------
-v1 <- variation(constSum(x$z2[1:95,]), robust=FALSE)
-v2 <- variation(constSum(xImp1$xImp[1:95,]), robust=FALSE)
-v22 <- variation(constSum(xImp2$xImp[1:95,]), robust=FALSE)
+## ----variations, echo=FALSE---------------------------------------------------
+v1 <- variation(constSum(x$z2[1:95,]), method="Pairwise")
+v2 <- variation(constSum(xImp1$xImp[1:95,]), method="Pairwise")
+v22 <- variation(constSum(xImp2$xImp[1:95,]),  method="Pairwise")
 variations1 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v2[upper.tri(v2, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v2, diag=FALSE))) 
 variations2 <- sum(abs(v1[upper.tri(v1, diag=FALSE)] - v22[upper.tri(v22, diag=FALSE)]), na.rm=TRUE)/length(c(upper.tri(v22, diag=FALSE))) 
 
-## ----erg-variations, echo=FALSE------------------------------------------
+## ----erg-variations, echo=FALSE-----------------------------------------------
 paste("RDA: iterative lm approach:", round(cda(x$z2, xImp1$xImp, xImp1$w),3))
 paste("RDA: iterative ltsReg approach:", round(cda(x$z2, xImp2$xImp, xImp2$w), 3))
 paste("DV: iterative lm approach:", round(variations1, 3))
 paste("DV: iterative ltsReg approach:", round(variations2, 3))
 
-## ----bootstrap-old, echo=FALSE-------------------------------------------
+## ----bootstrap-old, echo=FALSE------------------------------------------------
 bootimp <- function(x, R = 100, method = "lm") {
      d <- dim(x)[2]
      n <- dim(x)[1]
@@ -242,7 +242,7 @@ bootimp <- function(x, R = 100, method = "lm") {
      res
 }
 
-## ----bootstrap-new, echo=FALSE-------------------------------------------
+## ----bootstrap-new, echo=FALSE------------------------------------------------
 bootimp <- function(x, R = 100, method = "lm") {
      d <- dim(x)[2]
      n <- dim(x)[1]
@@ -332,13 +332,13 @@ bootimpM <- function(x, R = 100) {
 }
 
 
-## ----bootstat-erg--------------------------------------------------------
+## ----bootstat-erg-------------------------------------------------------------
 R <- 5
 bootimp(x$z2, R=R)
 
-## ----message=FALSE, warning=FALSE----------------------------------------
+## ----message=FALSE, warning=FALSE---------------------------------------------
 plot(xImp1, which=2)
 
-## ----message=FALSE, warning=FALSE----------------------------------------
+## ----message=FALSE, warning=FALSE---------------------------------------------
 plot(xImp1, which=3, seg1=FALSE)
 

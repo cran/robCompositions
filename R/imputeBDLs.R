@@ -77,7 +77,8 @@
 #' 
 #' for(j in 1:col)        
 #' {data[data[,j]<DL[j],j] <- 0}
-#' 
+#' \dontrun{
+#' # under dontrun because of long exectution time
 #' imp <- imputeBDLs(data,dl=DL,maxit=10,eps=0.1,R=10,method="subPLS")
 #' imp
 #' imp <- imputeBDLs(data,dl=DL,maxit=10,eps=0.1,R=10,method="pls", variation = FALSE)
@@ -88,8 +89,6 @@
 #' imp
 #' 
 #' data(mcad)
-#' \dontrun{
-#' ## longer computation times...
 #' ## generate rounded zeros artificially:
 #' x <- mcad
 #' x <- x[1:25, 2:ncol(x)]
@@ -347,7 +346,7 @@
       rtmspe <- NULL
       for(i in which(indNA)){
         xneworder <- cbind(x[, i, drop=FALSE], x[, -i, drop=FALSE]) 
-        rv <- variation(x, robust = FALSE)[1,]
+        rv <- variation(x, method = "Pairwise")[1,]
         cve <- numeric()
         for(np in seq(3, min(c(27,ncol(x),floor(nrow(x)/2))), 3)){
           s <- sort(rv)[np]
@@ -387,7 +386,7 @@
         ## if based on variation matrix:
         if(variation){
           orig <- xneworder  
-          rv <- variation(x, robust = FALSE)[1,]
+          rv <- variation(x, method = "Pairwise")[1,]
           s <- sort(rv)[nPred[i]]
           cols <- which(rv <= s)[1:nPred[i]]
           xneworder <- xneworder[, cols]

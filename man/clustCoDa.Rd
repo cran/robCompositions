@@ -5,12 +5,28 @@
 \alias{plot.clustCoDa}
 \title{Cluster analysis for compositional data}
 \usage{
-clustCoDa(x, k = NULL, method = "Mclust", scale = "robust",
-  transformation = "pivotCoord", distMethod = NULL, iter.max = 100,
-  vals = TRUE, alt = NULL, bic = NULL, verbose = TRUE)
+clustCoDa(
+  x,
+  k = NULL,
+  method = "Mclust",
+  scale = "robust",
+  transformation = "pivotCoord",
+  distMethod = NULL,
+  iter.max = 100,
+  vals = TRUE,
+  alt = NULL,
+  bic = NULL,
+  verbose = TRUE
+)
 
-\method{plot}{clustCoDa}(x, y, ..., normalized = FALSE,
-  which.plot = "clusterMeans", measure = "silwidths")
+\method{plot}{clustCoDa}(
+  x,
+  y,
+  ...,
+  normalized = FALSE,
+  which.plot = "clusterMeans",
+  measure = "silwidths"
+)
 }
 \arguments{
 \item{x}{compositional data represented as a data.frame}
@@ -69,9 +85,13 @@ rr2 <- clustCoDa(x, k=6, distMethod = "Aitchison", scale = "none",
                  transformation = "identity")
 rr3 <- clustCoDa(x, k=6, distMethod = "Aitchison", method = "single",
                  transformation = "identity", scale = "none")
+                 
+\dontrun{
+require(reshape2)
 plot(rr)
 plot(rr, normalized = TRUE)
 plot(rr, normalized = TRUE, which.plot = "partMeans")
+}
 }
 \references{
 M. Templ, P. Filzmoser, C. Reimann.

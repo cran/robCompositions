@@ -4,10 +4,22 @@
 \alias{pfa}
 \title{Factor analysis for compositional data}
 \usage{
-pfa(x, factors, robust = TRUE, data = NULL, covmat = NULL,
-  n.obs = NA, subset, na.action, start = NULL, scores = c("none",
-  "regression", "Bartlett"), rotation = "varimax", maxiter = 5,
-  control = NULL, ...)
+pfa(
+  x,
+  factors,
+  robust = TRUE,
+  data = NULL,
+  covmat = NULL,
+  n.obs = NA,
+  subset,
+  na.action,
+  start = NULL,
+  scores = c("none", "regression", "Bartlett"),
+  rotation = "varimax",
+  maxiter = 5,
+  control = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{(robustly) scaled input data}
@@ -71,8 +83,8 @@ res.cla <- pfa(x, factors=1, robust=FALSE)
 
 ## the following produce always the same result:
 res1 <- pfa(x, factors=1, covmat="covMcd")
-res2 <- pfa(x, factors=1, covmat=covMcd(pivotCoord(x))$cov)
-res3 <- pfa(x, factors=1, covmat=covMcd(pivotCoord(x)))
+res2 <- pfa(x, factors=1, covmat=robustbase::covMcd(pivotCoord(x))$cov)
+res3 <- pfa(x, factors=1, covmat=robustbase::covMcd(pivotCoord(x)))
 
 }
 \references{
