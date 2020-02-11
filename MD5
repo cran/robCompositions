@@ -1,6 +1,6 @@
-92ba984400394a19ba59974399ef2e58 *DESCRIPTION
+d0d8e8aff2a746ad187530aa841d5090 *DESCRIPTION
 4480a95237a610aaf71fc64f94cff0b1 *NAMESPACE
-cb2b30300e85b2187ad6b7b6383c970c *NEWS
+b1f3d62cb3054ad1325eb9fd716e6bd3 *NEWS
 634a367109990a6dbe6baf94b5a09085 *R/CubeCoord.R
 64bc4112a513209e10b8fa065713cc4d *R/SDev.R
 988031210f56c5cbd3498a7403854374 *R/TabCoord.R
@@ -22,7 +22,7 @@ c43efafd507f7f21b72fbf16dd9f2ef3 *R/ced.R
 fbb365dfb8af6d4c2c24df4ebdf791a4 *R/center.R
 545bbcf17d782ed0b316fbbad2b9f38b *R/clustCoDa.R
 f00791f9abfaf4f7db57f2d846adb583 *R/clustCoDa_qmode.R
-27729a469a4da6a1a635c20c44f02ab7 *R/compareMahal.R
+53944a237d89afbf81676a2cf06ed4e7 *R/compareMahal.R
 a050800e3a9cfd8764e5408282cc359f *R/constSum.R
 e7f208e37c20d859f72c0ce029961461 *R/coord.R
 9ad47b3a5d263aa5a0db21ce87421b57 *R/corCoDa.R
@@ -66,9 +66,9 @@ bf494d69cf50fe2dbaccd4074016c5b4 *R/outCoDa.R
 ea6a6ffc644d124ae444623d30ba5992 *R/rdcm.R
 be78c18f666b8adb40e186f85201dc01 *R/robCompositions-package.R
 8d432de9f899f7bac55fa66739969a6a *R/robilrregression.R
-c91e8ba5b5936eb933e13fbff11b853b *R/splineDensity.R
+7deda61eacd41fffe3f42a636173ef96 *R/splineDensity.R
 81959fe055fd862b88c9aea62f0cbec2 *R/splineDensity.plot.R
-5adf775c16e1ebc5d391c400c367cae4 *R/splineDensity.smoothingSplinesValidation.R
+456639ed77208880ecb66fa8ed39a2d3 *R/splineDensity.smoothingSplinesValidation.R
 3c3436d381a657767f087d8e0c3f4a47 *R/stats.R
 39f483251296267acaffe34bb7b93da0 *R/summary.imp.R
 d68ba9fb13491149aa3f4c7ca22da255 *R/ternaryDiag.R
@@ -113,8 +113,8 @@ a68d5e9251907e677ca6a8e444fbb912 *data/machineOperators.rda
 7abff38e54f0a366c691a042d6bb7cf2 *data/mcad.rda
 cab8737c9489a532a5fc296eb8f31eb9 *data/mortality.rda
 b3ca6287e72c7835fbc0507a08a0f592 *data/mortality_tab.rda
-3259c337ad081a5340bb8478b50ea51a *data/nutrients.rda
-a5cbf4a04a9e8b82ed7e66ebc6786f91 *data/nutrients_branded.rda
+92b10bd00b3a129eee809afa6cfbebc1 *data/nutrients.rda
+793a32915b150aeea144868413fc4ac3 *data/nutrients_branded.rda
 8d18c068b7263588149262982fdbeafb *data/payments.rda
 37657833e097f711d750e1d1dbec864c *data/phd.rda
 283cf04a1a0449c14355f13d867409ec *data/phd_totals.rda
@@ -130,9 +130,9 @@ c5834daa6d2daa3e5bd1c773bba6bc2e *data/trondelagC.rda
 1ebf3ad65b7173dc07b508be0d8c062f *inst/CITATION
 461c7ce49a79d91ae07a847fd188322e *inst/doc/imputation.R
 586e8ccb698218f1c08fb64c82104d53 *inst/doc/imputation.Rnw
-3e9bdfdabf5c531f14717fd9b5f7470d *inst/doc/imputation.pdf
+1b00da74777f01f2b488ff6b041873eb *inst/doc/imputation.pdf
 ae1f8cc344d33f286781e15e37959173 *inst/doc/robCompositions-overview.Rnw
-89144126d542f7d4358f627b253421a6 *inst/doc/robCompositions-overview.pdf
+2c6c06a71e2682d7f0be4b43ed450feb *inst/doc/robCompositions-overview.pdf
 69b0cc4c77f30273b6884669e54f1ac4 *man/GDPsatis.Rd
 2421c3270ca65468b366c7d067779556 *man/SDev.Rd
 f73b1492536cb69226318e0877d2d29d *man/aDist.Rd
@@ -220,7 +220,7 @@ bd89361ee56d8444bf0c8a1ccaebc28f *man/pfa.Rd
 40d6ab56fa45ad8ab7bec147294b9af0 *man/pivotCoord.Rd
 c18f23ed9b95c95405ede6b3f91b08cc *man/plot.imp.Rd
 28cd8b91723c3773280a411dbca9a336 *man/plot.pcaCoDa.Rd
-cb19db482bbde47a28d47a7a46d241a9 *man/plot.smoothSpl.Rd
+cd7c26dfaf8b792b13751a02603b9b8b *man/plot.smoothSpl.Rd
 df4b44258d81fd9568f28ad4e918bbc8 *man/precipitation.Rd
 0a065c89ec4aa329410291d13370e559 *man/print.imp.Rd
 de423e6c34b76fd8dcbbdc008314147b *man/production.Rd
@@ -230,8 +230,8 @@ ac28f950042455f9d7b4a709d344b084 *man/rcodes.Rd
 fe8794c54374f22441ef90e94f032e6a *man/rdcm.Rd
 488379d07db4c79a0c026ddd43bd5f57 *man/robCompositions-package.Rd
 13b168e0196194113c3cf9051d32cfd5 *man/skyeLavas.Rd
-22ac24f7f336b4cfaa83d9b979887999 *man/smoothSplines.Rd
-6933101a062bce1d55e8a7bd2006e4e0 *man/smoothSplinesVal.Rd
+d636b1bce7e99477c148489358ba4fc3 *man/smoothSplines.Rd
+448614d2e8c7ca3991f0028fb519b3b6 *man/smoothSplinesVal.Rd
 98e33e45e6c6a0281839184b7402e243 *man/socExp.Rd
 16262546a1d15952ea93905eef8f343e *man/stats.Rd
 ef26fdf4fe1a2e48116972f90f0eab9d *man/summary.imp.Rd
@@ -267,7 +267,7 @@ f5e22b26aec646e5c93663acc161cc14 *src/zeros.h
 ba52a79e997227c702152bea7d03b262 *tests/testthat/imp_test.R
 605dd16a970bc64e97baddfa00f702df *tests/testthat/importFood.R
 46a322d5f5b05c87f44b398963d83d93 *tests/testthat/rz.R
-3414d0e446f60c4b0abc5a971254c117 *tests/testthat/test_iris.r
+a64941571bbd178b704661ab78fc22ed *tests/testthat/test_iris.r
 972a8c9653bcf03ecd6e1bc3affc5c7c *vignettes/CoDaWork.sty
 6eee41d55feae22ff895415960ae1ec9 *vignettes/boxplot.pdf
 c0adc3c86986ff717ced634fcb5db594 *vignettes/ilr.pdf
