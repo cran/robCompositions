@@ -4,7 +4,8 @@
 \name{haplogroups}
 \alias{haplogroups}
 \title{haplogroups data.}
-\format{A data frame with 38 observations on the following 12 variables.
+\format{
+A data frame with 38 observations on the following 12 variables.
 \itemize{ 
 \item{\code{I1 }}{pre-Germanic (Nordic)}
 \item{\code{I2b }}{pre-Celto-Germanic} 
@@ -18,10 +19,11 @@
 \item{\code{J2 }}{Mesopotamian, Minoan Greek, Phoenician} 
 \item{\code{J1 }}{Semitic (Arabic, Jewish)}
 \item{\code{T }}{Near-Eastern, Egyptian, Ethiopian, Arabic} 
-}}
+}
+}
 \source{
 Eupedia:
-\url{http://www.eupedia.com/europe/european_y-dna_haplogroups.shtml}
+\url{https://www.eupedia.com/europe/european_y-dna_haplogroups.shtml}
 }
 \description{
 Distribution of European Y-chromosome DNA (Y-DNA) haplogroups by region in
