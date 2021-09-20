@@ -4,7 +4,7 @@
 \alias{plot.pcaCoDa}
 \title{Plot method}
 \usage{
-\method{plot}{pcaCoDa}(x, y, ...)
+\method{plot}{pcaCoDa}(x, y, ..., which = 1, choices = 1:2)
 }
 \arguments{
 \item{x}{object of class \sQuote{pcaCoDa}}
@@ -12,19 +12,27 @@
 \item{y}{...}
 
 \item{\dots}{...}
+
+\item{which}{an integer between 1 and 3. Produces a screeplot (1), or a biplot using stats biplot.prcomp function (2), or a biplot using ggfortify's autoplot function (3).}
+
+\item{choices}{principal components to plot by number}
 }
 \value{
 The robust compositional screeplot.
 }
 \description{
-Provides a screeplot for (robust) compositional principal components analysis.
+Provides a screeplot and biplot for (robust) compositional principal components analysis.
 }
 \examples{
 
 data(coffee)
+\dontrun{
 p1 <- pcaCoDa(coffee[,-1])
 plot(p1)
 plot(p1, type="lines")
+plot(p1, which = 2)
+plot(p1, which = 3)
+}
 
 
 }

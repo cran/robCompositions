@@ -124,7 +124,7 @@ NULL
 #' @details The response (discharges) is provided for the European Union countries (except Greece, Hungary and Malta) by Eurostat. As explanatory variables we use the age structure of the population in the same countries (year 2008). The age structure consists of three parts, age smaller than 15, age between 15 and 60 and age above 60 years, and they are expressed as percentages on the overall population in the countries. The data are provided by the United Nations Statistics Division.
 #' @format A data set on 24 compositions on 6 variables.
 #' @source
-#' \url{http://www.ec.europa.eu/eurostat} and \url{http://unstats.un.org/unsd}
+#' \url{https://www.ec.europa.eu/eurostat} and \url{https://unstats.un.org/home/}
 #' @keywords datasets
 #' @author conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@@tuwien.ac.at} 
 #' @references K. Hron, P. Filzmoser, K. Thompson (2012). Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, Volume 39, Issue 5, 2012. 
@@ -153,7 +153,7 @@ NULL
 #' @details The data are obtained from the OECD website.
 #' @format A data set on 35 compositional tables on 4 parts (row-wise sorted cells) and 5 variables.
 #' @source
-#' \url{http://www.oecd.org}
+#' \url{https://www.oecd.org}
 #' @keywords datasets
 #' @author conversion to R by Karel Hron and intergration by Matthias Templ \email{matthias.templ@@tuwien.ac.at} 
 #' @examples
@@ -166,7 +166,7 @@ NULL
 
 #' C-horizon of the Kola data with rounded zeros
 #' 
-#' This data set is almost the same as \code{\link[mvoutlier]{chorizon}} data set
+#' This data set is almost the same as the `chorizon` data set
 #' in package \code{mvoutlier} and \code{\link[VIM]{chorizonDL}}, except that values below the detection limit
 #' are coded as zeros, and detection limits provided as attributes to the data set and
 #' less variables are included.
@@ -240,8 +240,8 @@ NULL
 #' \item{LITO }{information on lithography} 
 #' }
 #' @note For a more detailed description of this data set, see
-#' \code{\link[mvoutlier]{chorizon}} in package \code{mvoutlier}.
-#' @seealso \code{\link[mvoutlier]{chorizon}}, \code{\link[VIM]{chorizonDL}}
+#' `chorizon` in package \code{mvoutlier}.
+#' @seealso `chorizon`, \code{\link[VIM]{chorizonDL}}
 #' @references Reimann, C., Filzmoser, P., Garrett, R.G. and Dutter, R. (2008)
 #' \emph{Statistical Data Analysis Explained: Applied Environmental Statistics
 #' with R}. Wiley.
@@ -305,7 +305,7 @@ NULL
 #' @usage data(economy)
 #' @author Peter Filzmoser, Matthias Templ \email{matthias.templ@@tuwien.ac.at}
 #' @format A data frame with 30 observations and 7 variables
-#' @references Eurostat, \url{http://ec.europa.eu/eurostat/data}
+#' @references Eurostat, \url{https://ec.europa.eu/eurostat/data}
 #' @keywords data
 #' @examples 
 #' 
@@ -334,12 +334,59 @@ NULL
 #' @author Peter Filzmoser, Matthias Templ
 #' @format A data frame with 31 observations and 8 variables
 #' @keywords data
-#' @source from Eurostat,\url{http://ec.europa.eu/eurostat/}
+#' @source from Eurostat,\url{https://ec.europa.eu/eurostat/}
 #' @examples 
 #' 
 #' data(educFM)
 #' str(educFM)
 NULL
+
+
+#' efsa nutrition consumption
+#' 
+#' Comprehensive European Food Consumption Database
+#' 
+#' The Comprehensive Food Consumption Database is a source of information on 
+#' food consumption across the European Union (EU). 
+#' The food consumption are reported in grams per day (g/day).
+#' 
+#' 
+#' @name efsa
+#' @docType data
+#' @format A data frame with 87 observations on the following 22 variables.
+#' \itemize{ 
+#' \item{\code{Country }}{country name}
+#' \item{\code{Pop.Class }}{population class}
+#' \item{\code{grains }}{Grains and grain-based products}
+#' \item{\code{vegetables }}{Vegetables and vegetable products (including fungi)}
+#' \item{\code{roots }}{Starchy roots and tubers}
+#' \item{\code{nuts }}{Legumes, nuts and oilseeds}
+#' \item{\code{fruit }}{Fruit and fruit products}
+#' \item{\code{meat }}{Meat and meat products (including edible offal)} 
+#' \item{\code{fish }}{Fish and other seafood (including amphibians, rept)} 
+#' \item{\code{milk }}{Milk and dairy products}
+#' \item{\code{eggs }}{Eggs and egg products}
+#' \item{\code{sugar }}{Sugar and confectionary} 
+#' \item{\code{fat }}{Animal and vegetable fats and oils} 
+#' \item{\code{juices }}{Fruit and vegetable juice} 
+#' \item{\code{nonalcoholic }}{Non-alcoholic beverages (excepting milk based beverages)} 
+#' \item{\code{alcoholic }}{Alcoholic beverages} 
+#' \item{\code{water }}{Drinking water (water without any additives)} 
+#' \item{\code{herbs }}{Herbs, spices and condiments} 
+#' \item{\code{small_children_food }}{Food for infants and small children} 
+#' \item{\code{special }}{Products for special nutritional use} 
+#' \item{\code{composite }}{Composite food (including frozen products)} 
+#' \item{\code{snacks }}{Snacks, desserts, and other foods} 
+#' }
+#' @source efsa
+#' @keywords datasets
+#' @examples
+#' 
+#' data(efsa)
+#' 
+NULL
+
+
 
 #' election data
 #' 
@@ -373,7 +420,7 @@ NULL
 #' @usage data(election)
 #' @author Petra Klynclova, Matthias Templ
 #' @format A data frame with 16 observations and 8 variables
-#' @references Eurostat, \url{http://ec.europa.eu/eurostat/data}
+#' @references Eurostat, \url{https://ec.europa.eu/eurostat/data}
 #' @keywords data
 #' @source German Federal Statistical Office 
 #' @examples 
@@ -476,7 +523,7 @@ NULL
 #' @references Facevicova, K., Filzmoser, P. and K. Hron (2019) 
 #' Compositional Cubes: Three-factorial Compositional Data. Under review.
 #' @author Kamila Facevicova
-#' @source http://stats.oecd.org
+#' @source https://stats.oecd.org
 #' @examples 
 #' data(employment2)
 #' head(employment2)
@@ -544,6 +591,27 @@ NULL
 #' 
 NULL
 
+#' country food balances
+#' 
+#' Food balance in each country (2018)
+#' 
+#' 
+#' @name foodbalance
+#' @docType data
+#' @format A data frame with 115 observations on the following 116 variables.
+#' \itemize{ 
+#' \item{\code{country}}{country} 
+#' \item{\code{Cereals - Excluding Beer}}{Food balance on cereals} 
+#' \item{\code{...}}{...}
+#' #' \item{\code{Alcohol - Non-Food}}{Food balance on alcohol}
+#' }
+#' @source \url{http://www.fao.org/home/en/}
+#' @keywords datasets
+#' @examples
+#' 
+#' data(foodbalance)
+#' 
+NULL
 
 #' GDP satisfaction 
 #' 
@@ -566,7 +634,7 @@ NULL
 #' @author Peter Filzmoser, Matthias Templ
 #' @format A data frame with 31 observations and 8 variables
 #' @keywords data
-#' @source from Eurostat,\url{http://ec.europa.eu/eurostat/}
+#' @source from Eurostat,\url{https://ec.europa.eu/eurostat/}
 #' @examples 
 #' 
 #' data(GDPsatis)
@@ -800,6 +868,50 @@ NULL
 #' 
 NULL
 
+#' honey compositions
+#' 
+#' The contents of honey, syrup, and adulteration mineral elements.
+#' 
+#' Discrimination of honey and adulteration by elemental chemometrics profiling.
+#' 
+#' 
+#' @name honey
+#' @docType data
+#' @format A data frame with 429 observations on the following 17 variables.
+#' \itemize{ 
+#' \item{\code{class }}{adulterated honey, Honey or Syrup}
+#' \item{\code{group }}{group information}
+#' \item{\code{group3 }}{detailed group information}
+#' \item{\code{group1 }}{less detailed group information}
+#' \item{\code{region }}{region}
+#' \item{\code{Al }}{chemical element}
+#' \item{\code{B }}{chemical element}
+#' \item{\code{Ba }}{chemical element} 
+#' \item{\code{Ca }}{chemical element} 
+#' \item{\code{Fe }}{chemical element}
+#' \item{\code{K }}{chemical element}
+#' \item{\code{Mg }}{chemical element} 
+#' \item{\code{Mn}}{chemical element} 
+#' \item{\code{Na }}{chemical element} 
+#' \item{\code{P }}{chemical element} 
+#' \item{\code{Sr }}{chemical element} 
+#' \item{\code{Zn }}{chemical element} 
+#' }
+#' @source Mendeley Data, contributed by Liping Luo and translated to R by Matthias Templ
+#' @references Tao Liu, Kang Ming, Wei Wang, Ning Qiao, Shengrong Qiu, Shengxiang Yi, Xueyong Huang, Liping Luo,
+#' Discrimination of honey and syrup-based adulteration by mineral element chemometrics profiling,'
+#' Food Chemistry, Volume 343, 2021, \doi{10.1016/j.foodchem.2020.128455}.
+#' @note In the original paper, sparse PLS-DA were applied optimize the classify model 
+#' and test effectiveness. Classify accuracy were exceed 87.7 percent.
+#' @keywords datasets
+#' @examples
+#' 
+#' data(honey)
+#' 
+NULL
+
+
+
 #' value added, output and input for different ISIC codes and countries.
 #'
 #' \itemize{
@@ -862,7 +974,7 @@ NULL
 #' @format A data set on 124 compositions on 9 variables.
 #' @author conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@@tuwien.ac.at} 
 #' @source
-#' \url{http://unstats.un.org/unsd/demographic/products/indwm/tab5c.htm}
+#' \url{https://unstats.un.org/unsd/demographic/products/indwm/default.htm}
 #' @keywords datasets
 #' @references K. Hron, P. Filzmoser, K. Thompson (2012). Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, Volume 39, Issue 5, 2012. 
 #' @examples
@@ -894,7 +1006,7 @@ NULL
 #' @docType data
 #' @format A data set on 27 compositions on 9 variables.
 #' @source
-#' \url{http://www.ec.europa.eu/eurostat} and \url{http://unstats.un.org/unsd}
+#' \url{https://www.ec.europa.eu/eurostat} and \url{https://unstats.un.org/home/}
 #' @keywords datasets
 #' @author conversion to R by Karel Hron and Matthias Templ \email{matthias.templ@@tuwien.ac.at} 
 #' @references K. Hron, P. Filzmoser, K. Thompson (2012). Linear regression with compositional explanatory variables. \emph{Journal of Applied Statistics}, Volume 39, Issue 5, 2012. 
@@ -956,7 +1068,7 @@ NULL
 #' @usage data(manu_abs)
 #' @source Elaboration based on the INDSTAT 4 database (UNIDO 2012a), see also UNIDO, 2012b.
 #' UNIDO (2012a), INDSTAT 4 Industrial Statistics Database at 3- and 4-digit level of 
-#' ISIC Revision 3 and 4. Vienna. Available from http://stat.unido.org. 
+#' ISIC Revision 3 and 4. Vienna. Available from https://stat.unido.org. 
 #' UNIDO (2012b) International Yearbook of Industrial Statistics, Edward Elgar Publishing Ltd, UK.
 #' @author Kamila Facevicova
 #' @format A data frame with 630 observations of 4 variables.
@@ -1035,7 +1147,7 @@ NULL
 #' @usage data(mortality)
 #' @author Peter Filzmoser, Matthias Templ \email{matthias.templ@@tuwien.ac.at}
 #' @format A data frame with 60 observations and 12 variables
-#' @references Eurostat, \url{http://ec.europa.eu/eurostat/data}
+#' @references Eurostat, \url{https://ec.europa.eu/eurostat/data}
 #' @keywords data
 #' @examples 
 #' 
@@ -1364,6 +1476,64 @@ NULL
 #' str(rcodes)
 NULL
 
+#' saffron compositions
+#' 
+#' Stable isotope ratio  and trace metal cncentration data for saffron samples.
+#' 
+#' @name saffron
+#' @docType data
+#' @format A data frame with 53 observations on the following 36 variables.
+#' \itemize{ 
+#' \item{\code{Sample }}{adulterated honey, Honey or Syrup}
+#' \item{\code{Country }}{group information}
+#' \item{\code{Batch }}{detailed group information}
+#' \item{\code{Region }}{less detailed group information}
+#' \item{\code{d2H }}{region}
+#' \item{\code{d13C }}{chemical element}
+#' \item{\code{d15N }}{chemical element}
+#' \item{\code{Li }}{chemical element} 
+#' \item{\code{B }}{chemical element} 
+#' \item{\code{Na }}{chemical element}
+#' \item{\code{Mg }}{chemical element}
+#' \item{\code{Al }}{chemical element} 
+#' \item{\code{K}}{chemical element} 
+#' \item{\code{Ca }}{chemical element} 
+#' \item{\code{V }}{chemical element} 
+#' \item{\code{Mn }}{chemical element} 
+#' \item{\code{Fe }}{chemical element} 
+#' \item{\code{Co }}{chemical element} 
+#' \item{\code{Ni }}{chemical element} 
+#' \item{\code{Cu }}{chemical element} 
+#' \item{\code{Zn }}{chemical element} 
+#' \item{\code{Ga }}{chemical element} 
+#' \item{\code{As }}{chemical element} 
+#' \item{\code{Rb }}{chemical element} 
+#' \item{\code{Sr }}{chemical element} 
+#' \item{\code{Y }}{chemical element} 
+#' \item{\code{Mo }}{chemical element} 
+#' \item{\code{Cd }}{chemical element} 
+#' \item{\code{Cs }}{chemical element} 
+#' \item{\code{Ba }}{chemical element} 
+#' \item{\code{Ce }}{chemical element} 
+#' \item{\code{Pr }}{chemical element} 
+#' \item{\code{Nd }}{chemical element} 
+#' \item{\code{Sm }}{chemical element} 
+#' \item{\code{Gd }}{chemical element} 
+#' \item{\code{Pb }}{chemical element} 
+#' }
+#' @source Mendeley Data, contributed by Russell Frew and translated to R by Matthias Templ
+#' @references Frew, Russell (2019), Data for: 
+#' CHEMICAL PROFILING OF SAFFRON FOR AUTHENTICATION OF ORIGIN, Mendeley Data, V1, 
+#' \doi{10.17632/5544tn9v6c.1}
+#' @note In the original paper, the authors applied lda for classifying the observations.
+#' @keywords datasets
+#' @examples
+#' 
+#' data(saffron)
+#' 
+NULL
+
+
 #' aphyric skye lavas data 
 #' 
 #' AFM compositions of 23 aphyric Skye lavas. This data set can be found on page 360 of the Aitchison book (see reference).
@@ -1413,7 +1583,7 @@ NULL
 #' @usage data(socExp)
 #' @author conversion to R by Karel Hron Karel Hron and modifications by Matthias Templ \email{matthias.templ@@tuwien.ac.at}
 #' @format A data frame with 20 observations on the following 8 variables (country + currency + row-wise sorted cells of 2x3 compositional table).
-#' @references OECD, \url{http://www.oecd.org}
+#' @references OECD, \url{https://www.oecd.org}
 #' @keywords data
 #' @examples 
 #' 
@@ -1548,7 +1718,7 @@ NULL
 #' @name trondelagC
 #' @docType data
 #' @usage data(trondelagC)
-#' @author NGU, \url{http://www.ngu.no}, transfered to R by Matthias Templ \email{matthias.templ@@tuwien.ac.at}
+#' @author NGU, \url{https://www.ngu.no}, transfered to R by Matthias Templ \email{matthias.templ@@tuwien.ac.at}
 #' @format A data frame with 754 observations and 70 variables
 #' @references C.Reimann, J.Schilling, D.Roberts, K.Fabian. A regional-scale geochemical survey of soil C horizon samples in Nord-Trondelag, Central Norway. Geology and mineral potential, \emph{Applied Geochemistry} 61 (2015) 192-205.
 #' @details The samples were analysed using aqua regia extraction. 
@@ -1643,7 +1813,7 @@ NULL
 #' @name trondelagO
 #' @docType data
 #' @usage data(trondelagO)
-#' @author NGU, \url{http://www.ngu.no}, transfered to R by Matthias Templ \email{matthias.templ@@tuwien.ac.at}
+#' @author NGU, \url{https://www.ngu.no}, transfered to R by Matthias Templ \email{matthias.templ@@tuwien.ac.at}
 #' @format A data frame with 754 observations and 70 variables
 #' @references C.Reimann, J.Schilling, D.Roberts, K.Fabian. A regional-scale geochemical survey of soil C horizon samples in Nord-Trondelag, Central Norway. Geology and mineral potential, \emph{Applied Geochemistry} 61 (2015) 192-205.
 #' @details The samples were analysed using aqua regia extraction. 
