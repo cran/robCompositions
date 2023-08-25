@@ -14,11 +14,6 @@ rule) and (robust) Anderson-Darling normality tests for compositional data
 as well as popular log-ratio transformations (alr, clr, ilr, and their
 inverse transformations).
 }
-\details{
-\tabular{ll}{ Package: \tab robCompositions\cr Type: \tab Package\cr
-Version: \tab 1.3.3\cr Date: \tab 2009-11-28\cr License: \tab GPL 2\cr
-LazyLoad: \tab yes\cr }
-}
 \examples{
 
 ## k nearest neighbor imputation
@@ -85,7 +80,7 @@ z <- pivotCoordInv(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
 \references{
 Aitchison, J. (1986) \emph{The Statistical Analysis of
 Compositional Data} Monographs on Statistics and Applied Probability.
-Chapman \& Hall Ltd., London (UK). 416p. \
+Chapman and Hall Ltd., London (UK). 416p. 
 
 Filzmoser, P., and Hron, K. (2008) Outlier detection for compositional data
 using robust methods. \emph{Math. Geosciences}, \bold{40} 233-248.

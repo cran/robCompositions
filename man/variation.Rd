@@ -4,12 +4,14 @@
 \alias{variation}
 \title{Robust and classical variation matrix}
 \usage{
-variation(x, method = "robustPivot")
+variation(x, method = "robustPivot", algorithm = "MCD")
 }
 \arguments{
 \item{x}{data frame or matrix with positive entries}
 
 \item{method}{method used for estimating covariances. See details.}
+
+\item{algorithm}{kind of robust estimator (MCD or MM)}
 }
 \value{
 The (robust) variation matrix.
@@ -42,7 +44,7 @@ variation(expenditures, method = "Pairwise") # same results as Pivot
 \references{
 Aitchison, J. (1986) \emph{The Statistical Analysis of
 Compositional Data} Monographs on Statistics and Applied Probability.
-Chapman \& Hall Ltd., London (UK). 416p.
+Chapman and Hall Ltd., London (UK). 416p.
 
 #' Filzmoser, P., Hron, K., Templ, M. (2018) \emph{Applied Compositional Data Analysis}.
 Springer, Cham.

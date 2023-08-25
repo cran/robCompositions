@@ -70,7 +70,7 @@
 #' @seealso \code{\link{impCoda}}, \code{\link{impKNNa}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
-#' Chapman \& Hall Ltd., London (UK). 416p.
+#' Chapman and Hall Ltd., London (UK). 416p.
 #' 
 #' Wegman, E. J. (1990) \emph{Hyperdimensional data analysis using parallel
 #' coordinates} Journal of the American Statistical Association 85, 664--675.
@@ -138,7 +138,8 @@ function (x, ..., which=1, ord=1:ncol(x),
   } else if(length(pch) != 2){ 
 	  stop("'pch' must be a vector of length 1 or 2.")
   }
-  if(class(seg1) != "logical") stop("'seg1' must be logical")
+	if(!(inherits(seg1, "logical"))) stop("'seg1' must be logical")
+  # if(class(seg1) != "logical") stop("'seg1' must be logical")
   if(length(seg1) != 1) stop("'seg1' has to be a vector of length 1") 
   if(length(seg.l) != 1) stop("'seg.l' has to be a vector of length 1") 
   x <- as.data.frame(x)

@@ -8,9 +8,6 @@
 #' as well as popular log-ratio transformations (alr, clr, ilr, and their
 #' inverse transformations).
 #' 
-#' \tabular{ll}{ Package: \tab robCompositions\cr Type: \tab Package\cr
-#' Version: \tab 1.3.3\cr Date: \tab 2009-11-28\cr License: \tab GPL 2\cr
-#' LazyLoad: \tab yes\cr }
 #' 
 #' @name robCompositions-package
 #' @aliases robCompositions-package robCompositions
@@ -20,7 +17,7 @@
 #' Maintainer: Matthias Templ <templ@@tuwien.ac.at>
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
-#' Chapman \& Hall Ltd., London (UK). 416p. \
+#' Chapman and Hall Ltd., London (UK). 416p. 
 #' 
 #' Filzmoser, P., and Hron, K. (2008) Outlier detection for compositional data
 #' using robust methods. \emph{Math. Geosciences}, \bold{40} 233-248.

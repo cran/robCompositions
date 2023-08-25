@@ -23,7 +23,7 @@
 #' \code{\link{cenLR}}, \code{\link{addLR}}
 #' @references Aitchison, J. (1986) \emph{The Statistical Analysis of
 #' Compositional Data} Monographs on Statistics and Applied Probability.
-#' Chapman \& Hall Ltd., London (UK). 416p.
+#' Chapman and Hall Ltd., London (UK). 416p.
 #' @keywords manip
 #' @examples
 #' 
@@ -59,7 +59,7 @@ addLRinv <- function(x, cnames=NULL, ivar=NULL, useClassInfo=TRUE){
 			dat <- cbind(dat[,1:(ivar-1)], x$varx, dat[,(ivar):(dim(xalr)[2])])
 		}
 		colnames(dat) <- x$cnames
-		if(class(x$x.alr) == "data.frame") dat <- as.data.frame(dat)
+    if(inherits(x$x.alr, "data.frame")) dat <- as.data.frame(dat)
 	} else if(clInfo == "alr" & useClassInfo == FALSE){
 		if(is.null(ivar)) stop("object ivar must be provided \n because object x is not from class alr")
 		xalr <- x$x.alr
