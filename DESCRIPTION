@@ -1,14 +1,14 @@
 Package: robCompositions
 Type: Package
 Title: Compositional Data Analysis
-Version: 2.4.1
-Date: 2023-08-21
+Version: 2.4.2
+Date: 2025-08-06
 Depends: R (>= 3.5.0), ggplot2, pls, data.table
 LinkingTo: Rcpp, RcppEigen
-Imports: cvTools, e1071, fda, rrcov, cluster, dplyr, magrittr, fpc,
-        GGally, ggfortify, kernlab, MASS, mclust, tidyr, robustbase,
-        robustHD, splines, VIM, zCompositions, reshape2, Rcpp
-Suggests: knitr, testthat
+Imports: cvTools, fda, rrcov, cluster, dplyr, magrittr, GGally,
+        ggfortify, kernlab, MASS, mclust, tidyr, robustbase, robustHD,
+        sparsepca, splines, VIM, zCompositions, reshape2, Rcpp
+Suggests: e1071, fpc, knitr, testthat
 VignetteBuilder: knitr
 Authors@R: c(
   person("Matthias", "Templ", email="matthias.templ@gmail.com", role=c("aut", "cre"), comment=c(ORCID="0000-0002-8638-5276")),
@@ -48,12 +48,13 @@ License: GPL (>= 2)
 LazyLoad: yes
 LazyData: true
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 NeedsCompilation: yes
-Packaged: 2023-08-25 15:02:41 UTC; matthias
-Author: Matthias Templ [aut, cre] (<https://orcid.org/0000-0002-8638-5276>),
-  Karel Hron [aut] (<https://orcid.org/0000-0002-1847-6598>),
-  Peter Filzmoser [aut] (<https://orcid.org/0000-0002-8014-4682>),
+Packaged: 2025-08-06 18:56:20 UTC; matthias
+Author: Matthias Templ [aut, cre] (ORCID:
+    <https://orcid.org/0000-0002-8638-5276>),
+  Karel Hron [aut] (ORCID: <https://orcid.org/0000-0002-1847-6598>),
+  Peter Filzmoser [aut] (ORCID: <https://orcid.org/0000-0002-8014-4682>),
   Kamila Facevicova [ctb],
   Petra Kynclova [ctb],
   Jan Walach [ctb],
@@ -61,11 +62,12 @@ Author: Matthias Templ [aut, cre] (<https://orcid.org/0000-0002-8638-5276>),
   Jiajia Chen [ctb],
   Dominika Miksova [ctb],
   Bernhard Meindl [ctb],
-  Alessandra Menafoglio [ctb] (<https://orcid.org/0000-0003-0682-6412>),
+  Alessandra Menafoglio [ctb] (ORCID:
+    <https://orcid.org/0000-0003-0682-6412>),
   Alessia Di Blasi [ctb],
   Federico Pavone [ctb],
   Nikola Stefelova [ctb],
   Gianluca Zeni [ctb],
   Roman Wiederkehr [ctb]
 Repository: CRAN
-Date/Publication: 2023-08-25 15:30:06 UTC
+Date/Publication: 2025-08-22 15:20:02 UTC
