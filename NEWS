@@ -1,3 +1,47 @@
+Changes in robCompositions version 2.7.0
+  + aDist() gains new options (defaults unchanged):
+    - type = "rows" returns the distance for each pair of corresponding rows,
+      type = "cross" the matrix of distances between all rows of x and all rows
+      of y (y may have any number of rows).
+    - weights: weighted Aitchison distance (part weights via a change of the
+      reference measure, Egozcue and Pawlowsky-Glahn 2016); unit weights give
+      the ordinary Aitchison distance.
+    - na.rm = TRUE: missing, zero and negative cells are left out and the
+      distance is computed from the available pairwise log-ratios, scaled to
+      all log-ratios (Gower-type).
+    - cellweights: non-negative cell weights, e.g. from a cellwise-robust
+      method; na.rm is the special case of weights 0 and 1.
+  + aDist() is now computed from clr coordinates in R instead of C: 25 to 100
+    times faster for larger data, same results up to rounding (relative
+    differences around 1e-16). The C routine has been removed.
+  + aDist() now stops with an informative error for missing or infinite values
+    (before, a generic error from the C call). Distances involving rows with
+    zero or negative values are NaN, now with a warning that points to
+    na.rm = TRUE (before, NaN or Inf without a warning).
+  + new function aDistDens() for the Aitchison distance between densities in
+    the Bayes space, optionally with respect to a reference measure P.
+
+Changes in robCompositions version 2.6.1
+  + src/zeros.cpp now includes <cassert> explicitly, needed to build against
+    Eigen 5.0.1 (RcppEigen). Thanks to Dirk Eddelbuettel.
+  + trapzc() returned a wrong value for a grid of only two points (the end
+    points were counted twice); results for three or more points are unchanged.
+    It now stops with an error for fewer than two points.
+  + the help pages of fcenLR(), fcenLRp(), fcenLRu(), fcenLRinv() and trapzc()
+    have been rewritten: defining formulas, input requirements (equidistant
+    grid, strictly positive density), correct return values, cross-references,
+    and examples that no longer refer to an undefined object (t.fine).
+  + new tests for the functional clr transformations.
+  + aDist(x, y), and hence ced(), now stops with an error if x and y do not have
+    the same dimensions. Before, a different number of columns silently gave a
+    wrong distance, and fewer rows in y made the C code read beyond the data.
+    Results for valid input are unchanged. The registration of the internal C
+    routine has been corrected (a misspelled NAOK argument was passed on to it).
+  + the help page of ced() has been rewritten (definition, input requirements,
+    return value, DOIs) and tests for aDist() and ced() have been added.
+  + the imputation vignette no longer links to a report on a retired web page
+    of the Swiss Federal Statistical Office (the URL now returns 404).
+
 Changes in robCompositions version 2.6.0
   + new function cellNetCoDa() for cellwise-robust network (Gaussian graphical
     model) estimation of compositional data, with print/summary/plot methods.
